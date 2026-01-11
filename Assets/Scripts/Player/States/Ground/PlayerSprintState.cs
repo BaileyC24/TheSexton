@@ -1,16 +1,32 @@
 using UnityEngine;
 
-public class PlayerSprintState : MonoBehaviour
+public class PlayerSprintState : PlayerMovementState
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public PlayerSprintState(PlayerStateContext _context, PlayerStateMachine.PlayerStates _state) : base(_context, _state)
     {
-        
+    }
+    private float speedOrig;
+    
+    public override void EnterState()
+    {
+        base.EnterState();
+        speedOrig = context.GetSpeed();
+        context.SetSpeed(context.GetSprintSpeed());
     }
 
-    // Update is called once per frame
-    void Update()
+    public override PlayerStateMachine.PlayerStates GetNextStateKey()
     {
+        if (!context.GetInput().Player.Sprint.IsPressed())
+        {
+            return PlayerStateMachine.PlayerStates.Idle;
+        }
         
+        return base.GetNextStateKey();
+    }
+
+    public override void ExitState()
+    {
+        base.ExitState();
+        context.SetSpeed(speedOrig);
     }
 }

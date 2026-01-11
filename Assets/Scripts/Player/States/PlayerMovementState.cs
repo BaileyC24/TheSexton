@@ -15,6 +15,7 @@ public class PlayerMovementState : PlayerStateBase
     {
         context.SetMoveValue(context.GetInput().Player.Movement.ReadValue<Vector2>());
         context.CheckForGround();
+        context.UpdatePlayerRotation();
     }
 
     public override void LateUpdateState()
@@ -28,10 +29,18 @@ public class PlayerMovementState : PlayerStateBase
     
     public override PlayerStateMachine.PlayerStates GetNextStateKey()
     {
-        if (context.GetInput().Player.Jump.triggered && context.IsGrounded())
+        if (context.IsGrounded())
         {
-            return PlayerStateMachine.PlayerStates.Jump;
+            if (context.GetInput().Player.Jump.triggered)
+                return PlayerStateMachine.PlayerStates.Jump;
+
+            if (context.GetInput().Player.Slide.triggered)
+                return PlayerStateMachine.PlayerStates.Slide;
+                
         }
+
+        if (!context.IsGrounded())
+            return PlayerStateMachine.PlayerStates.Fall;
         
         return StateKey;
     }

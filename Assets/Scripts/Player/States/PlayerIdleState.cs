@@ -11,4 +11,12 @@ public class PlayerIdleState : PlayerMovementState
     {
         Debug.Log("Entering Idle State");
     }
+
+    public override PlayerStateMachine.PlayerStates GetNextStateKey()
+    {
+        if (context.CanMove())
+            return PlayerStateMachine.PlayerStates.Walk;
+        
+        return base.GetNextStateKey();
+    }
 }
