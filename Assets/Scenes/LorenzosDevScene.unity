@@ -1694,6 +1694,7 @@ MonoBehaviour:
   menuLose: {fileID: 0}
   menuHome: {fileID: 0}
   isPaused: 0
+  player: {fileID: 0}
 --- !u!1 &1362489393
 GameObject:
   m_ObjectHideFlags: 0
