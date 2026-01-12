@@ -10,10 +10,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuHome;
-
-
-
-
+    
     public bool isPaused;
     public GameObject player;
 
