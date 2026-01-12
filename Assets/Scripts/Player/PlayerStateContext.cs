@@ -7,11 +7,15 @@ public class PlayerStateContext
     private float slideTargetDistance;
     private float slideFasterDuration; 
     private float slideDuration;
+    private float slideColliderHeight;
+    private float slideColliderWidth;
+    private Vector3 slideColliderCenter;
     private PlayerInput input;
     private Vector2 moveValue;
     private Rigidbody rBody;
     private Camera camera;
     private Transform playerTransform;
+    private CapsuleCollider playerCollider;
     private bool isGrounded;
 
     public PlayerStateContext(
@@ -20,6 +24,10 @@ public class PlayerStateContext
         float _slideTargetDistance,
         float _slideFasterDuration,
         float _slideDuration,
+        float _slideColliderHeight,
+        float _slideColliderWidth,
+        Vector3 _slideColliderCenter,
+        CapsuleCollider _playerCollider,
         PlayerInput _input,
         Rigidbody _rBody,
         Transform _playerTransform,
@@ -30,6 +38,10 @@ public class PlayerStateContext
         slideTargetDistance = _slideTargetDistance;
         slideFasterDuration = _slideFasterDuration;
         slideDuration = _slideDuration;
+        slideColliderHeight = _slideColliderHeight;
+        slideColliderWidth = _slideColliderWidth;
+        slideColliderCenter = _slideColliderCenter;
+        playerCollider = _playerCollider;
         input = _input;
         rBody = _rBody;
         playerTransform = _playerTransform;
@@ -42,6 +54,10 @@ public class PlayerStateContext
     public float GetSlideTargetDistance() => slideTargetDistance;
     public float GetSlideFasterDuration() => slideFasterDuration;
     public float GetSlideDuration() => slideDuration;
+    public float GetSlideColliderHeight() => slideColliderHeight;
+    public CapsuleCollider GetPlayerCollider() => playerCollider;
+    public float GetSlideColliderWidth() => slideColliderWidth;
+    public Vector3 GetSlideColliderCenter() => slideColliderCenter;
     public PlayerInput GetInput() => input;
     public Vector2 GetMoveValue() => moveValue;
     public bool CanMove() => GetMoveValue().magnitude > 0.01f;

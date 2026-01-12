@@ -63,8 +63,7 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>
 
     [FoldoutGroup("Advanced Physics")]
     [GUIColor(0.8f, 0.9f, 1f)]
-    [Range(-1f, 1f)]
-    [SerializeField] private float slideColliderCenter;
+    [SerializeField] private Vector3 slideColliderCenter;
     
     [BoxGroup("References")]
     [GUIColor(1f, 1f, 0.8f)]
@@ -75,6 +74,11 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>
     [GUIColor(1f, 1f, 0.8f)]
     [SceneObjectsOnly]
     [SerializeField] private TextMeshProUGUI stateText;
+    
+    [BoxGroup("References")]
+    [GUIColor(1f, 1f, 0.8f)]
+    [Required("Collider is required for physics movement.")]
+    [SerializeField] private CapsuleCollider collider;
     #endregion
 
     public override void StartMethod()
@@ -112,6 +116,10 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>
             slideTargetDistance,
             slideFasterDuration,
             slideDuration,
+            slideColliderHeight,
+            slideColliderWidth,
+            slideColliderCenter,
+            collider,
             playerInput,
             rBody,
             transform,

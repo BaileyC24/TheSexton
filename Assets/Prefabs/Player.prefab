@@ -272,7 +272,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 63
 --- !u!1 &4530762121446077718
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,11 +328,12 @@ MonoBehaviour:
   slideTargetDistance: 5
   slideFasterDuration: 0.5
   slideDuration: 1.2
-  slideColliderHeight: 0.1
-  slideColliderWidth: 0.1
-  slideColliderCenter: 0
+  slideColliderHeight: 1
+  slideColliderWidth: 0.5
+  slideColliderCenter: {x: 0, y: -0.5, z: 0}
   rBody: {fileID: 20817500193030927}
   stateText: {fileID: 6877820635486737620}
+  collider: {fileID: 5086628511350846356}
 --- !u!33 &6812413740509817892
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -340,7 +341,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4530762121446077718}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &4511972390370449720
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -409,7 +410,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5000001
+  m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
@@ -437,9 +438,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!1 &9063552278187869996
 GameObject:
   m_ObjectHideFlags: 0
