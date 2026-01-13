@@ -18,8 +18,6 @@ public class gameManager : MonoBehaviour
     //public playerController playerScript; 
 
 
-
-
     float timeScaleOrig;
 
 
