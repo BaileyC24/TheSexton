@@ -13,15 +13,15 @@ public class gameManager : MonoBehaviour
     
     public bool isPaused;
     public GameObject player;
+    public PlayerStateMachine playerStateMachine;
 
-    //ToDo: link player controller script - Lorenzo
-    //public playerController playerScript; 
 
 
 
 
     float timeScaleOrig;
 
+   
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -33,8 +33,8 @@ public class gameManager : MonoBehaviour
 
         player = GameObject.FindWithTag("Player");
 
-        /* ToDo: link player controller script - Lorenzo
-        playerScript = player.GetComponent<playerController>();*/
+        playerStateMachine = player.GetComponent<PlayerStateMachine>();
+   
 
     }
 
