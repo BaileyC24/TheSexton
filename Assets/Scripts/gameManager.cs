@@ -23,16 +23,19 @@ public class gameManager : MonoBehaviour
     
     public bool isPaused;
     public GameObject player;
+    public PlayerStateMachine playerStateMachine;
 
     
     public PlayerStateMachine playerScript;
 
 
 
+
     int gameGoalCount;
     float timeScaleOrig;
-
     public TMP_Text gameGoalText;
+
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -43,9 +46,9 @@ public class gameManager : MonoBehaviour
         timeScaleOrig = Time.timeScale;
 
         player = GameObject.FindWithTag("Player");
-
         
         playerScript = player.GetComponent<PlayerStateMachine>();
+        
 
         
     }
