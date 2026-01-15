@@ -9,13 +9,14 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Renderer model;
     [SerializeField] Transform attackPos;
     [SerializeField] Transform pointDestination;
+    [SerializeField] LayerMask targetLayer;
 
 
-    [Range(20, 100)][SerializeField] float detectRange;
+    [Range(1, 20)][SerializeField] float detectRange;
     [Range(1, 10)][SerializeField] int HP;
     [Range(1, 20)][SerializeField] int faceTargetSpeed;
     [Range(0, 10)][SerializeField] float navCooldown;
-
+    [Range(5, 20)][SerializeField] int sightDist;
 
     [SerializeField] GameObject weapon;
     [Range((float)0.1, 2)][SerializeField] float attackSpeed;
@@ -50,11 +51,6 @@ public class EnemyAI : MonoBehaviour, IDamage
         playerDistance = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
 
         StartCoroutine(setNav());
-
-        if (attackTimer >= attackSpeed)
-        {
-            attack();
-        }
     }
 
     void faceTarget()
@@ -72,17 +68,23 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     IEnumerator setNav()
     {
+        RaycastHit hit;
         //if player is moving set agent destination towards player. when player stops moving set destination to a predetermined point
         // get player state to determine if player is moving and within a set range
-        //TODO: have enemy continue to go player if player can be seen by the enemy
-        //TODO potentially change so that enemy only auto paths when player is moving too quickly or is seen
-        if (gameManager.instance.playerScript.CurrentState.StateKey != PlayerStateMachine.PlayerStates.Idle && playerDistance <= detectRange)
+        // have enemy continue to go player if player can be seen by the enemy
+        // potentially change so that enemy only auto paths when player is moving too quickly or is seen
+
+        if (gameManager.instance.playerScript.CurrentState.StateKey != PlayerStateMachine.PlayerStates.Idle && playerDistance <= detectRange || Physics.Raycast(transform.position,transform.forward, out hit, sightDist, targetLayer))
         {
             agent.stoppingDistance = origStopDist;
             agent.SetDestination(gameManager.instance.player.transform.position);
             if (agent.remainingDistance <= agent.stoppingDistance)
             {
                 faceTarget();
+            }
+            if (attackTimer >= attackSpeed)
+            {
+                attack();
             }
         }
         else if (transform.position != pointOrig && navCooldown <= 0)
