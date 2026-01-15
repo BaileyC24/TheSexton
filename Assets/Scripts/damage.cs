@@ -44,4 +44,42 @@ public class damage : MonoBehaviour
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y - (gravity * Time.deltaTime), rb.linearVelocity.z);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.isTrigger)
+        {
+            return;
+        }
+        IDamage dmg = other.GetComponent<IDamage>();
+        if (dmg != null && type != damageType.DOT)
+        {
+            dmg.takeDamage(damageAmount);
+        }
+        if(type == damageType.ranged)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.isTrigger)
+        {
+            return;
+        }
+        IDamage dmg = other.GetComponent<IDamage>();
+        if(dmg != null && type == damageType.DOT && !isDamaging)
+        {
+            StartCoroutine(damageOther(dmg));
+        }
+    }
+
+    IEnumerator damageOther(IDamage d)
+    {
+        isDamaging = true;
+        d.takeDamage(damageAmount);
+        yield return new WaitForSeconds(damageRate);
+        isDamaging = false;
+    }
 }
