@@ -28,7 +28,11 @@ public class buttonFunctions : MonoBehaviour
     }
 
  
-    
+    public void nextWave()
+    {
+        WaveManager.instance.StartCoroutine("StartNextWave");
+
+    }
 
 
 

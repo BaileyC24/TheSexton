@@ -54,6 +54,7 @@ public class WaveManager : MonoBehaviour
     public void EnemiesDied()
     {
         enemiesAlive--;
+        gameManager.instance.updateGameGoal(-1);
         if (enemiesAlive <= 0 && waveStarted)
         {
             EndWave();
@@ -70,7 +71,7 @@ public class WaveManager : MonoBehaviour
         }
         else
         {
-            TemporaryWin();
+            gameManager.instance.youWin();
         }
     }
 
@@ -82,11 +83,5 @@ public class WaveManager : MonoBehaviour
             manager.StartSpawning(enemyCount);
     }
 
-    void TemporaryWin()
-    {
-        Debug.Log("All waves complete! You Win!");
-        //trigger win UI 
-    }
-
-    
+  
 }

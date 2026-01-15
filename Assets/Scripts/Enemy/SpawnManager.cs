@@ -8,7 +8,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private List<GameObject> spawnPoints;
     [SerializeField] private float spawnBuffer;
-    
+    [SerializeField] private gameManager gameManager;
+
     public bool spawning;
 
     private void Start()
@@ -25,6 +26,9 @@ public class SpawnManager : MonoBehaviour
     public void StartSpawning(int enemyCount)
     {
         StartCoroutine(Spawn(enemyCount));
+
+
+
     }
     
     IEnumerator Spawn(int enemyCount)
@@ -34,6 +38,7 @@ public class SpawnManager : MonoBehaviour
         {
             Instantiate(enemyPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
             WaveManager.instance.enemiesAlive++;
+            gameManager.updateGameGoal(1);
             yield return new WaitForSeconds(0.5f);
         }
         spawning = false;
