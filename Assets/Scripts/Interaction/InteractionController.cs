@@ -31,7 +31,13 @@ public class InteractionController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.LogWarning("Interact pressed on " + hitInfo.collider.gameObject.name); 
+
+                IInteractable interactable = hitInfo.collider.GetComponent<IInteractable>(); 
+                if (interactable != null)
+                {
+                    interactable.Interact();
+                }
+                    //Debug.LogWarning("Interact pressed on " + hitInfo.collider.gameObject.name); 
             }
 
             Debug.Log("HIT: " + hitInfo.collider.gameObject.name);
