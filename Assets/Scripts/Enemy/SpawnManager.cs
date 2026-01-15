@@ -34,14 +34,24 @@ public class SpawnManager : MonoBehaviour
     IEnumerator Spawn(int enemyCount)
     {
         spawning = true;
-        foreach (var spawnPoint in spawnPoints)
+
+        if (spawnPoints == null || spawnPoints.Count == 0)
         {
+            Debug.LogError($"{name} has no spawn points assigned!");
+            yield break;
+        }
+
+        for (int i = 0; i < enemyCount; i++)
+        {
+            GameObject spawnPoint = spawnPoints[i % spawnPoints.Count];
             Instantiate(enemyPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
             WaveManager.instance.enemiesAlive++;
-            gameManager.updateGameGoal(1);
+            gameManager.updateGameGoal(amount: 1);
             yield return new WaitForSeconds(0.5f);
         }
+
         spawning = false;
+
     }
     
 }
