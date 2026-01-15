@@ -1549,7 +1549,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   detectRange: 5
-  HP: 10
+  HP: 1
   faceTargetSpeed: 13
   navCooldown: 4.94
   sightDist: 11

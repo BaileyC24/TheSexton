@@ -181,9 +181,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   detectRange: 5
-  HP: 4
+  HP: 1
   faceTargetSpeed: 12
-  navCooldown: 7.78
+  navCooldown: 4.96
   sightDist: 11
   weapon: {fileID: 3785360412475301167, guid: fa9c224a53c45d74598cb820ba731585, type: 3}
   attackSpeed: 0.91

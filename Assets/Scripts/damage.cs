@@ -73,6 +73,10 @@ public class damage : MonoBehaviour
         {
             StartCoroutine(damageOther(dmg));
         }
+        if (dmg != null && type != damageType.DOT)
+        {
+            dmg.takeDamage(damageAmount);
+        }
     }
 
     IEnumerator damageOther(IDamage d)

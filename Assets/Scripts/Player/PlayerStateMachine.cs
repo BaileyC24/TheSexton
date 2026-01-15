@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
 
 public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> , IDamage
 {
@@ -87,6 +88,20 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
     [SerializeField] private CapsuleCollider collider;
     #endregion
 
+    [SerializeField] GameObject weapon;
+    [SerializeField] GameObject flair;
+    [Range((float)0.1, 2)][SerializeField] float attackSpeed;
+    [SerializeField] Transform attackPos;
+
+    float attackTimer;
+
+    void attack()
+    {
+        attackTimer = 0;
+
+        Instantiate(weapon, attackPos.position, transform.rotation);
+    }
+
     public override void StartMethod()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -99,7 +114,14 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
 
     public override void UpdateMethod()
     {
+        attackTimer += Time.deltaTime;
         stateText.text = "State: " + CurrentState.StateKey;
+
+        if (Input.GetButtonDown("Fire1") && attackTimer >= attackSpeed)
+        {
+            attack();
+            StartCoroutine(flashFlair());
+        }
     }
     
     private void SetupState()
@@ -132,6 +154,7 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
             Camera.main);
     }
 
+    
     public void takeDamage(int amount)
     {
         health -= amount;
@@ -139,5 +162,12 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
         {
             gameManager.instance.youLose();
         }
+    }
+
+    IEnumerator flashFlair()
+    {
+        flair.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        flair.SetActive(false);
     }
 }
