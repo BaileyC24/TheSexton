@@ -35,6 +35,12 @@ public class SpawnManager : MonoBehaviour
     {
         spawning = true;
 
+        if (enemyPrefab == null) 
+        {
+            Debug.LogError($"{name} is missing an enemy prefab!");
+            yield break;
+        }
+
         if (spawnPoints == null || spawnPoints.Count == 0)
         {
             Debug.LogError($"{name} has no spawn points assigned!");
