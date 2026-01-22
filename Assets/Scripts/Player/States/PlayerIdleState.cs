@@ -7,11 +7,6 @@ public class PlayerIdleState : PlayerMovementState
     {
     }
 
-    public override void EnterState()
-    {
-        Debug.Log("Entering Idle State");
-    }
-
     public override PlayerStateMachine.PlayerStates GetNextStateKey()
     {
         if (context.CanMove())

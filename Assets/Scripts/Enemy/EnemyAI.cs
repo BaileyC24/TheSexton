@@ -6,11 +6,10 @@ using UnityEngine.Rendering.UI;
 public class EnemyAI : MonoBehaviour, IDamage
 {
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] Renderer model;
+    [SerializeField] Renderer[] models;
     [SerializeField] Transform attackPos;
     [SerializeField] Transform pointDestination;
     [SerializeField] LayerMask targetLayer;
-
 
     [Range(1, 20)][SerializeField] float detectRange;
     [Range(1, 10)][SerializeField] int HP;
@@ -35,7 +34,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        colorOrig = model.material.color;
+        colorOrig = models[0].material.color;
         pointOrig = transform.position;
         navCDORig = navCooldown;
         origStopDist = agent.stoppingDistance;
@@ -114,8 +113,10 @@ public class EnemyAI : MonoBehaviour, IDamage
     }
     IEnumerator flashRed()
     {
-        model.material.color = Color.red;
+        foreach (Renderer model in models)
+            model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
-        model.material.color = colorOrig;
+        foreach (Renderer model in models)
+            model.sharedMaterial.color = colorOrig;
     }
 }

@@ -86,21 +86,12 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
     [GUIColor(1f, 1f, 0.8f)]
     [Required("Collider is required for physics movement.")]
     [SerializeField] private CapsuleCollider collider;
+    
+    [BoxGroup("References")]
+    [GUIColor(1f, 1f, 0.8f)]
+    [Required("Animator is required for physics movement.")]
+    [SerializeField] private Animator animator;
     #endregion
-
-    [SerializeField] GameObject weapon;
-    [SerializeField] GameObject flair;
-    [Range((float)0.1, 2)][SerializeField] float attackSpeed;
-    [SerializeField] Transform attackPos;
-
-    float attackTimer;
-
-    void attack()
-    {
-        attackTimer = 0;
-
-        Instantiate(weapon, attackPos.position, transform.rotation);
-    }
 
     public override void StartMethod()
     {
@@ -114,14 +105,7 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
 
     public override void UpdateMethod()
     {
-        attackTimer += Time.deltaTime;
         stateText.text = "State: " + CurrentState.StateKey;
-
-        if (Input.GetButtonDown("Fire1") && attackTimer >= attackSpeed)
-        {
-            attack();
-            StartCoroutine(flashFlair());
-        }
     }
     
     private void SetupState()
@@ -164,10 +148,13 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
         }
     }
 
-    IEnumerator flashFlair()
+    public PlayerInput GetInput()
     {
-        flair.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
-        flair.SetActive(false);
+        return playerInput;
+    }
+
+    public Animator GetAnimator()
+    {
+        return animator;
     }
 }

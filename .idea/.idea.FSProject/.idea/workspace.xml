@@ -5,27 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c53948aa-d7c5-4fca-b3da-d60d905e3aff" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerAttack.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerAttack.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FSProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FSProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GraveYard.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GraveYard.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/SpawnManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/SpawnManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LorenzosDevScene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LorenzosDevScene.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayerInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayerInput.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayerInput.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayerInput.inputactions" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerStateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerStateMachine.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WaveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WaveManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/Free medieval weapons/Materials/Arrows_Arrows_AlbedoTransparency.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/Free medieval weapons/Materials/Arrows_Arrows_AlbedoTransparency.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/Free medieval weapons/Materials/DoubleSided_Axes_low_Axes_DS_AlbedoTransparency.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/Free medieval weapons/Materials/DoubleSided_Axes_low_Axes_DS_AlbedoTransparency.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/Free medieval weapons/Materials/OneSided_Axes_low_Axes_OS_AlbedoTransparency.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/Free medieval weapons/Materials/OneSided_Axes_low_Axes_OS_AlbedoTransparency.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/Free medieval weapons/Materials/Swords_DH_low_Sword_DH_AlbedoTransparency.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/Free medieval weapons/Materials/Swords_DH_low_Sword_DH_AlbedoTransparency.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/Free medieval weapons/Materials/Swords_low_Swords_OH_AlbedoTransparency.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/Free medieval weapons/Materials/Swords_low_Swords_OH_AlbedoTransparency.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/Free medieval weapons/Materials/Wooden Bow_1_Wooden Bow_1_AlbedoTransparency.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/Free medieval weapons/Materials/Wooden Bow_1_Wooden Bow_1_AlbedoTransparency.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/Mini Simple Characters Skeleton Demo/Materials/Material Variations/Mini Simple Characters Mat Red Eyes.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/Mini Simple Characters Skeleton Demo/Materials/Material Variations/Mini Simple Characters Mat Red Eyes.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/Mini Simple Characters Skeleton Demo/Materials/Material Variations/Mini Simple Characters Mat Yellow Bones.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/Mini Simple Characters Skeleton Demo/Materials/Material Variations/Mini Simple Characters Mat Yellow Bones.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/Mini Simple Characters Skeleton Demo/Materials/Mini Simple Characters Demo Mat primary.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/Mini Simple Characters Skeleton Demo/Materials/Mini Simple Characters Demo Mat primary.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/Mini Simple Characters Skeleton Demo/Materials/Mini Simple Characters Demo Mat secondary.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/Mini Simple Characters Skeleton Demo/Materials/Mini Simple Characters Demo Mat secondary.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/Mini Simple Characters Skeleton Demo/Materials/Mini Simple Characters Demo Mat tertiary.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/Mini Simple Characters Skeleton Demo/Materials/Mini Simple Characters Demo Mat tertiary.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/Mini Simple Characters Skeleton Demo/Readme.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/Mini Simple Characters Skeleton Demo/Readme.asset.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,6 +22,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerAttack.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerStateBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerStateContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/States/Airborne/PlayerJumpState.cs" root0="FORCE_HIGHLIGHTING" />
@@ -65,7 +51,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Bailey&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;MoMo&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -81,8 +67,10 @@
       <option name="PROGRAM_PARAMETERS" value="-projectPath D:\Coding\C#\FSProject -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\Coding\C#\FSProject" />
       <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="ENV_FILE_PATHS" value="" />
       <option name="REDIRECT_INPUT_PATH" value="" />
+      <option name="PTY_MODE" value="Auto" />
       <option name="MIXED_MODE_DEBUG" value="0" />
       <method v="2" />
     </configuration>
@@ -91,12 +79,14 @@
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath D:\Coding\C#\FSProject -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\Coding\C#\FSProject" />
       <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="ENV_FILE_PATHS" value="" />
       <option name="REDIRECT_INPUT_PATH" value="" />
+      <option name="PTY_MODE" value="Auto" />
       <option name="MIXED_MODE_DEBUG" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" useMixedMode="false">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
@@ -107,9 +97,10 @@
       <option name="selectedOptions">
         <list />
       </option>
+      <option name="useMixedMode" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" useMixedMode="false">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
@@ -120,6 +111,7 @@
       <option name="selectedOptions">
         <list />
       </option>
+      <option name="useMixedMode" value="false" />
       <method v="2" />
     </configuration>
     <configuration name="Attach to" type="UnityDevicePlayer" factoryName="UnityAttachToDevicePlayer">
@@ -141,6 +133,7 @@
       <workItem from="1768327865630" duration="445000" />
       <workItem from="1768328764717" duration="5991000" />
       <workItem from="1768336702904" duration="2999000" />
+      <workItem from="1769016360004" duration="420000" />
     </task>
     <servers />
   </component>
