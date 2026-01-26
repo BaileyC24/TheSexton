@@ -8,6 +8,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private List<GameObject> spawnPoints;
     [SerializeField] private float spawnBuffer;
+    [SerializeField] private int maxEnemies; //0125
     
     public bool spawning;
 
