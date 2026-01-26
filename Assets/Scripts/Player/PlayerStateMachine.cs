@@ -16,8 +16,10 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
         Slide
     }
 
+    public float HPOrig;
+
     #region Variables
-    
+
     private PlayerStateContext context;
     private PlayerInput playerInput;
     
@@ -94,7 +96,10 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
     #endregion
 
     public override void StartMethod()
-    {
+    {   
+
+        HPOrig=health;
+        updatePlayerUI();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         playerInput = new PlayerInput();
@@ -142,6 +147,8 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
     public void takeDamage(int amount)
     {
         health -= amount;
+        updatePlayerUI();
+        StartCoroutine(flashDamage());
         if (health <= 0)
         {
             gameManager.instance.youLose();
@@ -156,5 +163,18 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
     public Animator GetAnimator()
     {
         return animator;
+    }
+
+    public void updatePlayerUI()
+    {
+        gameManager.instance.playerHPBar.fillAmount = health / HPOrig;
+
+    }
+
+    IEnumerator flashDamage()
+    {
+        gameManager.instance.damageFlash.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gameManager.instance.damageFlash.SetActive(false);
     }
 }

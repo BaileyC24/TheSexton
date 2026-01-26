@@ -3,6 +3,7 @@ using UnityEditor.Build;
 using UnityEngine;
 using TMPro;
 using UnityEditor.Build.Reporting;
+using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
 {
@@ -20,9 +21,10 @@ public class gameManager : MonoBehaviour
 
 
 
-    
+    public Image playerHPBar;
     public bool isPaused;
     public GameObject player;
+    public GameObject damageFlash;
    
     
     public PlayerStateMachine playerScript;
