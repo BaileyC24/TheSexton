@@ -18,7 +18,7 @@ public class InteractionController : MonoBehaviour
     // Update is called once per frame
     void Update() // this is where the scene "beats" live: What is my character/object doing in this moment?
     {
-        // Debug.Log("Update tick");
+        //Debug.Log("Update tick");
 
         // Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
         Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));  
@@ -29,7 +29,7 @@ public class InteractionController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hitInfo, interactionDistance))
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E))  
             {
 
                 IInteractable interactable = hitInfo.collider.GetComponent<IInteractable>(); 
@@ -37,7 +37,7 @@ public class InteractionController : MonoBehaviour
                 {
                     interactable.Interact();
                 }
-                    //Debug.LogWarning("Interact pressed on " + hitInfo.collider.gameObject.name); 
+                    Debug.LogWarning("Interact pressed via E on " + hitInfo.collider.gameObject.name); 
             }
 
             Debug.Log("HIT: " + hitInfo.collider.gameObject.name);
