@@ -5,10 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c53948aa-d7c5-4fca-b3da-d60d905e3aff" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FSProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FSProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GraveYard.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GraveYard.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/Ilumisoft/Spooky Graveyard/Prefabs/Environment/Tree01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/Ilumisoft/Spooky Graveyard/Prefabs/Environment/Tree01.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/Ilumisoft/Spooky Graveyard/Terrain/Demo Terrain.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/Ilumisoft/Spooky Graveyard/Terrain/Demo Terrain.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Fonts/LiberationSans.ttf.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Fonts/LiberationSans.ttf.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF.asset.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Shaders/TMP_SDF.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Shaders/TMP_SDF.shader" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Shaders/TMP_SDF.shader.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Shaders/TMP_SDF.shader.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Shaders/TMPro.cginc" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Shaders/TMPro.cginc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Shaders/TMPro.cginc.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Shaders/TMPro.cginc.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Shaders/TMPro_Properties.cginc" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Shaders/TMPro_Properties.cginc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Shaders/TMPro_Properties.cginc.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Unity DL/TextMesh Pro/Shaders/TMPro_Properties.cginc.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Recovery.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Recovery/0.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Recovery/0.unity.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +32,8 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/AttackTrigger.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerAttack.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerStateBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerStateContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/States/Airborne/PlayerJumpState.cs" root0="FORCE_HIGHLIGHTING" />
@@ -40,21 +55,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "MoMo",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;MoMo&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Standalone Player.Start Unity">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.3.2f1\Editor\Unity.exe" />
@@ -124,6 +141,10 @@
       <workItem from="1767922394299" duration="5000" />
       <workItem from="1768167518258" duration="2233000" />
       <workItem from="1768240500156" duration="2528000" />
+      <workItem from="1768327865630" duration="445000" />
+      <workItem from="1768328764717" duration="5991000" />
+      <workItem from="1768336702904" duration="2999000" />
+      <workItem from="1769016360004" duration="11032000" />
     </task>
     <servers />
   </component>

@@ -1,5 +1,9 @@
+using Unity.VisualScripting;
 using UnityEditor.Build;
 using UnityEngine;
+using TMPro;
+using UnityEditor.Build.Reporting;
+using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
 {
@@ -10,20 +14,31 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuHome;
-    
+    [SerializeField] GameObject menuUpgrades;
+    [SerializeField] GameObject menuGuns;
+    [SerializeField] GameObject menuObjectives;
+
+
+
+    public GameObject playerSpawnPos;
+    public Image playerHPBar;
     public bool isPaused;
     public GameObject player;
+    public GameObject damageFlash;
+   
+    
+    public PlayerStateMachine playerScript;
 
-    //ToDo: link player controller script - Lorenzo
-    //public playerController playerScript; 
 
 
+    int gameGoalCount;
     float timeScaleOrig;
 
+    public TMP_Text gameGoalText;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
 
         instance = this;
@@ -31,9 +46,10 @@ public class gameManager : MonoBehaviour
 
         player = GameObject.FindWithTag("Player");
 
-        /* ToDo: link player controller script - Lorenzo
-        playerScript = player.GetComponent<playerController>();*/
+        
+        playerScript = player.GetComponent<PlayerStateMachine>();
 
+        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
     }
 
     // Update is called once per frame
@@ -47,6 +63,8 @@ public class gameManager : MonoBehaviour
                 menuActive = menuPause;
                 menuActive.SetActive(true);
 
+               
+
             }
             else if(menuActive == menuPause)
             {
@@ -54,8 +72,16 @@ public class gameManager : MonoBehaviour
             }
 
         }
-
-
+            
+        if (Input.GetButtonDown("U") && menuActive == false)
+        {
+                  
+                  menuUpgrade();
+        }
+        else if(menuActive == menuUpgrades && Input.GetButtonDown("Cancel") || Input.GetButtonDown("U"))
+        {
+            stateUnpaused();
+        }
 
 
     }
@@ -76,10 +102,48 @@ public class gameManager : MonoBehaviour
         Time.timeScale = timeScaleOrig;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        menuActive.SetActive(false);
+        menuActive?.SetActive(false);
         menuActive = null;
+    }
+
+    public void youLose()
+    {
+        statePaused();
+        menuActive = menuLose;
+        menuActive.SetActive(true);
+    }
+
+    public void youWin()
+    {
+        statePaused();
+        menuActive = menuWin;
+        menuActive.SetActive(true);
+    }
+
+    public void menuUpgrade()
+        {
+        statePaused();
+        menuActive = menuUpgrades;
+        menuActive.SetActive(true);
+    }
+
+    public void updateGameGoal(int amount)
+    {
+        gameGoalCount += amount; ;
+        gameGoalText.text = gameGoalCount.ToString("F0");
+
+        if (gameGoalCount <= 0)
+        {
+            statePaused();
+            menuActive = menuWin;
+            menuActive.SetActive(true);
+        }
     }
 
 
 
-}
+
+
+
+
+ }

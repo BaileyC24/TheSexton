@@ -2,8 +2,9 @@ using Sirenix.OdinInspector;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
 
-public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>
+public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> , IDamage
 {
     public enum PlayerStates
     {
@@ -15,10 +16,19 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>
         Slide
     }
 
+    public float HPOrig;
+    [SerializeField] CharacterController controller;
+
     #region Variables
-    
+
     private PlayerStateContext context;
     private PlayerInput playerInput;
+    
+    [BoxGroup("Health Settings")]
+    [Title("Base Health")]
+    [GUIColor(1f, 0.9f, 0.8f)]
+    [Range(10f, 200f), SuffixLabel("hp", Overlay = true)]
+    [SerializeField] private float health;
     
     [BoxGroup("Movement Settings")]
     [Title("Base Speeds")]
@@ -79,10 +89,16 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>
     [GUIColor(1f, 1f, 0.8f)]
     [Required("Collider is required for physics movement.")]
     [SerializeField] private CapsuleCollider collider;
+    
+    [BoxGroup("References")]
+    [GUIColor(1f, 1f, 0.8f)]
+    [Required("Animator is required for physics movement.")]
+    [SerializeField] private Animator animator;
     #endregion
 
     public override void StartMethod()
-    {
+    {   
+        spawnPlayer();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         playerInput = new PlayerInput();
@@ -124,5 +140,47 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>
             rBody,
             transform,
             Camera.main);
+    }
+
+    
+    public void takeDamage(int amount)
+    {
+        health -= amount;
+        updatePlayerUI();
+        StartCoroutine(flashDamage());
+        if (health <= 0)
+        {
+            gameManager.instance.youLose();
+        }
+    }
+
+    public PlayerInput GetInput()
+    {
+        return playerInput;
+    }
+
+    public Animator GetAnimator()
+    {
+        return animator;
+    }
+
+    public void updatePlayerUI()
+    {
+        gameManager.instance.playerHPBar.fillAmount = health / HPOrig;
+
+    }
+
+    IEnumerator flashDamage()
+    {
+        gameManager.instance.damageFlash.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gameManager.instance.damageFlash.SetActive(false);
+    }
+
+    public void spawnPlayer()
+    {
+        HPOrig = health;
+        updatePlayerUI();
+        controller.transform.position = gameManager.instance.playerSpawnPos.transform.position;
     }
 }

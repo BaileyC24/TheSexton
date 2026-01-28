@@ -8,34 +8,50 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private List<GameObject> spawnPoints;
     [SerializeField] private float spawnBuffer;
-    [SerializeField] private int maxEnemies; //0125
+    [SerializeField] private gameManager gameManager;
 
-    private int currentEnemyCount = 0; //0125
-    
     public bool spawning;
 
     private void Start()
     {
-        for (int i = 0; i < gameObject.transform.childCount; i++)
+        spawnPoints = new List<GameObject>();
+        for (int i = 0; i < transform.childCount; i++)
         {
-            spawnPoints.Add(gameObject.transform.GetChild(i).gameObject);
+            spawnPoints.Add(transform.GetChild(i).gameObject);
         }
 
-        StartCoroutine(Spawn());
+        
     }
 
-    IEnumerator Spawn()
+    public void StartSpawning(int enemyCount)
     {
-        yield return new WaitForSeconds(spawnBuffer);
-        spawning = true;
-        foreach (var spawnPoint in spawnPoints)
-        {
-            if (currentEnemyCount >= maxEnemies) //0125
-                yield break; 
+        StartCoroutine(Spawn(enemyCount));
 
-            Instantiate(enemyPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
-            currentEnemyCount ++; //0125
+
+
+    }
+    
+    IEnumerator Spawn(int enemyCount)
+    {
+        spawning = true;
+
+        if (spawnPoints == null || spawnPoints.Count == 0)
+        {
+            Debug.LogError($"{name} has no spawn points assigned!");
+            yield break;
         }
+
+        for (int i = 0; i < enemyCount; i++)
+        {
+            GameObject spawnPoint = spawnPoints[i % spawnPoints.Count];
+            Instantiate(enemyPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+            WaveManager.instance.enemiesAlive++;
+            gameManager.updateGameGoal(amount: 1);
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        spawning = false;
+
     }
 
     public void EnemyDied() //0125

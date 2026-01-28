@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,7 +27,12 @@ public class buttonFunctions : MonoBehaviour
 #endif
     }
 
+ 
+    public void nextWave()
+    {
+        WaveManager.instance.StartCoroutine("StartNextWave");
 
+    }
 
 
 

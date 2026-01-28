@@ -11,24 +11,37 @@ public class WaveManager : MonoBehaviour
     
     [SerializeField] private int Waves;
     [SerializeField] private TextMeshProUGUI waveCountText;
-    
+    [SerializeField] private List<int> enemiesPerWave;
     
     private List<SpawnManager> spawnManagers;
     private bool waveStarted;
     private int currentWave;
+
+    public int enemiesAlive;
+    
     
     void Start()
     {
         instance = this;
         spawnManagers = new List<SpawnManager>();
-
-        foreach (GameObject spawnManager in GameObject.FindGameObjectsWithTag("Spawner"))
-            spawnManagers.Add(spawnManager.GetComponent<SpawnManager>());
+        foreach (GameObject spawnManager in GameObject.FindGameObjectsWithTag("Spawner")) 
+        {
+            var manager = spawnManager.GetComponent<SpawnManager>();
+            if (manager != null) 
+            {
+                spawnManagers.Add(manager);
+            } 
+            else 
+            {
+                Debug.LogWarning($"Spawner {spawnManager.name} is missing a SpawnManager component.");
+            }
+        }
+        StartCoroutine(StartNextWave());
     }
 
     private void Update()
     {
-        if (!waveStarted && spawnManagers.TrueForAll(manager => manager.spawning))
+        if (!waveStarted && spawnManagers.TrueForAll(manager => manager !=null && manager.spawning))
         {
             Debug.Log("Spawning true");
             waveStarted = true;
@@ -37,4 +50,38 @@ public class WaveManager : MonoBehaviour
         
         waveCountText.text = currentWave.ToString();
     }
+
+    public void EnemiesDied()
+    {
+        enemiesAlive--;
+        gameManager.instance.updateGameGoal(-1);
+        if (enemiesAlive <= 0 && waveStarted)
+        {
+            EndWave();
+        }
+    }
+
+    void EndWave()
+    {
+        waveStarted = false;
+        
+        if (currentWave < Waves)
+        {
+            StartCoroutine(StartNextWave());
+        }
+        else
+        {
+            gameManager.instance.youWin();
+        }
+    }
+
+    IEnumerator StartNextWave()
+    {
+        int enemyCount = enemiesPerWave[currentWave];
+        yield return new WaitForSeconds(3f);
+        foreach (var manager in spawnManagers)
+            manager.StartSpawning(enemyCount);
+    }
+
+  
 }
