@@ -1423,6 +1423,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8297429106404489251}
   - component: {fileID: 8350641608674527195}
+  - component: {fileID: 9196736817413631019}
+  - component: {fileID: 5691860100255865159}
   m_Layer: 0
   m_Name: attackPos (1)
   m_TagString: Untagged
@@ -1438,13 +1440,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8696744913249196524}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.9878943, z: -0, w: 0.15512858}
-  m_LocalPosition: {x: -0.621, y: 0.677, z: -8.709}
+  m_LocalRotation: {x: -0.5786311, y: -0.51508766, z: -0.4673397, w: 0.4259864}
+  m_LocalPosition: {x: -0.648, y: 0.699, z: -8.713}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8877763386572392639}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -77.013, y: -206.99, z: 118.27}
 --- !u!135 &8350641608674527195
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1466,6 +1468,63 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &9196736817413631019
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8696744913249196524}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &5691860100255865159
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8696744913249196524}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &9074822214476854037
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,16 +1608,17 @@ MonoBehaviour:
   attackPos: {fileID: 8297429106404489251}
   pointDestination: {fileID: 7577806682178959295, guid: 64f56905d7c349649bb16e443fc218a4,
     type: 3}
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  detectRange: 5
-  HP: 6
-  faceTargetSpeed: 13
-  navCooldown: 4.94
+  HeadPos: {fileID: 1375725042661477649}
+  detectRange: 9.66
+  HP: 4
+  faceTargetSpeed: 12
+  navCooldown: 7.78
   sightDist: 11
   weapon: {fileID: 3785360412475301167, guid: fa9c224a53c45d74598cb820ba731585, type: 3}
-  attackSpeed: 0.472
+  attackSpeed: 1
+  droppedObj: {fileID: 0}
+  offset: 0
+  FOV: 45
 --- !u!195 &2612845031164209962
 NavMeshAgent:
   m_ObjectHideFlags: 0
