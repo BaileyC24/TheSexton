@@ -31362,6 +31362,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1696301330}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1697489522 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2146050965714078543, guid: 8c06f7c7854af5a4491012e5413c777c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1711705567}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1697489528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697489522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e950269504306d4181a008d3971bd56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GoalIndicator_Eve
+  winZone: {fileID: 814835063}
 --- !u!1001 &1697867993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31528,7 +31547,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2146050965714078543, guid: 8c06f7c7854af5a4491012e5413c777c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1697489528}
   m_SourcePrefab: {fileID: 100100000, guid: 8c06f7c7854af5a4491012e5413c777c, type: 3}
 --- !u!1001 &1712847052
 PrefabInstance:
