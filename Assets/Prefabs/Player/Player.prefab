@@ -936,7 +936,7 @@ Transform:
   m_GameObject: {fileID: 1408602858495687344}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.78999996, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1657,7 +1657,6 @@ MonoBehaviour:
   slideColliderWidth: 0.5
   slideColliderCenter: {x: 0, y: -0.5, z: 0}
   rBody: {fileID: 3851675104023062832}
-  stateText: {fileID: 0}
   collider: {fileID: 772442463008066308}
   animator: {fileID: 638484684100904255}
 --- !u!114 &1357382888961720616
@@ -1674,6 +1673,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   AttackPos: {fileID: 6778669902633837958}
   attackSpeed: 0.55
+  str: 1
   damageColor: {r: 0.7798742, g: 0.041691333, b: 0.041691333, a: 0}
 --- !u!33 &2404296483650153395
 MeshFilter:
@@ -2003,7 +2003,7 @@ Transform:
   m_GameObject: {fileID: 4604841354948560987}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.025, y: -0.688, z: 0.199}
+  m_LocalPosition: {x: 0, y: -0.688, z: 0.199}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
