@@ -9,8 +9,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Renderer[] models;
     [SerializeField] Transform attackPos;
     [SerializeField] Transform pointDestination;
-    [SerializeField] Transform HeadPos;
-
+    [SerializeField] LayerMask targetLayer;
 
     [Range(1, 20)] [SerializeField] float detectRange;
     [Range(1, 10)] [SerializeField] int HP;
@@ -25,16 +24,12 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     [SerializeField] private GameObject droppedObj;
     [SerializeField] private float offset;
-    [SerializeField] int FOV;
 
 
     float attackTimer;
 
     float playerDistance;
     Vector3 targetDir;
-    Vector3 playerDir;
-    float angleToPlayer;
-
 
     Color colorOrig;
     Vector3 pointOrig;
@@ -45,7 +40,6 @@ public class EnemyAI : MonoBehaviour, IDamage
     void Start()
     {
         colorOrig = models[0].material.color;
-        gameManager.instance.updateGameGoal(1);
         pointOrig = transform.position;
         navCDORig = navCooldown;
         origStopDist = agent.stoppingDistance;
@@ -60,9 +54,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         targetDir = (agent.destination - transform.position);
         playerDistance = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
 
-            StartCoroutine(setNav());
-
-        if (playerDistance <= detectRange && canSeePlayer()) { }
+        StartCoroutine(setNav());
     }
 
     void faceTarget()
@@ -78,41 +70,25 @@ public class EnemyAI : MonoBehaviour, IDamage
         Instantiate(weapon, attackPos.position, transform.rotation);
     }
 
-    bool canSeePlayer()
-    {
-        playerDir = (gameManager.instance.player.transform.position - HeadPos.position);
-        angleToPlayer = Vector3.Angle(playerDir, transform.forward);
-        Debug.DrawRay(HeadPos.position, playerDir);
-
-        RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, playerDir, out hit))
-        {
-            if(angleToPlayer <= FOV && hit.collider.CompareTag("Player"))
-            {
-                agent.SetDestination(gameManager.instance.player.transform.position);
-                if (agent.remainingDistance <= agent.stoppingDistance)
-                {
-                    faceTarget();
-                }
-
-                if (attackTimer >= attackSpeed)
-                {
-                    attack();
-                }
-                return true;
-            }
-        }
-        return false;   
-    }
-
     IEnumerator setNav()
     {
-        if (playerDistance <= detectRange && canSeePlayer())
+        RaycastHit hit;
+
+        if (gameManager.instance.playerScript.CurrentState.StateKey != PlayerStateMachine.PlayerStates.Idle &&
+            playerDistance <= detectRange ||
+            Physics.Raycast(transform.position, transform.forward, out hit, sightDist, targetLayer))
         {
             agent.stoppingDistance = origStopDist;
             agent.SetDestination(gameManager.instance.player.transform.position);
-           
+            if (agent.remainingDistance <= agent.stoppingDistance)
+            {
+                faceTarget();
+            }
+
+            if (attackTimer >= attackSpeed)
+            {
+                attack();
+            }
         }
         else if (transform.position != pointOrig && navCooldown <= 0)
         {
@@ -133,8 +109,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         HP -= amount;
         if (HP <= 0)
         {
-            gameManager.instance.updateGameGoal(-1);
-            gameManager.instance.exp++;
+            WaveManager.instance.EnemiesDied();
             dropItem();
             Destroy(gameObject);
         }
