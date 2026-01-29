@@ -54,5 +54,10 @@ public class SpawnManager : MonoBehaviour
         spawning = false;
 
     }
+
+   // public void EnemyDied() //0125
+   // {
+    //    currentEnemyCount --; 
+   // }
     
 }
