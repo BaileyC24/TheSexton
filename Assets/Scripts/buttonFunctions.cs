@@ -28,13 +28,6 @@ public class buttonFunctions : MonoBehaviour
     }
 
 
-    public void nextWave()
-    {
-        WaveManager.instance.StartCoroutine("StartNextWave");
-
-    }
-
-
     public void hpPlus()
     {
         if(gameManager.instance.points > 0 && gameManager.instance.playerScript.health < 200)
