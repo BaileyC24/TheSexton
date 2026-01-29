@@ -126,8 +126,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1420126735961266223}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.41089234, z: 0, w: 0.9116839}
-  m_LocalPosition: {x: -14.465878, y: 2.02, z: -19.228}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -137,7 +137,7 @@ Transform:
   - {fileID: 2417890218034027469}
   - {fileID: 4170205307119615562}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 2208.522, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4493692650512313004
 Animator:
   serializedVersion: 7
@@ -148,10 +148,10 @@ Animator:
   m_GameObject: {fileID: 1420126735961266223}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 41f081d5c6d286c47a33bed3f84de79a, type: 3}
-  m_Controller: {fileID: 9100000, guid: 46832a3eefea6e043ae6aa767744c94c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 65df38ab2d47ab342bd297230b9a8562, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -178,38 +178,24 @@ MonoBehaviour:
   - {fileID: 2158426147446090751}
   - {fileID: 9167240573668182697}
   - {fileID: 6480156114085080839}
-<<<<<<< Updated upstream
   animator: {fileID: 4493692650512313004}
   attackPos: {fileID: 297461308541736389}
-  roamDist: 20
-  navCooldown: 4.96
-  faceTargetSpeed: 12
-  detectRange: 10
-=======
-  animator: {fileID: 0}
-  attackPos: {fileID: 297461308541736389}
   roamDist: 0
-  navCooldown: 4.96
+  navCooldown: 5
   faceTargetSpeed: 12
   detectRange: 5
->>>>>>> Stashed changes
   sightDist: 11
   FOV: 45
   targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   weapon: {fileID: 3785360412475301167, guid: fa9c224a53c45d74598cb820ba731585, type: 3}
-  attackSpeed: 0.91
+  attackSpeed: 1
   HP: 7
-<<<<<<< Updated upstream
-  droppedObj: {fileID: 0}
-  offset: 0
-=======
   dropPrefabs:
   - {fileID: 3199720909439884744, guid: 3a48f2ac21590b1449363c9983016193, type: 3}
   dropChance: 0.35
-  dropYOffset: 0.5
->>>>>>> Stashed changes
+  dropYOffset: 0.1
 --- !u!195 &4811956273937372866
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -224,7 +210,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

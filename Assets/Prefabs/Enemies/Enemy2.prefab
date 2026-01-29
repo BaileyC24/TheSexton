@@ -615,8 +615,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5546170355588485569}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.41089234, z: 0, w: 0.9116839}
-  m_LocalPosition: {x: -14.465878, y: 2.02, z: -19.228}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -626,7 +626,7 @@ Transform:
   - {fileID: 8426789380256073550}
   - {fileID: 8253283084659638531}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 2208.522, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &759422710608392999
 Animator:
   serializedVersion: 7
@@ -640,7 +640,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 65df38ab2d47ab342bd297230b9a8562, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -670,9 +670,9 @@ MonoBehaviour:
   animator: {fileID: 759422710608392999}
   attackPos: {fileID: 5609761323877432090}
   roamDist: 0
-  navCooldown: 6.42
+  navCooldown: 7
   faceTargetSpeed: 12
-  detectRange: 5
+  detectRange: 11
   sightDist: 11
   FOV: 45
   targetLayer:

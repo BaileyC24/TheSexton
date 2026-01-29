@@ -1609,9 +1609,9 @@ MonoBehaviour:
   animator: {fileID: 2459541210537913145}
   attackPos: {fileID: 8297429106404489251}
   roamDist: 0
-  navCooldown: 7.78
+  navCooldown: 8
   faceTargetSpeed: 12
-  detectRange: 9.66
+  detectRange: 10
   sightDist: 11
   FOV: 0
   targetLayer:
