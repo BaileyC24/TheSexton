@@ -10854,7 +10854,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
   Waves: 3
   waveCountText: {fileID: 682142851}
-  enemiesPerWave: 010000000200000003000000
+  enemiesPerWave: 140000000200000003000000
   enemiesAlive: 0
 --- !u!1001 &771542306
 PrefabInstance:
