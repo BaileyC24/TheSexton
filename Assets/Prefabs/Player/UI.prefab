@@ -2483,7 +2483,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
 --- !u!1 &3951281704657984141
 GameObject:
   m_ObjectHideFlags: 0
@@ -5424,7 +5424,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
 --- !u!1 &8346303688161984639
 GameObject:
   m_ObjectHideFlags: 0

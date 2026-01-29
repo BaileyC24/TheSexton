@@ -111,6 +111,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             WaveManager.instance.EnemiesDied();
             dropItem();
+            gameManager.instance.exp++;
             Destroy(gameObject);
         }
         else
