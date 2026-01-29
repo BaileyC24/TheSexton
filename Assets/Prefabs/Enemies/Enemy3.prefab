@@ -126,7 +126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1420126735961266223}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.4108936, z: -0, w: 0.9116833}
+  m_LocalRotation: {x: 0, y: 0.41089234, z: 0, w: 0.9116839}
   m_LocalPosition: {x: -14.465878, y: 2.02, z: -19.228}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -181,16 +181,17 @@ MonoBehaviour:
   attackPos: {fileID: 297461308541736389}
   pointDestination: {fileID: 7577806682178959295, guid: 302b315eab7469c419acc672705902a2,
     type: 3}
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 8
+  HeadPos: {fileID: 6115404859881757567}
   detectRange: 5
-  HP: 4
+  HP: 7
   faceTargetSpeed: 12
   navCooldown: 4.96
   sightDist: 11
   weapon: {fileID: 3785360412475301167, guid: fa9c224a53c45d74598cb820ba731585, type: 3}
   attackSpeed: 0.91
+  droppedObj: {fileID: 0}
+  offset: 0
+  FOV: 45
 --- !u!195 &4811956273937372866
 NavMeshAgent:
   m_ObjectHideFlags: 0
