@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections;
 
-public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> , IDamage, iPickup
+public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>, IDamage, iPickup
 {
     public enum PlayerStates
     {
@@ -23,13 +23,13 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
     private PlayerStateContext context;
     private PlayerInput playerInput;
 
-    
+
     [BoxGroup("Health Settings")]
     [Title("Base Health")]
     [GUIColor(1f, 0.9f, 0.8f)]
     [Range(10f, 200f), SuffixLabel("hp", Overlay = true)]
     [SerializeField] public float health;
-    
+
     [BoxGroup("Movement Settings")]
     [Title("Base Speeds")]
     [GUIColor(0.8f, 1f, 0.8f)]
@@ -40,7 +40,7 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
     [GUIColor(0.8f, 1f, 0.8f)]
     [Range(1f, 30f), SuffixLabel("m/s", Overlay = true)]
     [SerializeField] private float sprintSpeed;
-    
+
     [BoxGroup("Slide Settings")]
     [Title("Duration & Distance")]
     [GUIColor(1f, 0.9f, 0.8f)]
@@ -59,7 +59,7 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
     [Tooltip("Base duration if not using distance calculation.")]
     [Range(0.1f, 3f), SuffixLabel("sec", Overlay = true)]
     [SerializeField] private float slideDuration;
-    
+
     [FoldoutGroup("Advanced Physics")]
     [Title("Slide Collider Adjustments")]
     [GUIColor(0.8f, 0.9f, 1f)]
@@ -74,17 +74,17 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
     [FoldoutGroup("Advanced Physics")]
     [GUIColor(0.8f, 0.9f, 1f)]
     [SerializeField] private Vector3 slideColliderCenter;
-    
+
     [BoxGroup("References")]
     [GUIColor(1f, 1f, 0.8f)]
     [Required("Rigidbody is required for physics movement.")]
     [SerializeField] private Rigidbody rBody;
-    
+
     [BoxGroup("References")]
     [GUIColor(1f, 1f, 0.8f)]
     [Required("Collider is required for physics movement.")]
     [SerializeField] private CapsuleCollider collider;
-    
+
     [BoxGroup("References")]
     [GUIColor(1f, 1f, 0.8f)]
     [Required("Animator is required for physics movement.")]
@@ -92,7 +92,7 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
     #endregion
 
     public override void StartMethod()
-    {   
+    {
         spawnPlayer();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -105,7 +105,7 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
     public override void UpdateMethod()
     {
     }
-    
+
     private void SetupState()
     {
         States.Add(PlayerStates.Idle, new PlayerIdleState(context, PlayerStates.Idle));
@@ -114,10 +114,10 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
         States.Add(PlayerStates.Sprint, new PlayerSprintState(context, PlayerStates.Sprint));
         States.Add(PlayerStates.Slide, new PlayerSlideState(context, PlayerStates.Slide));
         States.Add(PlayerStates.Walk, new PlayerWalkState(context, PlayerStates.Walk));
-        
+
         CurrentState = States[PlayerStates.Idle];
     }
-    
+
     private void SetupContext()
     {
         context = new PlayerStateContext(
@@ -136,7 +136,7 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
             Camera.main);
     }
 
-    
+
     public void takeDamage(int amount)
     {
         health -= amount;
@@ -177,11 +177,16 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
         updatePlayerUI();
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
     }
-    
+
 
     public void getPowerUps(powerUps heal)
     {
-        
+
         health = heal.healthCurrent;
+    }
+
+    public void GetAllyStats(SurvivorStats survivorStats)
+    {
+        // Player does not use ally stats
     }
 }
