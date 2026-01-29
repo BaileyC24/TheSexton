@@ -11,5 +11,6 @@ AssetOrigin:
   productId: 223200
   packageName: Spooky Graveyard - Stylized Fantasy Environment
   packageVersion: 1.2
-  assetPath: Assets/Ilumisoft/Spooky Graveyard/Scenes/Showcase Lighting Settings.lighting
+  assetPath: Assets/Unity DL/Ilumisoft/Spooky Graveyard/Scenes/Showcase Lighting
+    Settings.lighting
   uploadId: 681650

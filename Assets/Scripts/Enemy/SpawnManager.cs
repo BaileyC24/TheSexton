@@ -8,7 +8,6 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private List<GameObject> spawnPoints;
     [SerializeField] private float spawnBuffer;
-    [SerializeField] private gameManager gameManager;
 
     public bool spawning;
 
@@ -41,7 +40,7 @@ public class SpawnManager : MonoBehaviour
             yield break;
         }
         
-        gameManager.updateGameGoal(enemyCount);
+        gameManager.instance.updateGameGoal(enemyCount);
 
         for (int i = 0; i < enemyCount; i++)
         {

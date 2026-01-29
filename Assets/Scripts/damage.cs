@@ -5,9 +5,9 @@ using Unity.VisualScripting;
 
 public class damage : MonoBehaviour
 {
-    enum damageType { ranged, melee, DOT}
+    public enum damageType { ranged, melee, DOT}
 
-    [SerializeField] damageType type;
+    public damageType type;
     [SerializeField] Rigidbody rb;
 
     [Range(1,10)][SerializeField] int damageAmount;
@@ -17,25 +17,19 @@ public class damage : MonoBehaviour
     [Range(0,5)][SerializeField] float verticalOffset;
     [SerializeField] float destroyTime;
     [SerializeField] GameObject hitEffect;
-   
-
+    
     bool isDamaging;
+    public bool allowedToDamage;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if (type == damageType.ranged)
         {
-            rb.linearVelocity = new Vector3(transform.forward.x * speed, (transform.forward.y * speed) + (verticalOffset * speed) , transform.forward.z * speed);
-            Destroy(gameObject, destroyTime);
-        }
-        if (type == damageType.melee)
-        {
+            // Apply velocity based on the variables in the inspector
+            rb.linearVelocity = (transform.forward + new Vector3(0, verticalOffset, 0)) * speed;
             Destroy(gameObject, destroyTime);
         }
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -47,17 +41,13 @@ public class damage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.isTrigger)
-        {
-            return;
-        }
+        if (other.isTrigger) return;
+
         IDamage dmg = other.GetComponent<IDamage>();
-        if (dmg != null && type != damageType.DOT)
+        
+        if (dmg != null && type == damageType.ranged)
         {
             dmg.takeDamage(damageAmount);
-        }
-        if(type == damageType.ranged)
-        {
             Destroy(gameObject);
         }
     }
@@ -73,9 +63,14 @@ public class damage : MonoBehaviour
         {
             StartCoroutine(damageOther(dmg));
         }
-        if (dmg != null && type != damageType.DOT)
+        
+        if (allowedToDamage)
         {
-            dmg.takeDamage(damageAmount);
+            if (dmg != null && type == damageType.melee)
+            {
+                dmg.takeDamage(damageAmount);
+                allowedToDamage = false; 
+            }
         }
     }
 
@@ -86,4 +81,5 @@ public class damage : MonoBehaviour
         yield return new WaitForSeconds(damageRate);
         isDamaging = false;
     }
+    
 }
