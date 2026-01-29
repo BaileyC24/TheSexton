@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Transform AttackPos;
-    [Range(0.1f, 2)][SerializeField] private float attackSpeed;
+    [Range(0.1f, 2)][SerializeField] public float attackSpeed;
+    [Range(1, 15)][SerializeField] public int str;
     [SerializeField] private Color damageColor;
     private float attackTimer;
     private bool attacking;
@@ -40,7 +41,7 @@ public class PlayerAttack : MonoBehaviour
         
         IDamage damage = _target.GetComponent<IDamage>();
         if (damage != null)
-            damage.takeDamage(1);
+            damage.takeDamage(str);
     }
 
     IEnumerator AttackWindow()

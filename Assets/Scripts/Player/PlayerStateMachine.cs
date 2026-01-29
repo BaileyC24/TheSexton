@@ -23,12 +23,13 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
 
     private PlayerStateContext context;
     private PlayerInput playerInput;
+
     
     [BoxGroup("Health Settings")]
     [Title("Base Health")]
     [GUIColor(1f, 0.9f, 0.8f)]
     [Range(10f, 200f), SuffixLabel("hp", Overlay = true)]
-    [SerializeField] private float health;
+    [SerializeField] public float health;
     
     [BoxGroup("Movement Settings")]
     [Title("Base Speeds")]
