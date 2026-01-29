@@ -40,7 +40,6 @@ public class EnemyAI : MonoBehaviour, IDamage
     void Start()
     {
         colorOrig = models[0].material.color;
-        gameManager.instance.updateGameGoal(1);
         pointOrig = transform.position;
         navCDORig = navCooldown;
         origStopDist = agent.stoppingDistance;
@@ -110,7 +109,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         HP -= amount;
         if (HP <= 0)
         {
-            gameManager.instance.updateGameGoal(-1);
+            WaveManager.instance.EnemiesDied();
             dropItem();
             Destroy(gameObject);
         }

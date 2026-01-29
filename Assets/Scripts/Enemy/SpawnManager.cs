@@ -40,13 +40,14 @@ public class SpawnManager : MonoBehaviour
             Debug.LogError($"{name} has no spawn points assigned!");
             yield break;
         }
+        
+        gameManager.updateGameGoal(enemyCount);
 
         for (int i = 0; i < enemyCount; i++)
         {
             GameObject spawnPoint = spawnPoints[i % spawnPoints.Count];
             Instantiate(enemyPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
             WaveManager.instance.enemiesAlive++;
-            gameManager.updateGameGoal(amount: 1);
             yield return new WaitForSeconds(0.5f);
         }
 
