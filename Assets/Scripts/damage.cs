@@ -10,11 +10,11 @@ public class damage : MonoBehaviour
     [SerializeField] damageType type;
     [SerializeField] Rigidbody rb;
 
-    [Range(1,3)][SerializeField] int damageAmount;
+    [Range(1,10)][SerializeField] int damageAmount;
     [Range(0, 2)][SerializeField] float damageRate;
-    [Range(5,25)][SerializeField] int speed;
-    [Range(15,40)][SerializeField] float gravity;
-    [Range(1,5)][SerializeField] float verticalOffset;
+    [Range(0,25)][SerializeField] int speed;
+    [Range(0,40)][SerializeField] float gravity;
+    [Range(0,5)][SerializeField] float verticalOffset;
     [SerializeField] float destroyTime;
     [SerializeField] GameObject hitEffect;
    

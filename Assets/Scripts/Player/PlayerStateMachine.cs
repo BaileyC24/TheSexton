@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections;
 
-public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> , IDamage
+public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> , IDamage, iPickup
 {
     public enum PlayerStates
     {
@@ -176,5 +176,11 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates> 
         gameManager.instance.damageFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         gameManager.instance.damageFlash.SetActive(false);
+    }
+
+    public void getPowerUps(powerUps heal)
+    {
+        
+        health = heal.healthCurrent;
     }
 }
