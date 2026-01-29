@@ -32,8 +32,8 @@ public class buttonFunctions : MonoBehaviour
     {
         if(gameManager.instance.points > 0 && gameManager.instance.playerScript.health < 200)
         {
-            gameManager.instance.playerScript.health += 5;
             gameManager.instance.playerScript.HPOrig += 5;
+            gameManager.instance.playerScript.health = gameManager.instance.playerScript.HPOrig;
             gameManager.instance.playerScript.updatePlayerUI();
             gameManager.instance.points--;
         }

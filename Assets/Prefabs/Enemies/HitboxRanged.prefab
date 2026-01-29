@@ -77,7 +77,7 @@ MonoBehaviour:
   speed: 10
   gravity: 26.8
   verticalOffset: 1.16
-  destroyTime: 3
+  destroyTime: 1
   hitEffect: {fileID: 3785360412475301167}
 --- !u!54 &8829970214444792151
 Rigidbody:
@@ -159,7 +159,7 @@ TrailRenderer:
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.5
+    widthMultiplier: 0.05
     widthCurve:
       serializedVersion: 2
       m_Curve:

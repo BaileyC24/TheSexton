@@ -1606,22 +1606,24 @@ MonoBehaviour:
   - {fileID: 624373199670012150}
   - {fileID: 9014438158106348245}
   - {fileID: 1005216724062915880}
+  animator: {fileID: 2459541210537913145}
   attackPos: {fileID: 8297429106404489251}
-  pointDestination: {fileID: 7577806682178959295, guid: 64f56905d7c349649bb16e443fc218a4,
-    type: 3}
+  roamDist: 0
+  navCooldown: 8
+  faceTargetSpeed: 12
+  detectRange: 10
+  sightDist: 11
+  FOV: 0
   targetLayer:
     serializedVersion: 2
     m_Bits: 8
-  detectRange: 9.66
-  HP: 4
-  faceTargetSpeed: 12
-  navCooldown: 7.78
-  sightDist: 11
   weapon: {fileID: 2522153297088560620}
   attackSpeed: 1
-  droppedObj: {fileID: 0}
-  animator: {fileID: 2459541210537913145}
-  offset: 0
+  HP: 4
+  dropPrefabs:
+  - {fileID: 3199720909439884744, guid: 3a48f2ac21590b1449363c9983016193, type: 3}
+  dropChance: 0.35
+  dropYOffset: 0.1
 --- !u!195 &2612845031164209962
 NavMeshAgent:
   m_ObjectHideFlags: 0

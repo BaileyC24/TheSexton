@@ -27,8 +27,9 @@ public class enemyAI : MonoBehaviour, IDamage
     [Range(1, 10)] [SerializeField] int HP;
 
     [Header("Drops")]
-    [SerializeField] private GameObject droppedObj;
-    [SerializeField] private float offset;
+    [SerializeField] private GameObject[] dropPrefabs;
+    [SerializeField][Range(0f, 1f)] private float dropChance = 0.35f;
+    [SerializeField] private float dropYOffset = 0.5f;
 
     float attackTimer;
     float navTimer;
@@ -181,9 +182,19 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void dropItem()
     {
-        if (droppedObj != null)
-        {
-            Instantiate(droppedObj, transform.position + new Vector3(0, offset, 0), transform.rotation);
-        }
+        if (dropPrefabs == null || dropPrefabs.Length == 0)
+            return;
+
+        if (Random.value > dropChance)
+            return;
+
+        int index = Random.Range(0, dropPrefabs.Length);
+        GameObject drop = dropPrefabs[index];
+
+        Instantiate(
+            drop,
+            transform.position + Vector3.up * dropYOffset,
+            Quaternion.identity
+        );
     }
 }
