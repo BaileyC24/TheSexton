@@ -29,8 +29,8 @@ public class InteractionController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hitInfo, interactionDistance))
         {
-            if (Input.GetKeyDown(KeyCode.E))  
-            {
+            if (gameManager.instance.playerScript.GetInput().Player.Interact.triggered)  //fka Input.GetKeyDown(KeyCode.E)
+            {//asking gameManager for the playerScript...
 
                 IInteractable interactable = hitInfo.collider.GetComponent<IInteractable>(); 
                 if (interactable != null)

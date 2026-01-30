@@ -9162,7 +9162,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3590821475202817051, guid: f4090d69f10342044a6411038809242f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1870951207}
   m_SourcePrefab: {fileID: 100100000, guid: f4090d69f10342044a6411038809242f, type: 3}
 --- !u!1001 &694474737
 PrefabInstance:
@@ -29946,6 +29950,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0df6dae40b55fdb4b984f8a754bda9ae, type: 3}
+--- !u!1 &1654257617 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3590821475202817051, guid: f4090d69f10342044a6411038809242f,
+    type: 3}
+  m_PrefabInstance: {fileID: 692713784}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1657611560 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6225213821830691003, guid: 44f229d1d60608e40bed929a10456491,
@@ -32675,6 +32685,20 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 692713784}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1870951207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654257617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4578c8c3aa218c499c2b012dc3882d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionController
+  playerCamera: {fileID: 0}
+  interactionDistance: 3
 --- !u!4 &1898603757 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4672622253915920495, guid: d7b8ddf2d41b77748898eea0ef6f19ff,

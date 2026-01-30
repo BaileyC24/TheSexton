@@ -16,3 +16,4 @@ public class TriggerWinZone : MonoBehaviour //can be attached to a GameObject in
         }
     }
 }
+
