@@ -1,14 +1,12 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.UIElements;
-using Unity.VisualScripting;
 
 public class damage : MonoBehaviour
 {
     public enum damageType { ranged, melee, DOT}
 
     public damageType type;
-    [SerializeField] Rigidbody rb;
+    [SerializeField] private Rigidbody rb;
 
     [Range(1,10)][SerializeField] int damageAmount;
     [Range(0, 2)][SerializeField] float damageRate;
@@ -82,4 +80,12 @@ public class damage : MonoBehaviour
         isDamaging = false;
     }
     
+    public void SetDamage(int amount) => damageAmount = amount;
+    public void SetRangedStats(int spd, float grav, float vert, float life)
+    {
+        speed = spd;
+        gravity = grav;
+        verticalOffset = vert;
+        destroyTime = life;
+    }
 }
