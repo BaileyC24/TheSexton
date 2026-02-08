@@ -68,8 +68,8 @@ public class gameManager : MonoBehaviour
     {
         levelText.text = "Level: " + level.ToString("F0") + "/" + maxLevel.ToString("F0");
         pointsText.text = points.ToString("F0");
-        strText.text = "STR: " + playerStats.str.ToString("F0");
-        attackSpdText.text = "A.SPD:" + playerStats.attackSpeed.ToString();
+        strText.text = "STR: " + playerStats.currentWeapon.damage.ToString("F0");
+        attackSpdText.text = "A.SPD:" + playerStats.currentWeapon.fireRate;
         HealthText.text = "HP: " + playerScript.health.ToString("F0") + "/" + playerScript.HPOrig.ToString("F0");
         if (Input.GetButtonDown("Cancel"))
         { 
@@ -144,7 +144,7 @@ public class gameManager : MonoBehaviour
     }
 
     public void menuUpgrade()
-        {
+    {
         statePaused();
         menuActive = menuUpgrades;
         menuActive.SetActive(true);

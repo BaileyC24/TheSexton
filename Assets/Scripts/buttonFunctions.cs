@@ -43,19 +43,21 @@ public class buttonFunctions : MonoBehaviour
 
     public void strPlus()
     {
-        if (gameManager.instance.points > 0 && gameManager.instance.playerStats.str < 15)
+        // TODO: REDO STRENGTH UPGRADE TO WORK PROPERLY WITH THE NEW SYSTEM
+        if (gameManager.instance.points > 0 && gameManager.instance.playerStats.currentWeapon.damage < 15)
         {
-            gameManager.instance.playerStats.str += 1;
+            gameManager.instance.playerStats.currentWeapon.damage += 1;
             gameManager.instance.points--;
         }
     }
 
     public void attSpdPlus()
     {
-        if (gameManager.instance.points > 0 && gameManager.instance.playerStats.attackSpeed > 0.1f)
+        // TODO: REDO ATTACK SPEED UPGRADE TO WORK PROPERLY WITH THE NEW SYSTEM
+        /*if (gameManager.instance.points > 0 && gameManager.instance.playerStats.attackSpeed > 0.1f)
         {
             gameManager.instance.playerStats.attackSpeed -= 0.1f;
             gameManager.instance.points--;
-        }
+        }*/
     }
 }
