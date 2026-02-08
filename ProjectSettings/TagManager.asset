@@ -7,6 +7,7 @@ TagManager:
   - Spawner
   - Enemy
   - Player Spawn Pos
+  - Cinemachine
   layers:
   - Default
   - TransparentFX

@@ -790,7 +790,7 @@ GameObject:
   - component: {fileID: 4072502752134315027}
   - component: {fileID: 1729098461933336942}
   - component: {fileID: 5681041765467784207}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Axe_os(1)_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -819,7 +819,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1238826807465539565}
-  m_Mesh: {fileID: 4300004, guid: 9aee63a8fb5917e479df7d2311f3bd99, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!23 &5681041765467784207
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -936,7 +936,7 @@ Transform:
   m_GameObject: {fileID: 1408602858495687344}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.78999996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1606,10 +1606,12 @@ GameObject:
   - component: {fileID: 5415460446128706163}
   - component: {fileID: 4804062950398805894}
   - component: {fileID: 1357382888961720616}
+  - component: {fileID: 4429929082094690574}
   - component: {fileID: 2404296483650153395}
   - component: {fileID: 8314770065868040343}
   - component: {fileID: 772442463008066308}
   - component: {fileID: 3851675104023062832}
+  - component: {fileID: 7754621423565768333}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1652,7 +1654,7 @@ MonoBehaviour:
   health: 10
   speed: 5
   volume: 0.588
-  aud: {fileID: 0}
+  aud: {fileID: 7754621423565768333}
   audHit:
   - {fileID: 8300000, guid: b7f8695cf65a4f24eb37544298821146, type: 3}
   sprintSpeed: 10
@@ -1677,10 +1679,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb690181ae24f90965b415c80335c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
-  AttackPos: {fileID: 6778669902633837958}
+  attackPos: {fileID: 6778669902633837958}
+  weaponVisual: {fileID: 1238826807465539565}
+  aimCamera: {fileID: 7186583299047919634}
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 64
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 1
+  maxTargetDistance: 3
+  thrustSphereRadius: 0.35
+  utilityRange: 4
+  thrustArcThreshold: 25
+  aimAssistRadius: 0.45
+  cameraRayStartOffset: 0
+  requireLineOfSight: 1
+  cleaveRadius: 1.25
+  maxCleaveTargets: 2
   attackSpeed: 0.55
   str: 1
-  damageColor: {r: 0.7798742, g: 0.041691333, b: 0.041691333, a: 0}
+  weapons:
+  - {fileID: 11400000, guid: f2f4768f1b5493b4e95d85832180cadb, type: 2}
+  - {fileID: 11400000, guid: 2812e91f843694c458b663520827031e, type: 2}
+  currentWeapon: {fileID: 0}
+--- !u!114 &4429929082094690574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3590821475202817051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4578c8c3aa218c499c2b012dc3882d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionController
+  interactionDistance: 3
 --- !u!33 &2404296483650153395
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1788,6 +1823,103 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!82 &7754621423565768333
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3590821475202817051}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3730447508976039497
 GameObject:
   m_ObjectHideFlags: 0
@@ -2456,7 +2588,7 @@ MonoBehaviour:
   WorldUpOverride: {fileID: 0}
   ChannelMask: -1
   UpdateMethod: 2
-  BlendUpdateMethod: 1
+  BlendUpdateMethod: 0
   LensModeOverride:
     Enabled: 0
     DefaultMode: 2
@@ -3053,8 +3185,8 @@ GameObject:
   - component: {fileID: 3858277210043857465}
   - component: {fileID: 3630859271568482364}
   - component: {fileID: 6409909045649935493}
-  - component: {fileID: 8464235259153304461}
-  m_Layer: 3
+  - component: {fileID: 4196818546766476327}
+  m_Layer: 8
   m_Name: Weapons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3147,7 +3279,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 15
   m_Center: {x: 86.4, y: 113.2, z: -12.3}
---- !u!114 &8464235259153304461
+--- !u!114 &4196818546766476327
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3156,9 +3288,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 7191283032340498951}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 145f944f4e4b4883b49584e04516b9fe, type: 3}
+  m_Script: {fileID: 11500000, guid: aae5dd97142cc404bb457e3ce15226ca, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AttackTrigger
+  m_EditorClassIdentifier: Assembly-CSharp::damage
+  type: 1
+  rb: {fileID: 0}
+  damageAmount: 1
+  damageRate: 0
+  speed: 0
+  gravity: 0
+  verticalOffset: 0
+  destroyTime: 0
+  hitEffect: {fileID: 0}
+  allowedToDamage: 0
 --- !u!1 &7327552727300194609
 GameObject:
   m_ObjectHideFlags: 0

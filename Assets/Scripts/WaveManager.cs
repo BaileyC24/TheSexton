@@ -43,7 +43,6 @@ public class WaveManager : MonoBehaviour
     {
         if (!waveStarted && spawnManagers.TrueForAll(manager => manager !=null && manager.spawning))
         {
-            Debug.Log("Spawning true");
             waveStarted = true;
             currentWave++;
         }
@@ -71,7 +70,7 @@ public class WaveManager : MonoBehaviour
         }
         else
         {
-            gameManager.instance.youWin();
+            gameManager.instance.OpenMenu(gameManager.MenuType.Win);
         }
     }
 

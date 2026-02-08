@@ -153,7 +153,7 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
         StartCoroutine(flashDamage());
         if (health <= 0)
         {
-            gameManager.instance.youLose();
+            gameManager.instance.OpenMenu(gameManager.MenuType.Lose);
         }
     }
 

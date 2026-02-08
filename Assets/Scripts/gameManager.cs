@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -6,16 +8,14 @@ public class gameManager : MonoBehaviour
 {
     public static gameManager instance;
 
-    [SerializeField] GameObject menuActive;
-    [SerializeField] GameObject menuPause;
-    [SerializeField] GameObject menuWin;
-    [SerializeField] GameObject menuLose;
-    [SerializeField] GameObject menuHome;
-    [SerializeField] GameObject menuUpgrades;
-    [SerializeField] GameObject menuGuns;
-    [SerializeField] GameObject menuObjectives;
-
-
+    [SerializeField] private GameObject menuActive;
+    [SerializeField] private GameObject menuPause;
+    [SerializeField] private GameObject menuWin;
+    [SerializeField] private GameObject menuLose;
+    [SerializeField] private GameObject menuUpgrades;
+    [SerializeField] private GameObject menuGuns;
+    [SerializeField] private GameObject menuStore;
+    [SerializeField] private GameObject AlertMenu;
 
     public GameObject playerSpawnPos;
     public Image playerHPBar;
@@ -28,9 +28,14 @@ public class gameManager : MonoBehaviour
     public int exp;
     public int points;
     int level;
-
-
-
+    
+    public enum MenuType
+    {
+        Lose,
+        Win,
+        Store
+    }
+    
     public PlayerStateMachine playerScript;
 
 
@@ -66,49 +71,36 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        levelText.text = "Level: " + level.ToString("F0") + "/" + maxLevel.ToString("F0");
+        levelText.text = level.ToString("F0") + "/" + maxLevel.ToString("F0");
         pointsText.text = points.ToString("F0");
-        strText.text = "STR: " + playerStats.currentWeapon.damage.ToString("F0");
-        attackSpdText.text = "A.SPD:" + playerStats.currentWeapon.fireRate;
-        HealthText.text = "HP: " + playerScript.health.ToString("F0") + "/" + playerScript.HPOrig.ToString("F0");
+        strText.text = playerStats.currentWeapon.damage.ToString("F0");
+        attackSpdText.text = "N/A TODO";
+        HealthText.text = playerScript.health.ToString("F0") + "/" + playerScript.HPOrig.ToString("F0");
+        
         if (Input.GetButtonDown("Cancel"))
-        { 
-            if(menuActive == null)
+        {
+            if (menuActive != null)
+            {
+                stateUnpaused();
+            }
+            else
             {
                 statePaused();
                 menuActive = menuPause;
                 menuActive.SetActive(true);
-
-               
-
             }
-            else if(menuActive == menuPause)
-            {
-                stateUnpaused();
-            }
-
-        }
-            
-        if (Input.GetButtonDown("U") && menuActive == false)
-        {
-            menuUpgrade();
-        }
-        else if(menuActive == menuUpgrades && Input.GetButtonDown("Cancel") || Input.GetButtonDown("U"))
-        {
-            stateUnpaused();
         }
 
-        if(exp >= nextLevel && level < maxLevel)
+        if (exp >= nextLevel && level < maxLevel)
         {
             level++;
             points += 3;
-            menuUpgrade();
             nextLevel = (nextLevel * 1.3) + 2;
             exp = 0;
+            SendAlert("Level Up! You are now level " + level.ToString("F0") + "!", 1.5f);
         }
 
     }
-
 
     public void statePaused()
     {      
@@ -129,24 +121,27 @@ public class gameManager : MonoBehaviour
         menuActive = null;
     }
 
-    public void youLose()
+    public void OpenMenu(MenuType type)
     {
         statePaused();
-        menuActive = menuLose;
-        menuActive.SetActive(true);
-    }
+        if (menuActive)
+            menuActive.SetActive(false);
 
-    public void youWin()
-    {
-        statePaused();
-        menuActive = menuWin;
-        menuActive.SetActive(true);
-    }
+        switch (type)
+        {
+            case MenuType.Lose:
+                menuActive = menuLose;
+                break;
 
-    public void menuUpgrade()
-    {
-        statePaused();
-        menuActive = menuUpgrades;
+            case MenuType.Win:
+                menuActive = menuWin;
+                break;
+
+            case MenuType.Store:
+                menuActive = menuStore;
+                break;
+        }
+
         menuActive.SetActive(true);
     }
 
@@ -157,5 +152,16 @@ public class gameManager : MonoBehaviour
     }
 
 
-
- }
+    public void SendAlert(string message, float delay = 0.5f)
+    {
+        StartCoroutine(Alert(message, delay));
+    }
+    
+    IEnumerator Alert(string message, float delay)
+    {
+        AlertMenu.SetActive(true);
+        AlertMenu.GetComponentInChildren<TMP_Text>().text = message;
+        yield return new WaitForSeconds(delay);
+        AlertMenu.SetActive(false);
+    }
+}

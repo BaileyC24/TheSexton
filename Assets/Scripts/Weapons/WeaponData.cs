@@ -3,40 +3,37 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Weapon", menuName = "The Sexton/Weapon Data")]
 public class WeaponData : ScriptableObject
 {
-    public enum WeaponType { Melee, Ranged }
+    public enum WeaponType { Melee, Utility }
+    public enum SpecialEffect { None, Stun, Blind, Knockback }
 
     [Header("Core")]
     public string weaponName;
     public Sprite weaponIcon;
     public GameObject weaponModel;
-    public WeaponType weaponType;
+
+    public WeaponType weaponType = WeaponType.Melee;
+
+    [Header("Animation")]
     public AnimatorOverrideController animatorOverride;
 
-    [Header("Damage")]
+    [Header("Combat")]
     public int damage = 5;
+    [Tooltip("How far the hit can reach.")]
+    public float range = 2f;
+    [Tooltip("How wide the swing is (0 = thrust / straight hit).")]
+    [Range(0f, 180f)] public float swingArc = 90f;
 
-    [Header("Melee")]
-    public float meleeHitDelay = 0.15f;
-    public float meleeTotalTime = 0.6f;
+    [Header("Timing")]
+    public float hitDelay = 0.15f;
+    public float totalTime = 0.6f;
 
-    [Header("Ranged")]
-    public bool useHitscan = true;
-    public float range = 50f;
-    public LayerMask hitMask = ~0;
+    [Header("Special")]
+    public SpecialEffect specialEffect = SpecialEffect.None;
+    [Range(0f, 1f)] public float specialChance;
+    public float specialDuration;
 
-    [Tooltip("If useHitscan = false, this prefab will be spawned.")]
-    public GameObject projectilePrefab;
-    public int projectileSpeed = 20;
-    public float projectileGravity;
-    public float projectileVerticalOffset;
-    public float projectileLife = 3f;
-
-    [Tooltip("Shots per second.")]
-    public float fireRate = 3f;
-
-    [Tooltip("Small random aim variance in degrees.")]
-    public float spreadDegrees = 0.5f;
-
-    [Tooltip("time before spawning the projectile / doing raycast (sync with animation).")]
-    public float shootDelay = 0.1f;
+    [Header("Utility Tags")]
+    public bool canBreakLocks;
+    public bool emitsLight;
+    public float lightRadius;
 }
