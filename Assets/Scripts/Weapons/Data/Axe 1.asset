@@ -17,21 +17,17 @@ MonoBehaviour:
   weaponModel: {fileID: 1948186286613674, guid: f063809a91c6b0248956e054e09b9b56,
     type: 3}
   weaponType: 1
+  damageType: 2
   animatorOverride: {fileID: 22100000, guid: d61f8a6482bc12d4581319814301b759, type: 2}
   damage: 1
-  meleeHitDelay: 0.15
-  meleeTotalTime: 1.5
-  useHitscan: 0
   range: 50
-  hitMask:
-    serializedVersion: 2
-    m_Bits: 64
-  projectilePrefab: {fileID: 1760950585416176603, guid: 1733acbcc53422949a2701f815b486c9,
-    type: 3}
-  projectileSpeed: 20
-  projectileGravity: 0
-  projectileVerticalOffset: 0
-  projectileLife: 3
-  fireRate: 40
-  spreadDegrees: 0.5
-  shootDelay: 0.1
+  swingArc: 90
+  hitDelay: 0.15
+  totalTime: 0.6
+  stagger: 0
+  specialEffect: 3
+  specialChance: 0
+  specialDuration: 0
+  canBreakLocks: 0
+  emitsLight: 1
+  lightRadius: 0

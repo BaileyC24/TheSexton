@@ -11,7 +11,7 @@ public class TriggerWinZone : MonoBehaviour //can be attached to a GameObject in
         if (other.CompareTag("Player")) //if the thing that enters the trigger is the player...
         {
             Debug.Log("Player reached Win Zone"); //print this message
-            gameManager.instance.youWin();
+            gameManager.instance.OpenMenu(gameManager.MenuType.Win);
 
         }
     }

@@ -1,10 +1,12 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class buttonFunctions : MonoBehaviour
 {
-
+    public RectTransform uiElementToManage;
+    public GameObject storeContent;
+    public GameObject upgradeContent;
+    
     public void resume()
     {
         gameManager.instance.stateUnpaused();
@@ -23,6 +25,15 @@ public class buttonFunctions : MonoBehaviour
 
     public void quit()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+            #endif
+            Application.Quit();
+            return;
+        }
+        
         SceneManager.LoadScene(0);
         gameManager.instance.stateUnpaused();
         Cursor.lockState = CursorLockMode.None;
@@ -59,5 +70,24 @@ public class buttonFunctions : MonoBehaviour
             gameManager.instance.playerStats.attackSpeed -= 0.1f;
             gameManager.instance.points--;
         }*/
+    }
+    
+    public void BringToFront()
+    {
+        if (uiElementToManage != null)
+        {
+            uiElementToManage.SetAsLastSibling();
+            storeContent.SetActive(true);
+            upgradeContent.SetActive(false);
+        }
+    }
+    public void SendToBack()
+    {
+        if (uiElementToManage != null)
+        {
+            uiElementToManage.SetAsFirstSibling();
+            storeContent.SetActive(false);
+            upgradeContent.SetActive(true);
+        }
     }
 }
