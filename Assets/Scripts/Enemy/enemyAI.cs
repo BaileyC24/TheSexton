@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyAI : MonoBehaviour, IDamage
 {
@@ -9,6 +10,13 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Renderer[] models;
     [SerializeField] Animator animator;
     [SerializeField] Transform attackPos;
+    
+    [Header("HP Bar Scaling")]
+    [SerializeField] private float scaleAt1m = 0.01f;
+    [SerializeField] private float minScale = 0.006f;
+    [SerializeField] private float maxScale = 0.02f;
+    [SerializeField] private float scaleSmooth = 10f;
+    [SerializeField] private Image HPBar;
 
     [Header("Movement Settings")]
     [SerializeField] int roamDist;
@@ -21,10 +29,15 @@ public class EnemyAI : MonoBehaviour, IDamage
     [Range(0, 360)] [SerializeField] int FOV;
     [SerializeField] LayerMask targetLayer;
 
+    [Header("Damage Popup")]
+    [SerializeField] private Transform popupAnchor;
+    [SerializeField] private float popupRadius = 0.25f;
+    [SerializeField] private float popupUpBias = 0.15f;
+    
     [Header("Combat Settings")]
     [SerializeField] GameObject weapon;
     [Range(0.1f, 2f)] [SerializeField] float attackSpeed;
-    [Range(1, 10)] [SerializeField] int HP;
+    [SerializeField] int HP;
 
     [Header("Drops")]
     [SerializeField] private GameObject[] dropPrefabs;
@@ -38,6 +51,10 @@ public class EnemyAI : MonoBehaviour, IDamage
     Vector3 pointOrig;
     float origStopDist;
     Color colorOrig;
+    private int hpOrig;
+    private float displayHP;
+    private Vector3 baseScale;
+    private Camera cam;
     
 
     void Awake()
@@ -45,11 +62,20 @@ public class EnemyAI : MonoBehaviour, IDamage
         colorOrig = models[0].material.color;
         pointOrig = transform.position;
         origStopDist = agent.stoppingDistance;
-       
+        hpOrig = HP;
+        displayHP = HP;
+        
+        cam = Camera.main;
+        baseScale = Vector3.one * scaleAt1m;
+        
+        HPBar.gameObject.SetActive(false);
     }
 
     void Update()
     {
+        displayHP = Mathf.MoveTowards(displayHP, HP, 8 * Time.deltaTime);
+        HPBar.fillAmount = displayHP / hpOrig;
+        
         attackTimer += Time.deltaTime;
 
         playerDistance = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
@@ -63,6 +89,8 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             checkRoam();
         }
+        
+        UpdateHPBarScale();
     }
 
     bool canSeePlayer()
@@ -159,6 +187,13 @@ public class EnemyAI : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         HP -= amount;
+        
+        if (!HPBar.gameObject.activeSelf)
+            HPBar.gameObject.SetActive(true);
+        
+        SpawnDamagePopup(amount);
+        SpawnDamagePopup(amount, WeaponData.SpecialEffect.Blind);
+        
         if (HP <= 0)
         {
             WaveManager.instance.EnemiesDied();
@@ -179,6 +214,20 @@ public class EnemyAI : MonoBehaviour, IDamage
         foreach (Renderer model in models) model.sharedMaterial.color = colorOrig;
         
     }
+    
+    private void SpawnDamagePopup(int amount, WeaponData.SpecialEffect effect = WeaponData.SpecialEffect.None)
+    {
+        Vector3 basePos = popupAnchor.position;
+        
+        Vector3 offset = Random.insideUnitSphere * popupRadius;
+        offset.y = Mathf.Abs(offset.y) + popupUpBias;
+        Vector3 spawnPos = basePos + offset;
+        
+        if (effect == WeaponData.SpecialEffect.None)
+            DamageManager.instance.CreatePopup(spawnPos, amount.ToString());
+        else
+            DamageManager.instance.CreatePopup(spawnPos, effect.ToString(), WeaponData.SpecialEffectColor[effect]);
+    }
 
     void dropItem()
     {
@@ -196,5 +245,16 @@ public class EnemyAI : MonoBehaviour, IDamage
             transform.position + Vector3.up * dropYOffset,
             Quaternion.identity
         );
+    }
+    
+    private void UpdateHPBarScale()
+    {
+        float dist = Vector3.Distance(cam.transform.position, transform.position);
+        
+        float target = scaleAt1m * dist;
+        target = Mathf.Clamp(target, minScale, maxScale);
+
+        Vector3 targetScale = Vector3.one * target;
+        HPBar.rectTransform.localScale = Vector3.Lerp(HPBar.rectTransform.localScale, targetScale, scaleSmooth * Time.deltaTime);
     }
 }

@@ -26,10 +26,10 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
 
 
     [BoxGroup("Health Settings")]
-    [Title("Base Health")]
     [GUIColor(1f, 0.9f, 0.8f)]
     [Range(10f, 200f), SuffixLabel("hp", Overlay = true)]
     [SerializeField] public float health;
+    private float displayHP;
 
     [BoxGroup("Movement Settings")]
     [Title("Base Speeds")]
@@ -113,6 +113,11 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
 
     public override void UpdateMethod()
     {
+        displayHP = Mathf.MoveTowards(displayHP, health, 5 * Time.deltaTime);
+        gameManager.instance.playerHPBar.fillAmount = displayHP / HPOrig;
+        
+        if (GetInput().Player.Inventory.triggered && !gameManager.instance.isPaused)
+            gameManager.instance.OpenMenu(gameManager.MenuType.Inventory);
     }
 
     private void SetupState()
@@ -149,7 +154,6 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
     public void takeDamage(int amount)
     {
         health -= amount;
-        updatePlayerUI();
         StartCoroutine(flashDamage());
         if (health <= 0)
         {
@@ -167,7 +171,7 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
         return animator;
     }
 
-    public void updatePlayerUI()
+    public void updatePlayerUIInstant()
     {
         gameManager.instance.playerHPBar.fillAmount = health / HPOrig;
 
@@ -183,7 +187,7 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
     public void spawnPlayer()
     {
         HPOrig = health;
-        updatePlayerUI();
+        displayHP = health;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
     }
 
@@ -203,7 +207,6 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
     {
         health += amount;
         health = Mathf.Clamp(health, 0, HPOrig);
-        updatePlayerUI();
     }
 
     private void OnDisable()

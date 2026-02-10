@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -20,8 +21,6 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float maxTargetDistance = 3.0f;
     // forgiveness for thrust
     [SerializeField] private float thrustSphereRadius = 0.35f;
-    // flashlight range, etc.
-    [SerializeField] private float utilityRange = 4.0f;
 
     [Header("Aim Assist")]
     [Tooltip("If swingArc <= this, treat weapon as thrust.")]
@@ -51,6 +50,7 @@ public class PlayerAttack : MonoBehaviour
     public List<WeaponData> weapons;
     private int currentWeaponIndex;
     private float mouseScroll;
+    private GameObject spawnedVfx;
     private RuntimeAnimatorController defaultAnimatorController;
 
     [HideInInspector] public WeaponData currentWeapon;
@@ -334,7 +334,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (aimCamera == null) return;
 
-        float range = Mathf.Max(0.1f, utilityRange);
+        float range = Mathf.Max(0.1f, currentWeapon.range);
         float arc = Mathf.Clamp(currentWeapon.swingArc, 0f, 180f);
         Vector3 origin = aimCamera.transform.position + aimCamera.transform.forward * cameraRayStartOffset;
 
@@ -465,13 +465,46 @@ public class PlayerAttack : MonoBehaviour
             ? newWeapon.animatorOverride
             : defaultAnimatorController;
 
-        MeshFilter newFilter = newWeapon.weaponModel.GetComponent<MeshFilter>() ?? newWeapon.weaponModel.GetComponentInChildren<MeshFilter>();
-        MeshRenderer newRenderer = newWeapon.weaponModel.GetComponent<MeshRenderer>() ?? newWeapon.weaponModel.GetComponentInChildren<MeshRenderer>();
-        
+        MeshFilter newFilter = newWeapon.weaponModel.GetComponent<MeshFilter>() ??
+                               newWeapon.weaponModel.GetComponentInChildren<MeshFilter>();
+        MeshRenderer newRenderer = newWeapon.weaponModel.GetComponent<MeshRenderer>() ??
+                                   newWeapon.weaponModel.GetComponentInChildren<MeshRenderer>();
+
         MeshFilter curFilter = weaponVisual.GetComponent<MeshFilter>();
         MeshRenderer curRenderer = weaponVisual.GetComponent<MeshRenderer>();
 
         curFilter.sharedMesh = newFilter.sharedMesh;
-        curRenderer.sharedMaterial = newRenderer.sharedMaterial;
+        curRenderer.sharedMaterials = newRenderer.sharedMaterials;
+        weaponVisual.gameObject.transform.localPosition = new Vector3(0f, 0f, newWeapon.zOffset);
+
+        if (newWeapon.optionalScale > 0)
+            weaponVisual.transform.localScale = Vector3.one * newWeapon.optionalScale;
+        else
+            weaponVisual.transform.localScale = Vector3.one * 100f;
+        
+        if (spawnedVfx != null)
+        {
+            Destroy(spawnedVfx);
+            spawnedVfx = null;
+        }
+        
+        ParticleSystem psPrefab = newWeapon.weaponModel.GetComponentInChildren<ParticleSystem>();
+        
+        if (psPrefab == null)
+            return;
+
+        spawnedVfx = Instantiate(psPrefab.gameObject, weaponVisual.transform);
+        
+        spawnedVfx.transform.localPosition = psPrefab.transform.localPosition;
+        spawnedVfx.transform.localRotation = psPrefab.transform.localRotation;
+        spawnedVfx.transform.localScale = psPrefab.transform.localScale;
+        spawnedVfx.layer = LayerMask.NameToLayer("Player");
+        
+        var spawnedPs = spawnedVfx.GetComponentInChildren<ParticleSystem>(true);
+        if (spawnedPs != null)
+        {
+            spawnedPs.Clear(true);
+            spawnedPs.Play(true);
+        }
     }
 }

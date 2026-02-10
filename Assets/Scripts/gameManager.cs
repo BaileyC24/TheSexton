@@ -12,10 +12,9 @@ public class gameManager : MonoBehaviour
     [SerializeField] private GameObject menuPause;
     [SerializeField] private GameObject menuWin;
     [SerializeField] private GameObject menuLose;
-    [SerializeField] private GameObject menuUpgrades;
-    [SerializeField] private GameObject menuGuns;
     [SerializeField] private GameObject menuStore;
-    [SerializeField] private GameObject AlertMenu;
+    [SerializeField] private GameObject menuAlert;
+    [SerializeField] private GameObject menuInventory;
 
     public GameObject playerSpawnPos;
     public Image playerHPBar;
@@ -23,17 +22,18 @@ public class gameManager : MonoBehaviour
     public GameObject player;
     public GameObject damageFlash;
     public PlayerAttack playerStats;
-    [SerializeField] int maxLevel;
+    public int maxLevel;
     [SerializeField] double nextLevel;
     public int exp;
     public int points;
-    int level;
+    public int level;
     
     public enum MenuType
     {
         Lose,
         Win,
-        Store
+        Store,
+        Inventory
     }
     
     public PlayerStateMachine playerScript;
@@ -140,6 +140,9 @@ public class gameManager : MonoBehaviour
             case MenuType.Store:
                 menuActive = menuStore;
                 break;
+            case MenuType.Inventory:
+                menuActive = menuInventory;
+                break;
         }
 
         menuActive.SetActive(true);
@@ -159,9 +162,9 @@ public class gameManager : MonoBehaviour
     
     IEnumerator Alert(string message, float delay)
     {
-        AlertMenu.SetActive(true);
-        AlertMenu.GetComponentInChildren<TMP_Text>().text = message;
+        menuAlert.SetActive(true);
+        menuAlert.GetComponentInChildren<TMP_Text>().text = message;
         yield return new WaitForSeconds(delay);
-        AlertMenu.SetActive(false);
+        menuAlert.SetActive(false);
     }
 }

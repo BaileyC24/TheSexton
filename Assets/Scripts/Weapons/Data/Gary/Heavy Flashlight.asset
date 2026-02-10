@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d929c9b2c6f44ff4393b744c8da8acfe, type: 3}
+  m_Name: Heavy Flashlight
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponData
+  weaponName: 
+  weaponIcon: {fileID: 0}
+  weaponModel: {fileID: 1816966673987872, guid: e7400f9e927fd47a394fadd5d536fb00,
+    type: 3}
+  zOffset: 0.28
+  optionalScale: 1
+  weaponType: 1
+  animatorOverride: {fileID: 22100000, guid: 537c502a6063d534ab35c3a1ca65860a, type: 2}
+  damage: 1
+  range: 1.9
+  swingArc: 35
+  hitDelay: 0.15
+  totalTime: 0.6
+  specialEffect: 2
+  specialChance: 1
+  specialDuration: 1.2
+  canBreakLocks: 0
+  emitsLight: 1
+  lightRadius: 6

@@ -47,7 +47,6 @@ public class buttonFunctions : MonoBehaviour
         {
             gameManager.instance.playerScript.HPOrig += 5;
             gameManager.instance.playerScript.health = gameManager.instance.playerScript.HPOrig;
-            gameManager.instance.playerScript.updatePlayerUI();
             gameManager.instance.points--;
         }
     }
