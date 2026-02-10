@@ -8,4 +8,12 @@ AnimatorOverrideController:
   m_PrefabAsset: {fileID: 0}
   m_Name: CombatKnifeController
   m_Controller: {fileID: 9100000, guid: 16542533e8e06314f9988f4541474b79, type: 2}
-  m_Clips: []
+  m_Clips:
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 8d949a8a9ee906f4c94cd71cd4235aed,
+      type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 49f9e16852fea3547ad2d5c3dd1f8ad1,
+      type: 3}
+  - m_OriginalClip: {fileID: -203655887218126122, guid: ce6474a75c583914398296667dc92574,
+      type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 706d5cd271509bb4ca882707cd250eb3,
+      type: 3}
