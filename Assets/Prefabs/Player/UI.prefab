@@ -1072,7 +1072,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7467041925670190}
+      - m_Target: {fileID: 1406481817292876002}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
         m_MethodName: UseItemInSelectedSlot
         m_Mode: 1
@@ -1994,6 +1994,7 @@ GameObject:
   - component: {fileID: 583054588230070750}
   - component: {fileID: 3012309380637660053}
   - component: {fileID: 1719912410758322289}
+  - component: {fileID: 1406481817292876002}
   m_Layer: 5
   m_Name: GameManager
   m_TagString: Untagged
@@ -2039,6 +2040,7 @@ MonoBehaviour:
   menuStore: {fileID: 1702928479070308184}
   menuAlert: {fileID: 1069626145513824557}
   menuInventory: {fileID: 1236976050402633407}
+  characterData: {fileID: 11400000, guid: 0b4f5d749bdfa134d86eb22baec4b844, type: 2}
   playerSpawnPos: {fileID: 0}
   playerHPBar: {fileID: 407216621613411148}
   isPaused: 0
@@ -2071,6 +2073,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DamageManager
   prefabDamage: {fileID: 5263004132225980333, guid: b3529e92e1d1a4d4b9fffa17d16f73dd,
     type: 3}
+--- !u!114 &1406481817292876002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082796796666301292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 007cf995fedd4624a0d0b564fd8679ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
+  inventoryContent: {fileID: 6425453326960803128}
+  slotPrefab: {fileID: 7990356813567061867}
+  slotCount: 24
+  healthText: {fileID: 6947457341270086572}
+  strText: {fileID: 6595378314451611692}
+  atkSpeedText: {fileID: 8167999940749623355}
+  levelText: {fileID: 7354265957358901397}
+  useMenu: {fileID: 2480744603819432988}
+  useText: {fileID: 2264028804900119743}
+  itemText: {fileID: 1971418204661938702}
+  primaryWeaponSlotUI: {fileID: 7990356813567061867}
+  secondaryWeaponSlotUI: {fileID: 1319292690380151660}
 --- !u!1 &1181142932345443251
 GameObject:
   m_ObjectHideFlags: 0
@@ -2103,10 +2129,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4721988352324568640}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 106, y: -263}
-  m_SizeDelta: {x: 152, y: 152}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3482151896314457921
 CanvasRenderer:
@@ -2217,7 +2243,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7058332728518769494}
-  - component: {fileID: 7467041925670190}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -2248,33 +2273,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7467041925670190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1236976050402633407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 007cf995fedd4624a0d0b564fd8679ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
-  inventoryContent: {fileID: 6425453326960803128}
-  slotPrefab: {fileID: 7990356813567061867}
-  slotCount: 24
-  healthText: {fileID: 6947457341270086572}
-  strText: {fileID: 6595378314451611692}
-  atkSpeedText: {fileID: 8167999940749623355}
-  levelText: {fileID: 7354265957358901397}
-  useMenu: {fileID: 2480744603819432988}
-  useText: {fileID: 2264028804900119743}
-  itemText: {fileID: 1971418204661938702}
-  items:
-  - {fileID: 11400000, guid: bffe00ecad22bb249bfbd5dbc95618fe, type: 2}
-  - {fileID: 11400000, guid: b8991876f7bb077449333568e56d232e, type: 2}
-  primaryWeaponSlotUI: {fileID: 7990356813567061867}
-  secondaryWeaponSlotUI: {fileID: 1319292690380151660}
 --- !u!1 &1350434441608538227
 GameObject:
   m_ObjectHideFlags: 0
@@ -5560,7 +5558,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7467041925670190}
+      - m_Target: {fileID: 1406481817292876002}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
         m_MethodName: CloseUseMenu
         m_Mode: 1
@@ -6399,10 +6397,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4721988352324568640}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 328, y: -263}
-  m_SizeDelta: {x: 152, y: 152}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2194431536531912678
 CanvasRenderer:
@@ -11903,7 +11901,7 @@ PrefabInstance:
     - target: {fileID: 8669559439349072568, guid: be6b46c23787eb2438bcefa7c15f1b4d,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8669559439349072568, guid: be6b46c23787eb2438bcefa7c15f1b4d,
         type: 3}
@@ -11913,17 +11911,17 @@ PrefabInstance:
     - target: {fileID: 8669559439349072568, guid: be6b46c23787eb2438bcefa7c15f1b4d,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8669559439349072568, guid: be6b46c23787eb2438bcefa7c15f1b4d,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 152
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8669559439349072568, guid: be6b46c23787eb2438bcefa7c15f1b4d,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 152
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8669559439349072568, guid: be6b46c23787eb2438bcefa7c15f1b4d,
         type: 3}
@@ -11963,12 +11961,12 @@ PrefabInstance:
     - target: {fileID: 8669559439349072568, guid: be6b46c23787eb2438bcefa7c15f1b4d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 328
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8669559439349072568, guid: be6b46c23787eb2438bcefa7c15f1b4d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -76
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8669559439349072568, guid: be6b46c23787eb2438bcefa7c15f1b4d,
         type: 3}
@@ -12039,7 +12037,7 @@ PrefabInstance:
     - target: {fileID: 8669559439349072568, guid: be6b46c23787eb2438bcefa7c15f1b4d,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8669559439349072568, guid: be6b46c23787eb2438bcefa7c15f1b4d,
         type: 3}
@@ -12049,17 +12047,17 @@ PrefabInstance:
     - target: {fileID: 8669559439349072568, guid: be6b46c23787eb2438bcefa7c15f1b4d,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8669559439349072568, guid: be6b46c23787eb2438bcefa7c15f1b4d,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 152
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8669559439349072568, guid: be6b46c23787eb2438bcefa7c15f1b4d,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 152
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8669559439349072568, guid: be6b46c23787eb2438bcefa7c15f1b4d,
         type: 3}
@@ -12099,12 +12097,12 @@ PrefabInstance:
     - target: {fileID: 8669559439349072568, guid: be6b46c23787eb2438bcefa7c15f1b4d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 106
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8669559439349072568, guid: be6b46c23787eb2438bcefa7c15f1b4d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -76
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8669559439349072568, guid: be6b46c23787eb2438bcefa7c15f1b4d,
         type: 3}
