@@ -20,6 +20,7 @@ public class WeaponData : ScriptableObject
     public string weaponName;
     public Sprite weaponIcon;
     public GameObject weaponModel;
+    public bool isWeaponPrimary;
     public float zOffset;
     public float optionalScale;
 

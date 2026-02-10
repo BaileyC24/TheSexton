@@ -45,8 +45,5 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
             InventoryManager.instance.OnSlotLeftClick(SlotIndex);
-
-        if (eventData.button == PointerEventData.InputButton.Right)
-            InventoryManager.instance.OnSlotRightClick(SlotIndex);
     }
 }

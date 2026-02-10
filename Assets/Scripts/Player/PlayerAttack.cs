@@ -47,7 +47,6 @@ public class PlayerAttack : MonoBehaviour
     private bool attacking;
 
     private PlayerStateMachine PSM;
-    public List<WeaponData> weapons;
     private int currentWeaponIndex;
     private float mouseScroll;
     private GameObject spawnedVfx;
@@ -75,10 +74,10 @@ public class PlayerAttack : MonoBehaviour
         if (aimCamera == null)
             aimCamera = Camera.main;
 
-        if (weapons != null && weapons.Count > 0)
+        if (PSM.weapons != null && PSM.weapons.Count > 0)
         {
             currentWeaponIndex = 0;
-            SwitchWeapon(weapons[currentWeaponIndex]);
+            SwitchWeapon(PSM.weapons[currentWeaponIndex]);
         }
         else
         {
@@ -105,6 +104,12 @@ public class PlayerAttack : MonoBehaviour
 
         if (mouseScroll != 0 && !attacking)
             ChangeWeapons();
+
+
+        if (PSM.weapons.Count > 0)
+        {
+            SwitchWeapon(PSM.weapons[currentWeaponIndex]);
+        }
     }
 
     private IEnumerator AttackRoutine()
@@ -446,13 +451,13 @@ public class PlayerAttack : MonoBehaviour
     {
         switch (mouseScroll)
         {
-            case > 0 when currentWeaponIndex < weapons.Count - 1:
+            case > 0 when currentWeaponIndex <PSM.weapons.Count - 1:
                 currentWeaponIndex++;
-                SwitchWeapon(weapons[currentWeaponIndex]);
+                SwitchWeapon(PSM.weapons[currentWeaponIndex]);
                 break;
             case < 0 when currentWeaponIndex > 0:
                 currentWeaponIndex--;
-                SwitchWeapon(weapons[currentWeaponIndex]);
+                SwitchWeapon(PSM.weapons[currentWeaponIndex]);
                 break;
         }
     }

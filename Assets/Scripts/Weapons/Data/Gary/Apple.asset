@@ -15,5 +15,5 @@ MonoBehaviour:
   itemName: Apple
   itemIcon: {fileID: 21300000, guid: cc89e15bc66daa6478deee4ab44bc75e, type: 3}
   isStackable: 1
-  maxStackSize: 2
+  maxStackSize: 10
   type: 0

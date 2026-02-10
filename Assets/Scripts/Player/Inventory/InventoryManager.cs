@@ -17,14 +17,15 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI strText;
     [SerializeField] private TextMeshProUGUI atkSpeedText;
     [SerializeField] private TextMeshProUGUI levelText;
-    
-    [SerializeField] private List<ItemData> items = new List<ItemData>();
+    [SerializeField] private GameObject useMenu;
+    [SerializeField] private TextMeshProUGUI useText;
+    [SerializeField] private TextMeshProUGUI itemText;
 
     [Header("Equipped Weapons (UI optional)")]
     [SerializeField] private InventorySlotUI primaryWeaponSlotUI;
     [SerializeField] private InventorySlotUI secondaryWeaponSlotUI;
-    private WeaponData PrimaryWeapon { get; set; }
-    private WeaponData SecondaryWeapon { get; set; }
+    public WeaponData PrimaryWeapon { get; private set; }
+    public WeaponData SecondaryWeapon { get; private set; }
     private List<SlotData> slots = new();
     private List<InventorySlotUI> slotUIs = new();
     private int selectedIndex = -1;
@@ -32,6 +33,8 @@ public class InventoryManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        BuildSlots();
+        RefreshUI();
     }
 
     private void Update()
@@ -43,20 +46,11 @@ public class InventoryManager : MonoBehaviour
                           "/" + gameManager.instance.playerScript.HPOrig.ToString("F0");
     }
 
-    private void Start()
-    {
-        BuildSlots();
-        RefreshUI();
-
-        // TODO: load from save data instead of inspector list
-        foreach (ItemData item in items)
-        {
-            AddItem(item, Random.Range(1, 5));
-        }
-    }
-
     private void BuildSlots()
     {
+        primaryWeaponSlotUI.Init(30);
+        secondaryWeaponSlotUI.Init(31);
+        
         for (int i = 0; i < slotCount; i++)
             slots.Add(new SlotData());
         
@@ -65,6 +59,7 @@ public class InventoryManager : MonoBehaviour
             InventorySlotUI ui = Instantiate(slotPrefab, inventoryContent);
             ui.Init(i);
             slotUIs.Add(ui);
+            slots[i].transform = ui.transform;
         }
     }
 
@@ -122,13 +117,14 @@ public class InventoryManager : MonoBehaviour
         return true;
     }
 
-    public bool AddWeapon(WeaponData weapon)
+    public int AddWeapon(WeaponData weapon)
     {
         if (weapon == null)
-            return false;
+            return -1;
 
         int emptyIndex = FindEmptySlot();
-        if (emptyIndex == -1) return false;
+        if (emptyIndex == -1) 
+            return -1;
 
         SlotData currentSlot = slots[emptyIndex];
         currentSlot.Clear();
@@ -136,7 +132,7 @@ public class InventoryManager : MonoBehaviour
         currentSlot.amount = 1;
 
         RefreshUI();
-        return true;
+        return emptyIndex;
     }
 
     public bool EquipPrimaryFromSlot(int slotIndex)
@@ -193,6 +189,16 @@ public class InventoryManager : MonoBehaviour
         if (!IsValidIndex(slotIndex)) return false;
 
         SlotData currentSlot = slots[slotIndex];
+
+        if (currentSlot.weapon != null)
+        {
+            bool equipped = currentSlot.weapon.isWeaponPrimary
+                ? EquipPrimaryFromSlot(slotIndex)
+                : EquipSecondaryFromSlot(slotIndex);
+            SyncWeaponsToPlayer();
+            return equipped;
+        }
+
         if (currentSlot.item == null) return false;
         
         // TODO: this is where you would trigger the item's effect (healing, buff, etc)
@@ -259,15 +265,46 @@ public class InventoryManager : MonoBehaviour
     
     public void OnSlotLeftClick(int index)
     {
-        //TODO: this is where you would handle selecting a slot,
-        // showing item details.
-    }
+        if (!IsValidIndex(index)) return;
 
-    public void OnSlotRightClick(int index)
-    {
-        // TODO: MAKE THIS DO SOMETHING (use item, equip weapon, etc)
+        SlotData currentSlot = slots[index];
+        if (currentSlot.IsEmpty)
+            return;
+
+        bool valid = currentSlot.weapon != null || 
+                     (currentSlot.item != null && currentSlot.item.type == ItemType.Consumable);
+        if (!valid) return;
+
+        if (currentSlot.weapon != null)
+        {
+            useText.text = "EQUIP";
+            itemText.text = currentSlot.weapon.name;
+        }
+        else {
+            useText.text = "USE";
+            itemText.text = currentSlot.item.name;
+        }
+
+        
+        selectedIndex = index;
+        useMenu.SetActive(true);
+        useMenu.transform.position = currentSlot.transform.position + new Vector3(130, -80);
     }
     
+    public void UseItemInSelectedSlot()
+    {
+        if (selectedIndex == -1) return;
+
+        UseItemInSlot(selectedIndex);
+        useMenu.SetActive(false);
+        selectedIndex = -1;
+    }
+    
+    public void CloseUseMenu()
+    {
+        useMenu.SetActive(false);
+        selectedIndex = -1;
+    }
 
     private int FindEmptySlot()
     {
@@ -280,5 +317,36 @@ public class InventoryManager : MonoBehaviour
     private bool IsValidIndex(int i)
     {
         return i >= 0 && i < slots.Count;
+    }
+    
+    public void AddStartingItems(List<StartingItem> startingItems, List<WeaponData> startingWeapons)
+    {
+        foreach (StartingItem item in startingItems)
+            AddItem(item.item, item.amount);
+        
+        foreach (WeaponData weapon in startingWeapons)
+        {            
+            if (PrimaryWeapon == null && weapon.isWeaponPrimary)
+                EquipPrimaryFromSlot(AddWeapon(weapon));
+            else if (SecondaryWeapon == null && !weapon.isWeaponPrimary)
+                EquipSecondaryFromSlot(AddWeapon(weapon));
+            else
+                AddWeapon(weapon);
+        }
+        
+        SyncWeaponsToPlayer();
+    }
+    
+    void SyncWeaponsToPlayer()
+    {
+        var player = gameManager.instance.playerScript;
+
+        player.weapons.Clear();
+
+        if (PrimaryWeapon != null)
+            player.weapons.Add(PrimaryWeapon);
+
+        if (SecondaryWeapon != null && SecondaryWeapon != PrimaryWeapon)
+            player.weapons.Add(SecondaryWeapon);
     }
 }

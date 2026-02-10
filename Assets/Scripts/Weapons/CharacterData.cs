@@ -31,11 +31,8 @@ public class CharacterData : ScriptableObject
     public CombatStyle combatStyle;
     public CharacterRole role;
 
-    [Header("Weapons")]
-    public WeaponData primaryWeapon;
-    public WeaponData secondaryWeapon;
-
     [Header("Starting Resources")]
-    public List<ItemData> startingInventory = new();
+    public List<StartingItem> startingItems;
+    public List<WeaponData> startingWeapons;
     public int startingCoins;
 }

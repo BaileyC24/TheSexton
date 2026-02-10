@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Reinforced Shovel
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   weaponName: Reinforced Shovel
-  weaponIcon: {fileID: 0}
+  weaponIcon: {fileID: 21300000, guid: 596cd29bea2837e41833cf60e73fde5f, type: 3}
   weaponModel: {fileID: 919132149155446097, guid: cf9c4998251de38419532b09130f3930,
     type: 3}
+  isWeaponPrimary: 0
   zOffset: 0
+  optionalScale: 0
   weaponType: 0
   animatorOverride: {fileID: 0}
   damage: 8

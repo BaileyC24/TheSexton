@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53d1084bc14cdda44ac21de956fa7cff, type: 3}
+  m_Name: Gary
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterData
+  characterName: 
+  bio: 
+  profilePicture: {fileID: 0}
+  cardPicture: {fileID: 0}
+  combatStyle: 0
+  role: 0
+  startingItems:
+  - item: {fileID: 11400000, guid: bffe00ecad22bb249bfbd5dbc95618fe, type: 2}
+    amount: 40
+  startingWeapons:
+  - {fileID: 11400000, guid: 56493bd269f58e5409da264052542f45, type: 2}
+  - {fileID: 11400000, guid: d185607cd56caaf4481248241737a35a, type: 2}
+  - {fileID: 11400000, guid: 78065dfb2311b424c84d68a02a5f13a0, type: 2}
+  startingCoins: 0

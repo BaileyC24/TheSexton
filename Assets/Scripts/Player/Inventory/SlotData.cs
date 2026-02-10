@@ -6,6 +6,7 @@ public class SlotData
     public ItemData item;
     public WeaponData weapon;
     public int amount;
+    public Transform transform;
 
     public bool IsEmpty => item == null && weapon == null;
 
