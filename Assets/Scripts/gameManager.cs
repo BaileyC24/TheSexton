@@ -15,6 +15,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] private GameObject menuStore;
     [SerializeField] private GameObject menuAlert;
     [SerializeField] private GameObject menuInventory;
+    
+    [SerializeField] private CharacterData characterData;
 
     public GameObject playerSpawnPos;
     public Image playerHPBar;
@@ -37,9 +39,7 @@ public class gameManager : MonoBehaviour
     }
     
     public PlayerStateMachine playerScript;
-
-
-
+    
     int gameGoalCount;
     float timeScaleOrig;
 
@@ -51,12 +51,10 @@ public class gameManager : MonoBehaviour
     public TMP_Text attackSpdText;
     public TMP_Text HealthText;
 
-
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-
         instance = this;
         timeScaleOrig = Time.timeScale;
 
@@ -66,6 +64,11 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerStateMachine>();
         playerStats = player.GetComponent<PlayerAttack>();
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
+    }
+
+    private void Start()
+    {
+        InventoryManager.instance.AddStartingItems(characterData.startingItems, characterData.startingWeapons);
     }
 
     // Update is called once per frame
@@ -99,7 +102,6 @@ public class gameManager : MonoBehaviour
             exp = 0;
             SendAlert("Level Up! You are now level " + level.ToString("F0") + "!", 1.5f);
         }
-
     }
 
     public void statePaused()

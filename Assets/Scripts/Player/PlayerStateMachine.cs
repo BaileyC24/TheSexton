@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>, IDamage, iPickup, IHealable
 {
@@ -23,7 +24,6 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
 
     private PlayerStateContext context;
     private PlayerInput playerInput;
-
 
     [BoxGroup("Health Settings")]
     [GUIColor(1f, 0.9f, 0.8f)]
@@ -99,6 +99,8 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
     [Required("Animator is required for physics movement.")]
     [SerializeField] private Animator animator;
     #endregion
+    
+    [HideInInspector] public List<WeaponData> weapons;
 
     public override void StartMethod()
     {

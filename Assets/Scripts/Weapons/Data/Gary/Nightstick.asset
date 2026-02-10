@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d929c9b2c6f44ff4393b744c8da8acfe, type: 3}
   m_Name: Nightstick
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  weaponName: 
-  weaponIcon: {fileID: 0}
+  weaponName: Nightstick
+  weaponIcon: {fileID: 21300000, guid: 8446e6959c26a5b4fb25f77dea850233, type: 3}
   weaponModel: {fileID: 4926703055965546900, guid: bc956f77213138048b30d54ab626e70a,
     type: 3}
+  isWeaponPrimary: 1
   zOffset: 0.05
   optionalScale: 1
   weaponType: 0
