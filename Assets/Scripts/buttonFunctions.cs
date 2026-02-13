@@ -28,6 +28,7 @@ public class buttonFunctions : MonoBehaviour
 
     public void quit()
     {
+        SoundManager.PlaySound(SoundType.Menu);
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             #if UNITY_EDITOR
@@ -37,7 +38,6 @@ public class buttonFunctions : MonoBehaviour
             return;
         }
         
-        SoundManager.PlaySound(SoundType.Menu);
         SceneManager.LoadScene(0);
         gameManager.instance.stateUnpaused();
         Cursor.lockState = CursorLockMode.None;
