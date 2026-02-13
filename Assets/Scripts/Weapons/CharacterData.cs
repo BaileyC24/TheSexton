@@ -15,7 +15,7 @@ public enum CharacterRole
     Control
 }
 
-[CreateAssetMenu(fileName = "CharacterData", menuName = "Game/Characters/Character Data")]
+[CreateAssetMenu(fileName = "CharacterData", menuName = "The Sexton/Character Data")]
 public class CharacterData : ScriptableObject
 {
     [Header("Identity")]
@@ -31,11 +31,8 @@ public class CharacterData : ScriptableObject
     public CombatStyle combatStyle;
     public CharacterRole role;
 
-    [Header("Weapons")]
-    public WeaponData primaryWeapon;
-    public WeaponData secondaryWeapon;
-
     [Header("Starting Resources")]
-    public List<GameObject> startingInventory = new List<GameObject>();
+    public List<StartingItem> startingItems;
+    public List<WeaponData> startingWeapons;
     public int startingCoins;
 }

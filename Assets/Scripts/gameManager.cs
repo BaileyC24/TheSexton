@@ -12,10 +12,11 @@ public class gameManager : MonoBehaviour
     [SerializeField] private GameObject menuPause;
     [SerializeField] private GameObject menuWin;
     [SerializeField] private GameObject menuLose;
-    [SerializeField] private GameObject menuUpgrades;
-    [SerializeField] private GameObject menuGuns;
     [SerializeField] private GameObject menuStore;
-    [SerializeField] private GameObject AlertMenu;
+    [SerializeField] private GameObject menuAlert;
+    [SerializeField] private GameObject menuInventory;
+    
+    [SerializeField] private CharacterData characterData;
 
     public GameObject playerSpawnPos;
     public Image playerHPBar;
@@ -23,23 +24,22 @@ public class gameManager : MonoBehaviour
     public GameObject player;
     public GameObject damageFlash;
     public PlayerAttack playerStats;
-    [SerializeField] int maxLevel;
+    public int maxLevel;
     [SerializeField] double nextLevel;
     public int exp;
     public int points;
-    int level;
+    public int level;
     
     public enum MenuType
     {
         Lose,
         Win,
-        Store
+        Store,
+        Inventory
     }
     
     public PlayerStateMachine playerScript;
-
-
-
+    
     int gameGoalCount;
     float timeScaleOrig;
 
@@ -51,12 +51,10 @@ public class gameManager : MonoBehaviour
     public TMP_Text attackSpdText;
     public TMP_Text HealthText;
 
-
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-
         instance = this;
         timeScaleOrig = Time.timeScale;
 
@@ -66,6 +64,11 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerStateMachine>();
         playerStats = player.GetComponent<PlayerAttack>();
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
+    }
+
+    private void Start()
+    {
+        InventoryManager.instance.AddStartingItems(characterData.startingItems, characterData.startingWeapons);
     }
 
     // Update is called once per frame
@@ -97,13 +100,14 @@ public class gameManager : MonoBehaviour
             points += 3;
             nextLevel = (nextLevel * 1.3) + 2;
             exp = 0;
+            SoundManager.PlaySound(SoundType.Buy);
             SendAlert("Level Up! You are now level " + level.ToString("F0") + "!", 1.5f);
         }
-
     }
 
     public void statePaused()
-    {      
+    {     
+        SoundManager.PlaySound(SoundType.Pause);
         isPaused = true;
         Time.timeScale = 0;
         Cursor.visible = true;
@@ -113,6 +117,7 @@ public class gameManager : MonoBehaviour
 
     public void stateUnpaused()
     {
+        SoundManager.PlaySound(SoundType.Unpause);
         isPaused = false;
         Time.timeScale = timeScaleOrig;
         Cursor.visible = false;
@@ -140,6 +145,9 @@ public class gameManager : MonoBehaviour
             case MenuType.Store:
                 menuActive = menuStore;
                 break;
+            case MenuType.Inventory:
+                menuActive = menuInventory;
+                break;
         }
 
         menuActive.SetActive(true);
@@ -159,9 +167,9 @@ public class gameManager : MonoBehaviour
     
     IEnumerator Alert(string message, float delay)
     {
-        AlertMenu.SetActive(true);
-        AlertMenu.GetComponentInChildren<TMP_Text>().text = message;
+        menuAlert.SetActive(true);
+        menuAlert.GetComponentInChildren<TMP_Text>().text = message;
         yield return new WaitForSeconds(delay);
-        AlertMenu.SetActive(false);
+        menuAlert.SetActive(false);
     }
 }

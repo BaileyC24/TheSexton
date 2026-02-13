@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -20,8 +21,6 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float maxTargetDistance = 3.0f;
     // forgiveness for thrust
     [SerializeField] private float thrustSphereRadius = 0.35f;
-    // flashlight range, etc.
-    [SerializeField] private float utilityRange = 4.0f;
 
     [Header("Aim Assist")]
     [Tooltip("If swingArc <= this, treat weapon as thrust.")]
@@ -48,9 +47,9 @@ public class PlayerAttack : MonoBehaviour
     private bool attacking;
 
     private PlayerStateMachine PSM;
-    public List<WeaponData> weapons;
     private int currentWeaponIndex;
     private float mouseScroll;
+    private GameObject spawnedVfx;
     private RuntimeAnimatorController defaultAnimatorController;
 
     [HideInInspector] public WeaponData currentWeapon;
@@ -75,10 +74,10 @@ public class PlayerAttack : MonoBehaviour
         if (aimCamera == null)
             aimCamera = Camera.main;
 
-        if (weapons != null && weapons.Count > 0)
+        if (PSM.weapons != null && PSM.weapons.Count > 0)
         {
             currentWeaponIndex = 0;
-            SwitchWeapon(weapons[currentWeaponIndex]);
+            SwitchWeapon(PSM.weapons[currentWeaponIndex]);
         }
         else
         {
@@ -105,6 +104,12 @@ public class PlayerAttack : MonoBehaviour
 
         if (mouseScroll != 0 && !attacking)
             ChangeWeapons();
+
+
+        if (PSM.weapons.Count > 0)
+        {
+            SwitchWeapon(PSM.weapons[currentWeaponIndex]);
+        }
     }
 
     private IEnumerator AttackRoutine()
@@ -334,7 +339,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (aimCamera == null) return;
 
-        float range = Mathf.Max(0.1f, utilityRange);
+        float range = Mathf.Max(0.1f, currentWeapon.range);
         float arc = Mathf.Clamp(currentWeapon.swingArc, 0f, 180f);
         Vector3 origin = aimCamera.transform.position + aimCamera.transform.forward * cameraRayStartOffset;
 
@@ -380,6 +385,7 @@ public class PlayerAttack : MonoBehaviour
             dmg.takeDamage(damageAmount);
 
         ApplySpecial(target);
+        //SoundManager.PlaySound(Choose sound from Enum for what you want);  Can add more sounds if needed.
     }
 
     private void ApplySpecial(Collider target)
@@ -431,28 +437,28 @@ public class PlayerAttack : MonoBehaviour
 
     private void AttackAudio()
     {
-        StartCoroutine(DelayedAttackAudio());
+        SoundManager.PlaySound(SoundType.Axe);
     }
 
-    private IEnumerator DelayedAttackAudio()
+   /* private IEnumerator DelayedAttackAudio()
     {
         yield return new WaitForSeconds(0.15f);
 
         if (PSM.audHit[0] != null)
             PSM.aud.PlayOneShot(PSM.audHit[0], PSM.volume);
-    }
+    }*/
 
     private void ChangeWeapons()
     {
         switch (mouseScroll)
         {
-            case > 0 when currentWeaponIndex < weapons.Count - 1:
+            case > 0 when currentWeaponIndex <PSM.weapons.Count - 1:
                 currentWeaponIndex++;
-                SwitchWeapon(weapons[currentWeaponIndex]);
+                SwitchWeapon(PSM.weapons[currentWeaponIndex]);
                 break;
             case < 0 when currentWeaponIndex > 0:
                 currentWeaponIndex--;
-                SwitchWeapon(weapons[currentWeaponIndex]);
+                SwitchWeapon(PSM.weapons[currentWeaponIndex]);
                 break;
         }
     }
@@ -465,13 +471,46 @@ public class PlayerAttack : MonoBehaviour
             ? newWeapon.animatorOverride
             : defaultAnimatorController;
 
-        MeshFilter newFilter = newWeapon.weaponModel.GetComponent<MeshFilter>() ?? newWeapon.weaponModel.GetComponentInChildren<MeshFilter>();
-        MeshRenderer newRenderer = newWeapon.weaponModel.GetComponent<MeshRenderer>() ?? newWeapon.weaponModel.GetComponentInChildren<MeshRenderer>();
-        
+        MeshFilter newFilter = newWeapon.weaponModel.GetComponent<MeshFilter>() ??
+                               newWeapon.weaponModel.GetComponentInChildren<MeshFilter>();
+        MeshRenderer newRenderer = newWeapon.weaponModel.GetComponent<MeshRenderer>() ??
+                                   newWeapon.weaponModel.GetComponentInChildren<MeshRenderer>();
+
         MeshFilter curFilter = weaponVisual.GetComponent<MeshFilter>();
         MeshRenderer curRenderer = weaponVisual.GetComponent<MeshRenderer>();
 
         curFilter.sharedMesh = newFilter.sharedMesh;
-        curRenderer.sharedMaterial = newRenderer.sharedMaterial;
+        curRenderer.sharedMaterials = newRenderer.sharedMaterials;
+        weaponVisual.gameObject.transform.localPosition = new Vector3(0f, 0f, newWeapon.zOffset);
+
+        if (newWeapon.optionalScale > 0)
+            weaponVisual.transform.localScale = Vector3.one * newWeapon.optionalScale;
+        else
+            weaponVisual.transform.localScale = Vector3.one * 100f;
+        
+        if (spawnedVfx != null)
+        {
+            Destroy(spawnedVfx);
+            spawnedVfx = null;
+        }
+        
+        ParticleSystem psPrefab = newWeapon.weaponModel.GetComponentInChildren<ParticleSystem>();
+        
+        if (psPrefab == null)
+            return;
+
+        spawnedVfx = Instantiate(psPrefab.gameObject, weaponVisual.transform);
+        
+        spawnedVfx.transform.localPosition = psPrefab.transform.localPosition;
+        spawnedVfx.transform.localRotation = psPrefab.transform.localRotation;
+        spawnedVfx.transform.localScale = psPrefab.transform.localScale;
+        spawnedVfx.layer = LayerMask.NameToLayer("Player");
+        
+        var spawnedPs = spawnedVfx.GetComponentInChildren<ParticleSystem>(true);
+        if (spawnedPs != null)
+        {
+            spawnedPs.Clear(true);
+            spawnedPs.Play(true);
+        }
     }
 }

@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>, IDamage, iPickup, IHealable
 {
@@ -24,12 +25,11 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
     private PlayerStateContext context;
     private PlayerInput playerInput;
 
-
     [BoxGroup("Health Settings")]
-    [Title("Base Health")]
     [GUIColor(1f, 0.9f, 0.8f)]
     [Range(10f, 200f), SuffixLabel("hp", Overlay = true)]
     [SerializeField] public float health;
+    private float displayHP;
 
     [BoxGroup("Movement Settings")]
     [Title("Base Speeds")]
@@ -37,13 +37,13 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
     [Range(1f, 20f), SuffixLabel("m/s", Overlay = true)]
     [SerializeField] private float speed;
 
-    [BoxGroup("Audio Settings")]
+   /* [BoxGroup("Audio Settings")]
     [Title("Audio Source")]
     [GUIColor(0.8f, 0.9f, 1f)]
     [Range(0, 1), SuffixLabel("volume", Overlay = true)]
     [SerializeField] public float volume;
     [SerializeField] public AudioSource aud;
-    [SerializeField] public AudioClip[] audHit;
+    [SerializeField] public AudioClip[] audHit;*/
     
     [BoxGroup("Movement Settings")]
     [GUIColor(0.8f, 1f, 0.8f)]
@@ -99,6 +99,8 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
     [Required("Animator is required for physics movement.")]
     [SerializeField] private Animator animator;
     #endregion
+    
+    [HideInInspector] public List<WeaponData> weapons;
 
     public override void StartMethod()
     {
@@ -113,6 +115,11 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
 
     public override void UpdateMethod()
     {
+        displayHP = Mathf.MoveTowards(displayHP, health, 5 * Time.deltaTime);
+        gameManager.instance.playerHPBar.fillAmount = displayHP / HPOrig;
+        
+        if (GetInput().Player.Inventory.triggered && !gameManager.instance.isPaused)
+            gameManager.instance.OpenMenu(gameManager.MenuType.Inventory);
     }
 
     private void SetupState()
@@ -149,8 +156,8 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
     public void takeDamage(int amount)
     {
         health -= amount;
-        updatePlayerUI();
         StartCoroutine(flashDamage());
+        SoundManager.PlaySound(SoundType.Hit);
         if (health <= 0)
         {
             gameManager.instance.OpenMenu(gameManager.MenuType.Lose);
@@ -167,7 +174,7 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
         return animator;
     }
 
-    public void updatePlayerUI()
+    public void updatePlayerUIInstant()
     {
         gameManager.instance.playerHPBar.fillAmount = health / HPOrig;
 
@@ -183,14 +190,13 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
     public void spawnPlayer()
     {
         HPOrig = health;
-        updatePlayerUI();
+        displayHP = health;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
     }
 
 
     public void getPowerUps(powerUps heal)
     {
-
         health = heal.healthCurrent;
     }
 
@@ -201,9 +207,9 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
 
     public void heal(int amount)
     {
+        SoundManager.PlaySound(SoundType.Heal);
         health += amount;
         health = Mathf.Clamp(health, 0, HPOrig);
-        updatePlayerUI();
     }
 
     private void OnDisable()

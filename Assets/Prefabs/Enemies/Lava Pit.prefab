@@ -60,6 +60,7 @@ MonoBehaviour:
   verticalOffset: 0
   destroyTime: 0
   hitEffect: {fileID: 0}
+  allowedToDamage: 0
 --- !u!33 &7450355733734007221
 MeshFilter:
   m_ObjectHideFlags: 0

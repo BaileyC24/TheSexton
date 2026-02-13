@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Weapon", menuName = "The Sexton/Weapon Data")]
@@ -5,11 +7,22 @@ public class WeaponData : ScriptableObject
 {
     public enum WeaponType { Melee, Utility }
     public enum SpecialEffect { None, Stun, Blind, Knockback }
+    
+    public static readonly Dictionary<SpecialEffect, Color> SpecialEffectColor = new()
+        {
+            { SpecialEffect.None, Color.black },
+            { SpecialEffect.Stun, new Color32(240, 230, 50, Byte.MaxValue) },
+            { SpecialEffect.Blind, new Color32(11, 128, 186, Byte.MaxValue) },
+            { SpecialEffect.Knockback, new Color32(212, 129, 13, Byte.MaxValue) }
+        };
 
     [Header("Core")]
     public string weaponName;
     public Sprite weaponIcon;
     public GameObject weaponModel;
+    public bool isWeaponPrimary;
+    public float zOffset;
+    public float optionalScale;
 
     public WeaponType weaponType = WeaponType.Melee;
 

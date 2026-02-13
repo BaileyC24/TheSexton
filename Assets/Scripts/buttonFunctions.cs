@@ -9,22 +9,26 @@ public class buttonFunctions : MonoBehaviour
     
     public void resume()
     {
+        SoundManager.PlaySound(SoundType.Menu);
         gameManager.instance.stateUnpaused();
     }
 
     public void restart()
     {
+        SoundManager.PlaySound(SoundType.Menu);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameManager.instance.stateUnpaused();
     }
     
     public void play()
     {
+        SoundManager.PlaySound(SoundType.Menu);
         SceneManager.LoadScene(1);
     }
 
     public void quit()
     {
+        SoundManager.PlaySound(SoundType.Menu);
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             #if UNITY_EDITOR
@@ -47,7 +51,6 @@ public class buttonFunctions : MonoBehaviour
         {
             gameManager.instance.playerScript.HPOrig += 5;
             gameManager.instance.playerScript.health = gameManager.instance.playerScript.HPOrig;
-            gameManager.instance.playerScript.updatePlayerUI();
             gameManager.instance.points--;
         }
     }
