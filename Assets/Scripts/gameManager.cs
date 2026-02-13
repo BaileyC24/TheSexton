@@ -100,12 +100,14 @@ public class gameManager : MonoBehaviour
             points += 3;
             nextLevel = (nextLevel * 1.3) + 2;
             exp = 0;
+            SoundManager.PlaySound(SoundType.Buy);
             SendAlert("Level Up! You are now level " + level.ToString("F0") + "!", 1.5f);
         }
     }
 
     public void statePaused()
-    {      
+    {     
+        SoundManager.PlaySound(SoundType.Pause);
         isPaused = true;
         Time.timeScale = 0;
         Cursor.visible = true;
@@ -115,6 +117,7 @@ public class gameManager : MonoBehaviour
 
     public void stateUnpaused()
     {
+        SoundManager.PlaySound(SoundType.Unpause);
         isPaused = false;
         Time.timeScale = timeScaleOrig;
         Cursor.visible = false;

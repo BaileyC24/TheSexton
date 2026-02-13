@@ -10,6 +10,7 @@ public class PlayerJumpState : PlayerMovementState
     {
         Vector3 linearVelocity = context.GetRb().linearVelocity;
         linearVelocity.y += 5f;
+        SoundManager.PlaySound(SoundType.Jump);
         context.GetRb().linearVelocity = linearVelocity;
     }
 
