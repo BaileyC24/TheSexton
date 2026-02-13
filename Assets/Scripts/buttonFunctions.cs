@@ -9,17 +9,20 @@ public class buttonFunctions : MonoBehaviour
     
     public void resume()
     {
+        SoundManager.PlaySound(SoundType.Menu);
         gameManager.instance.stateUnpaused();
     }
 
     public void restart()
     {
+        SoundManager.PlaySound(SoundType.Menu);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameManager.instance.stateUnpaused();
     }
     
     public void play()
     {
+        SoundManager.PlaySound(SoundType.Menu);
         SceneManager.LoadScene(1);
     }
 
@@ -34,6 +37,7 @@ public class buttonFunctions : MonoBehaviour
             return;
         }
         
+        SoundManager.PlaySound(SoundType.Menu);
         SceneManager.LoadScene(0);
         gameManager.instance.stateUnpaused();
         Cursor.lockState = CursorLockMode.None;
