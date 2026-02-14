@@ -1664,7 +1664,7 @@ MonoBehaviour:
   HP: 15
   dropPrefabs:
   - {fileID: 3199720909439884744, guid: 3a48f2ac21590b1449363c9983016193, type: 3}
-  dropChance: 0.35
+  dropChance: 1
   dropYOffset: 0.1
 --- !u!195 &2612845031164209962
 NavMeshAgent:

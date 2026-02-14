@@ -120,6 +120,9 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
         
         if (GetInput().Player.Inventory.triggered && !gameManager.instance.isPaused)
             gameManager.instance.OpenMenu(gameManager.MenuType.Inventory);
+        
+        if (!gameManager.instance.isPaused)
+            playerInput.Enable();
     }
 
     private void SetupState()
