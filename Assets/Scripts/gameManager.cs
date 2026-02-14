@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEditor;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
@@ -16,7 +18,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] private GameObject menuAlert;
     [SerializeField] private GameObject menuInventory;
     
-    [SerializeField] private CharacterData characterData;
+    [SerializeField] public PlayerActiveData currentPlayerData;
 
     public GameObject playerSpawnPos;
     public Image playerHPBar;
@@ -68,7 +70,7 @@ public class gameManager : MonoBehaviour
 
     private void Start()
     {
-        InventoryManager.instance.AddStartingItems(characterData.startingItems, characterData.startingWeapons);
+        currentPlayerData.LoadData(InventoryManager.instance);
     }
 
     // Update is called once per frame
@@ -100,27 +102,32 @@ public class gameManager : MonoBehaviour
             points += 3;
             nextLevel = (nextLevel * 1.3) + 2;
             exp = 0;
+            SoundManager.PlaySound(SoundType.Buy);
             SendAlert("Level Up! You are now level " + level.ToString("F0") + "!", 1.5f);
         }
     }
 
     public void statePaused()
-    {      
+    {     
+        SoundManager.PlaySound(SoundType.Pause);
         isPaused = true;
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        playerScript.GetInput().Disable();
     }
 
 
     public void stateUnpaused()
     {
+        SoundManager.PlaySound(SoundType.Unpause);
         isPaused = false;
         Time.timeScale = timeScaleOrig;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         menuActive?.SetActive(false);
         menuActive = null;
+        playerScript.GetInput().Enable();
     }
 
     public void OpenMenu(MenuType type)
@@ -168,5 +175,11 @@ public class gameManager : MonoBehaviour
         menuAlert.GetComponentInChildren<TMP_Text>().text = message;
         yield return new WaitForSeconds(delay);
         menuAlert.SetActive(false);
+    }
+
+    private void SwitchLevels(int levelIndex)
+    {
+        currentPlayerData.SaveData(InventoryManager.instance);
+        SceneManager.LoadScene(levelIndex);
     }
 }

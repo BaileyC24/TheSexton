@@ -37,13 +37,13 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
     [Range(1f, 20f), SuffixLabel("m/s", Overlay = true)]
     [SerializeField] private float speed;
 
-    [BoxGroup("Audio Settings")]
+   /* [BoxGroup("Audio Settings")]
     [Title("Audio Source")]
     [GUIColor(0.8f, 0.9f, 1f)]
     [Range(0, 1), SuffixLabel("volume", Overlay = true)]
     [SerializeField] public float volume;
     [SerializeField] public AudioSource aud;
-    [SerializeField] public AudioClip[] audHit;
+    [SerializeField] public AudioClip[] audHit;*/
     
     [BoxGroup("Movement Settings")]
     [GUIColor(0.8f, 1f, 0.8f)]
@@ -120,6 +120,9 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
         
         if (GetInput().Player.Inventory.triggered && !gameManager.instance.isPaused)
             gameManager.instance.OpenMenu(gameManager.MenuType.Inventory);
+        
+        if (!gameManager.instance.isPaused)
+            playerInput.Enable();
     }
 
     private void SetupState()
@@ -157,6 +160,7 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
     {
         health -= amount;
         StartCoroutine(flashDamage());
+        SoundManager.PlaySound(SoundType.Hit);
         if (health <= 0)
         {
             gameManager.instance.OpenMenu(gameManager.MenuType.Lose);
@@ -196,7 +200,6 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
 
     public void getPowerUps(powerUps heal)
     {
-
         health = heal.healthCurrent;
     }
 
@@ -207,6 +210,7 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
 
     public void heal(int amount)
     {
+        SoundManager.PlaySound(SoundType.Heal);
         health += amount;
         health = Mathf.Clamp(health, 0, HPOrig);
     }

@@ -162,6 +162,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::healing
   type: 0
+  pickable: 1
+  pickUpItemData: {fileID: 11400000, guid: bf7ab7b2f54ff0141ab6270c3483b360, type: 2}
   healingAmount: 10
   cooldown: 1
   healingRate: 1
