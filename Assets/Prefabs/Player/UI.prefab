@@ -2040,7 +2040,7 @@ MonoBehaviour:
   menuStore: {fileID: 1702928479070308184}
   menuAlert: {fileID: 1069626145513824557}
   menuInventory: {fileID: 1236976050402633407}
-  characterData: {fileID: 11400000, guid: 0b4f5d749bdfa134d86eb22baec4b844, type: 2}
+  currentPlayerData: {fileID: 11400000, guid: b8213f116173ce14682b15c207665148, type: 2}
   playerSpawnPos: {fileID: 0}
   playerHPBar: {fileID: 407216621613411148}
   isPaused: 0
@@ -7488,6 +7488,7 @@ MonoBehaviour:
   uiElementToManage: {fileID: 5841204524826361500}
   storeContent: {fileID: 2217092029971611188}
   upgradeContent: {fileID: 8473793042213820894}
+  currentPlayerData: {fileID: 0}
 --- !u!1 &5414333059630591911
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEditor;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
@@ -16,7 +18,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] private GameObject menuAlert;
     [SerializeField] private GameObject menuInventory;
     
-    [SerializeField] private CharacterData characterData;
+    [SerializeField] public PlayerActiveData currentPlayerData;
 
     public GameObject playerSpawnPos;
     public Image playerHPBar;
@@ -68,7 +70,7 @@ public class gameManager : MonoBehaviour
 
     private void Start()
     {
-        InventoryManager.instance.AddStartingItems(characterData.startingItems, characterData.startingWeapons);
+        currentPlayerData.LoadData(InventoryManager.instance);
     }
 
     // Update is called once per frame
@@ -112,6 +114,7 @@ public class gameManager : MonoBehaviour
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        playerScript.GetInput().Disable();
     }
 
 
@@ -124,6 +127,7 @@ public class gameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         menuActive?.SetActive(false);
         menuActive = null;
+        playerScript.GetInput().Enable();
     }
 
     public void OpenMenu(MenuType type)
@@ -171,5 +175,11 @@ public class gameManager : MonoBehaviour
         menuAlert.GetComponentInChildren<TMP_Text>().text = message;
         yield return new WaitForSeconds(delay);
         menuAlert.SetActive(false);
+    }
+
+    private void SwitchLevels(int levelIndex)
+    {
+        currentPlayerData.SaveData(InventoryManager.instance);
+        SceneManager.LoadScene(levelIndex);
     }
 }

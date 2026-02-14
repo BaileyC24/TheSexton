@@ -6,6 +6,7 @@ public class buttonFunctions : MonoBehaviour
     public RectTransform uiElementToManage;
     public GameObject storeContent;
     public GameObject upgradeContent;
+    public PlayerActiveData currentPlayerData;
     
     public void resume()
     {
@@ -15,20 +16,23 @@ public class buttonFunctions : MonoBehaviour
 
     public void restart()
     {
+        currentPlayerData.Clear();
         SoundManager.PlaySound(SoundType.Menu);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameManager.instance.stateUnpaused();
     }
     
-    public void play()
+    public void play(CharacterData characterData)
     {
         SoundManager.PlaySound(SoundType.Menu);
         SceneManager.LoadScene(1);
+        currentPlayerData.currentCharacter = characterData;
     }
 
     public void quit()
     {
         SoundManager.PlaySound(SoundType.Menu);
+        currentPlayerData.Clear();
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             #if UNITY_EDITOR
