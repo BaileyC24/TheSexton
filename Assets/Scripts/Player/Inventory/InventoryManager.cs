@@ -26,7 +26,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private InventorySlotUI secondaryWeaponSlotUI;
     public WeaponData PrimaryWeapon { get; private set; }
     public WeaponData SecondaryWeapon { get; private set; }
-    private List<SlotData> slots = new();
+    public List<SlotData> slotList = new();
     private List<InventorySlotUI> slotUIs = new();
     private int selectedIndex = -1;
     
@@ -52,14 +52,14 @@ public class InventoryManager : MonoBehaviour
         secondaryWeaponSlotUI.Init(31);
         
         for (int i = 0; i < slotCount; i++)
-            slots.Add(new SlotData());
+            slotList.Add(new SlotData());
         
         for (int i = 0; i < slotCount; i++)
         {
             InventorySlotUI ui = Instantiate(slotPrefab, inventoryContent);
             ui.Init(i);
             slotUIs.Add(ui);
-            slots[i].transform = ui.transform;
+            slotList[i].transform = ui.transform;
         }
     }
 
@@ -69,7 +69,7 @@ public class InventoryManager : MonoBehaviour
         
         if (item.isStackable)
         {
-            foreach (SlotData currentSlot in slots)
+            foreach (SlotData currentSlot in slotList)
             {
                 if (currentSlot.item != item || currentSlot.weapon != null ||
                     currentSlot.amount >= item.maxStackSize) continue;
@@ -96,7 +96,7 @@ public class InventoryManager : MonoBehaviour
                 return false;
             }
 
-            SlotData currentSlot = slots[emptyIndex];
+            SlotData currentSlot = slotList[emptyIndex];
             currentSlot.weapon = null;
             currentSlot.item = item;
 
@@ -126,7 +126,7 @@ public class InventoryManager : MonoBehaviour
         if (emptyIndex == -1) 
             return -1;
 
-        SlotData currentSlot = slots[emptyIndex];
+        SlotData currentSlot = slotList[emptyIndex];
         currentSlot.Clear();
         currentSlot.weapon = weapon;
         currentSlot.amount = 1;
@@ -139,7 +139,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (!IsValidIndex(slotIndex)) return false;
 
-        SlotData currentSlot = slots[slotIndex];
+        SlotData currentSlot = slotList[slotIndex];
         if (currentSlot.weapon == null) return false;
         
         WeaponData old = PrimaryWeapon;
@@ -163,7 +163,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (!IsValidIndex(slotIndex)) return false;
 
-        SlotData currentSlot = slots[slotIndex];
+        SlotData currentSlot = slotList[slotIndex];
         if (currentSlot.weapon == null) return false;
 
         WeaponData old = SecondaryWeapon;
@@ -188,7 +188,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (!IsValidIndex(slotIndex)) return false;
 
-        SlotData currentSlot = slots[slotIndex];
+        SlotData currentSlot = slotList[slotIndex];
 
         if (currentSlot.weapon != null)
         {
@@ -204,7 +204,10 @@ public class InventoryManager : MonoBehaviour
         // TODO: this is where you would trigger the item's effect (healing, buff, etc)
         if (currentSlot.item.type == ItemType.Consumable)
         {
-            // For testing, just remove one from the stack.
+            if (currentSlot.item.isHealing)
+            {
+                gameManager.instance.playerScript.heal(currentSlot.item.healingAmount);
+            }
             RemoveFromSlot(slotIndex, 1);
             return true;
         }
@@ -217,7 +220,7 @@ public class InventoryManager : MonoBehaviour
         if (!IsValidIndex(slotIndex)) 
             return;
 
-        SlotData currentSlot = slots[slotIndex];
+        SlotData currentSlot = slotList[slotIndex];
         if (currentSlot.IsEmpty) 
             return;
         
@@ -238,9 +241,9 @@ public class InventoryManager : MonoBehaviour
 
     private void RefreshUI()
     {
-        for (int i = 0; i < slots.Count && i < slotUIs.Count; i++)
+        for (int i = 0; i < slotList.Count && i < slotUIs.Count; i++)
         {
-            SlotData currentSlot = slots[i];
+            SlotData currentSlot = slotList[i];
             if (currentSlot.IsEmpty) 
                 slotUIs[i].SetEmpty();
             else 
@@ -267,7 +270,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (!IsValidIndex(index)) return;
 
-        SlotData currentSlot = slots[index];
+        SlotData currentSlot = slotList[index];
         if (currentSlot.IsEmpty)
             return;
 
@@ -308,15 +311,15 @@ public class InventoryManager : MonoBehaviour
 
     private int FindEmptySlot()
     {
-        for (int i = 0; i < slots.Count; i++)
-            if (slots[i].IsEmpty)
+        for (int i = 0; i < slotList.Count; i++)
+            if (slotList[i].IsEmpty)
                 return i;
         return -1;
     }
 
     private bool IsValidIndex(int i)
     {
-        return i >= 0 && i < slots.Count;
+        return i >= 0 && i < slotList.Count;
     }
     
     public void AddStartingItems(List<StartingItem> startingItems, List<WeaponData> startingWeapons)
