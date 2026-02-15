@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 using Random = UnityEngine.Random;
 
 public class PlayerAttack : MonoBehaviour
@@ -422,6 +423,24 @@ public class PlayerAttack : MonoBehaviour
                 }
                 break;
             }
+
+            case WeaponData.SpecialEffect.Polymorph:
+                {
+                    var polymorph = target.GetComponent<IPolymorphable>();
+                    if (polymorph != null)
+                        polymorph.Polymorph(currentWeapon.specialDuration);
+                    break;
+                }
+
+            case WeaponData.SpecialEffect.Alteration:
+                {
+                    var alter = target.GetComponent<IAlterable>();
+                    if (alter != null)
+                        alter.Alter(currentWeapon.specialDuration);
+                    break;
+                }
+
+
             case WeaponData.SpecialEffect.None:
                 break;
         }

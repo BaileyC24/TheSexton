@@ -6,7 +6,7 @@ using UnityEngine;
 public class WeaponData : ScriptableObject
 {
     public enum WeaponType { Melee, Utility }
-    public enum SpecialEffect { None, Stun, Blind, Knockback }
+    public enum SpecialEffect { None, Stun, Blind, Knockback, Polymorph, Alteration }
     
     public static readonly Dictionary<SpecialEffect, Color> SpecialEffectColor = new()
         {
