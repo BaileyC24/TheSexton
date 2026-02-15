@@ -16,9 +16,10 @@ public class buttonFunctions : MonoBehaviour
 
     public void restart()
     {
-        currentPlayerData.Clear();
         SoundManager.PlaySound(SoundType.Menu);
+        currentPlayerData.Clear();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        MusicManager.instance.PlayMusic("InGame");
         gameManager.instance.stateUnpaused();
     }
     
@@ -26,6 +27,7 @@ public class buttonFunctions : MonoBehaviour
     {
         SoundManager.PlaySound(SoundType.Menu);
         SceneManager.LoadScene(1);
+        MusicManager.instance.PlayMusic("InGame");
         currentPlayerData.currentCharacter = characterData;
     }
 
@@ -43,6 +45,7 @@ public class buttonFunctions : MonoBehaviour
         }
         
         SceneManager.LoadScene(0);
+        MusicManager.instance.PlayMusic("MainMenu");
         gameManager.instance.stateUnpaused();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
