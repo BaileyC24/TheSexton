@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   weaponName: Reinforced Shovel
   weaponIcon: {fileID: 21300000, guid: 596cd29bea2837e41833cf60e73fde5f, type: 3}
-  weaponModel: {fileID: 919132149155446097, guid: cf9c4998251de38419532b09130f3930,
+  weaponModel: {fileID: 919132149155446097, guid: 5bef26018f4711847ad2cda30fb6eabc,
     type: 3}
   isWeaponPrimary: 0
   zOffset: 0
