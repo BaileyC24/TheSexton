@@ -59,9 +59,9 @@ public class gameManager : MonoBehaviour
     {
         instance = this;
         timeScaleOrig = Time.timeScale;
-
+        
         player = GameObject.FindWithTag("Player");
-
+        
         level = 1;
         playerScript = player.GetComponent<PlayerStateMachine>();
         playerStats = player.GetComponent<PlayerAttack>();
