@@ -16,7 +16,9 @@ MonoBehaviour:
   weaponIcon: {fileID: 0}
   weaponModel: {fileID: 919132149155446097, guid: 210e6f4a52d6fcf4d88f364d29b1e739,
     type: 3}
+  isWeaponPrimary: 0
   zOffset: 0
+  optionalScale: 0
   weaponType: 0
   animatorOverride: {fileID: 22100000, guid: c0a7f64f93e70874cb394470e43bf862, type: 2}
   damage: 6

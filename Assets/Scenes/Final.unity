@@ -10413,11 +10413,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4804062950398805894, guid: f4090d69f10342044a6411038809242f,
-        type: 3}
-      propertyPath: aud
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5415460446128706163, guid: f4090d69f10342044a6411038809242f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -26229,38 +26224,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1406481817292876002, guid: 3c4d8ad0770989440a5ee50cc5c98200,
-        type: 3}
-      propertyPath: slotList.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1406481817292876002, guid: 3c4d8ad0770989440a5ee50cc5c98200,
-        type: 3}
-      propertyPath: slotList.Array.data[0].item
-      value: 
-      objectReference: {fileID: 11400000, guid: bffe00ecad22bb249bfbd5dbc95618fe,
-        type: 2}
-    - target: {fileID: 1406481817292876002, guid: 3c4d8ad0770989440a5ee50cc5c98200,
-        type: 3}
-      propertyPath: slotList.Array.data[0].amount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1406481817292876002, guid: 3c4d8ad0770989440a5ee50cc5c98200,
-        type: 3}
-      propertyPath: slotList.Array.data[0].weapon
-      value: 
-      objectReference: {fileID: 11400000, guid: 2812e91f843694c458b663520827031e,
-        type: 2}
-    - target: {fileID: 3012309380637660053, guid: 3c4d8ad0770989440a5ee50cc5c98200,
-        type: 3}
-      propertyPath: playerStats
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3012309380637660053, guid: 3c4d8ad0770989440a5ee50cc5c98200,
-        type: 3}
-      propertyPath: playerScript
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4463837056008338379, guid: 3c4d8ad0770989440a5ee50cc5c98200,
         type: 3}
       propertyPath: m_Pivot.x
@@ -27646,6 +27609,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 116638761144158777, guid: 26abe097b96783d4bac231581fde0cf1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2370002197241719615, guid: 26abe097b96783d4bac231581fde0cf1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -78.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2370002197241719615, guid: 26abe097b96783d4bac231581fde0cf1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 2370002197241719615, guid: 26abe097b96783d4bac231581fde0cf1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 158.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455142842026195586, guid: 26abe097b96783d4bac231581fde0cf1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -78.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455142842026195586, guid: 26abe097b96783d4bac231581fde0cf1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455142842026195586, guid: 26abe097b96783d4bac231581fde0cf1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 195.8
+      objectReference: {fileID: 0}
     - target: {fileID: 4708692691161389246, guid: 26abe097b96783d4bac231581fde0cf1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -27695,6 +27693,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6957764602944841696, guid: 26abe097b96783d4bac231581fde0cf1,
+        type: 3}
+      propertyPath: spawnBuffer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8558141029203615484, guid: 26abe097b96783d4bac231581fde0cf1,
         type: 3}
@@ -29488,6 +29491,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 838076707608937050, guid: 016de01944aa0724587142b200994159,
+        type: 3}
+      propertyPath: Waves
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 838076707608937050, guid: 016de01944aa0724587142b200994159,
         type: 3}
       propertyPath: waveCountText

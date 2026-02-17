@@ -17,7 +17,7 @@ public class buttonFunctions : MonoBehaviour
     public void restart()
     {
         SoundManager.PlaySound(SoundType.Menu);
-        currentPlayerData.Clear();
+        gameManager.instance.currentPlayerData.Clear();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         MusicManager.instance.PlayMusic("InGame");
         gameManager.instance.stateUnpaused();
@@ -34,15 +34,16 @@ public class buttonFunctions : MonoBehaviour
     public void quit()
     {
         SoundManager.PlaySound(SoundType.Menu);
-        currentPlayerData.Clear();
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
             #endif
+            
             Application.Quit();
             return;
         }
+        gameManager.instance.currentPlayerData.Clear();
         
         SceneManager.LoadScene(0);
         MusicManager.instance.PlayMusic("MainMenu");
