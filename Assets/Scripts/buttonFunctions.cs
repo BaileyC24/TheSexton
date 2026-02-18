@@ -6,35 +6,47 @@ public class buttonFunctions : MonoBehaviour
     public RectTransform uiElementToManage;
     public GameObject storeContent;
     public GameObject upgradeContent;
+    public PlayerActiveData currentPlayerData;
     
     public void resume()
     {
+        SoundManager.PlaySound(SoundType.Menu);
         gameManager.instance.stateUnpaused();
     }
 
     public void restart()
     {
+        SoundManager.PlaySound(SoundType.Menu);
+        gameManager.instance.currentPlayerData.Clear();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        MusicManager.instance.PlayMusic("InGame");
         gameManager.instance.stateUnpaused();
     }
     
-    public void play()
+    public void play(CharacterData characterData)
     {
+        SoundManager.PlaySound(SoundType.Menu);
         SceneManager.LoadScene(1);
+        MusicManager.instance.PlayMusic("InGame");
+        currentPlayerData.currentCharacter = characterData;
     }
 
     public void quit()
     {
+        SoundManager.PlaySound(SoundType.Menu);
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
             #endif
+            
             Application.Quit();
             return;
         }
+        gameManager.instance.currentPlayerData.Clear();
         
         SceneManager.LoadScene(0);
+        MusicManager.instance.PlayMusic("MainMenu");
         gameManager.instance.stateUnpaused();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

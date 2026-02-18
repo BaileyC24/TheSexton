@@ -16,4 +16,12 @@ public class ItemData : ScriptableObject
     public int maxStackSize = 10;
 
     public ItemType type = ItemType.Consumable;
+    public float consumableCooldown;
+    
+    public bool isHealing;
+    public int healingAmount;
+
+    public bool isStrBuff;
+    public float strBuffTime;
+    public int strBuffAmount;
 }

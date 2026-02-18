@@ -13,6 +13,8 @@ public class healing : MonoBehaviour
 
     [Header("Type")]
     [SerializeField] HealingType type;
+    [SerializeField] private bool pickable;
+    [SerializeField] private ItemData pickUpItemData;
 
     [Header("Healing")]
     [SerializeField] int healingAmount;
@@ -41,11 +43,18 @@ public class healing : MonoBehaviour
         if (healable == null || type == HealingType.Regen || onCooldown)
             return;
 
-        if (other.CompareTag("Player"))
+        if (!other.CompareTag("Player")) return;
+        
+        if (pickable)
         {
-            healable.heal(healingAmount);
-            StartCoroutine(HandleUse());
+            SoundManager.PlaySound(SoundType.Equip);
+            InventoryManager.instance.AddItem(pickUpItemData, uses);
+            Destroy(gameObject);
+            return;
         }
+
+        healable.heal(healingAmount);
+        StartCoroutine(HandleUse());
     }
 
     private void OnTriggerStay(Collider other)
@@ -69,16 +78,15 @@ public class healing : MonoBehaviour
         if (type == HealingType.Temporary || type == HealingType.TimedReusable)
             uses--;
 
-        if (type == HealingType.Temporary && uses <= 0)
+        switch (type)
         {
-            Destroy(gameObject);
-            yield break;
-        }
-
-        if (type == HealingType.TimedReusable && uses <= 0)
-        {
-            yield return new WaitForSeconds(cooldown);
-            uses = originalUses;
+            case HealingType.Temporary when uses <= 0:
+                Destroy(gameObject);
+                yield break;
+            case HealingType.TimedReusable when uses <= 0:
+                yield return new WaitForSeconds(cooldown);
+                uses = originalUses;
+                break;
         }
 
         yield return new WaitForSeconds(cooldown);

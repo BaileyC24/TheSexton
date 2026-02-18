@@ -9,8 +9,10 @@ public class PlayerFallState : PlayerMovementState
     public override PlayerStateMachine.PlayerStates GetNextStateKey()
     {
         if (context.IsGrounded())
+        {
+            SoundManager.PlaySound(SoundType.Land);
             return context.GetInput().Player.Sprint.IsPressed() ? PlayerStateMachine.PlayerStates.Sprint : PlayerStateMachine.PlayerStates.Idle;
-        
+        }
         return StateKey;
     }
 }

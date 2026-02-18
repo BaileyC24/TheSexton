@@ -385,6 +385,7 @@ public class PlayerAttack : MonoBehaviour
             dmg.takeDamage(damageAmount);
 
         ApplySpecial(target);
+        //SoundManager.PlaySound(Choose sound from Enum for what you want);  Can add more sounds if needed.
     }
 
     private void ApplySpecial(Collider target)
@@ -436,16 +437,16 @@ public class PlayerAttack : MonoBehaviour
 
     private void AttackAudio()
     {
-        StartCoroutine(DelayedAttackAudio());
+        SoundManager.PlaySound(SoundType.Axe);
     }
 
-    private IEnumerator DelayedAttackAudio()
+   /* private IEnumerator DelayedAttackAudio()
     {
         yield return new WaitForSeconds(0.15f);
 
         if (PSM.audHit[0] != null)
             PSM.aud.PlayOneShot(PSM.audHit[0], PSM.volume);
-    }
+    }*/
 
     private void ChangeWeapons()
     {
