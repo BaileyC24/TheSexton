@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class EnemyAI : MonoBehaviour, IDamage
+public class EnemyAI : MonoBehaviour, IDamage, IKnockbackable, IBlindable, IStunnable
 {
     [Header("Components")]
     [SerializeField] NavMeshAgent agent;
@@ -192,7 +192,6 @@ public class EnemyAI : MonoBehaviour, IDamage
             HPBar.gameObject.SetActive(true);
         
         SpawnDamagePopup(amount);
-        SpawnDamagePopup(amount, WeaponData.SpecialEffect.Blind);
         
         if (HP <= 0)
         {
@@ -256,5 +255,20 @@ public class EnemyAI : MonoBehaviour, IDamage
 
         Vector3 targetScale = Vector3.one * target;
         HPBar.rectTransform.localScale = Vector3.Lerp(HPBar.rectTransform.localScale, targetScale, scaleSmooth * Time.deltaTime);
+    }
+
+    public void Knockback(Vector3 dir, float strength)
+    {
+        SpawnDamagePopup(0, WeaponData.SpecialEffect.Knockback);
+    }
+
+    public void Blind(float duration)
+    {
+        SpawnDamagePopup(0, WeaponData.SpecialEffect.Blind);
+    }
+
+    public void Stun(float duration)
+    {
+        SpawnDamagePopup(0, WeaponData.SpecialEffect.Stun);
     }
 }

@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -482,6 +479,22 @@ public class PlayerAttack : MonoBehaviour
         curFilter.sharedMesh = newFilter.sharedMesh;
         curRenderer.sharedMaterials = newRenderer.sharedMaterials;
         weaponVisual.gameObject.transform.localPosition = new Vector3(0f, 0f, newWeapon.zOffset);
+
+        if (newWeapon.outLineMaterial != null)
+        {
+            var baseMaterials = newRenderer.sharedMaterials;
+
+            Material[] combinedMaterials = new Material[baseMaterials.Length + 1];
+
+            for (int i = 0; i < baseMaterials.Length; i++)
+            {
+                combinedMaterials[i] = baseMaterials[i];
+            }
+
+            combinedMaterials[combinedMaterials.Length - 1] = newWeapon.outLineMaterial;
+
+            curRenderer.sharedMaterials = combinedMaterials;
+        }
 
         if (newWeapon.optionalScale > 0)
             weaponVisual.transform.localScale = Vector3.one * newWeapon.optionalScale;
