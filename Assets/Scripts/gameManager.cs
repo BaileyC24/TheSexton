@@ -18,6 +18,11 @@ public class gameManager : MonoBehaviour
     [SerializeField] private GameObject menuAlert;
     [SerializeField] private GameObject menuInventory;
     
+    [Header("Upgrade")]
+    [SerializeField] private TextMeshProUGUI weaponName;
+    [SerializeField] private TextMeshProUGUI weaponEffect;
+    [SerializeField] private TextMeshProUGUI weaponChance;
+    
     [SerializeField] public PlayerActiveData currentPlayerData;
 
     public GameObject playerSpawnPos;
@@ -76,12 +81,8 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        levelText.text = level.ToString("F0") + "/" + maxLevel.ToString("F0");
-        pointsText.text = points.ToString("F0");
-        strText.text = playerStats.currentWeapon.damage.ToString("F0");
-        attackSpdText.text = "N/A TODO";
-        HealthText.text = playerScript.health.ToString("F0") + "/" + playerScript.HPOrig.ToString("F0");
-        
+        UpdateText();
+
         if (Input.GetButtonDown("Cancel"))
         {
             if (menuActive != null)
@@ -105,6 +106,19 @@ public class gameManager : MonoBehaviour
             SoundManager.PlaySound(SoundType.Buy);
             SendAlert("Level Up! You are now level " + level.ToString("F0") + "!", 1.5f);
         }
+    }
+
+    private void UpdateText()
+    {
+        levelText.text = level.ToString("F0") + "/" + maxLevel.ToString("F0");
+        pointsText.text = points.ToString("F0");
+        strText.text = (playerStats.currentWeapon.damage + currentPlayerData.damageUpgrade).ToString("F0");
+        attackSpdText.text = (playerStats.currentWeapon.totalTime - currentPlayerData.atkSpeedUpgrade).ToString("F2");
+        HealthText.text = (playerScript.health) + "/" + (playerScript.HPOrig + currentPlayerData.healthUpgrade);
+        weaponName.text = playerStats.currentWeapon.weaponName;
+        weaponChance.text = (playerStats.currentWeapon.specialChance + playerStats.currentWeapon.effectChanceUpgrade).ToString("F2");
+        weaponEffect.color = WeaponData.SpecialEffectColor[playerStats.currentWeapon.specialEffect];
+        weaponEffect.text = playerStats.currentWeapon.specialEffect.ToString();
     }
 
     public void statePaused()

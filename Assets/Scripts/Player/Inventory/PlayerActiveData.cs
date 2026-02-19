@@ -10,10 +10,24 @@ public class PlayerActiveData : ScriptableObject
     public int coins;
     public CharacterData currentCharacter;
 
+    [Header("Upgrades")] 
+    public int damageUpgrade;
+    public float atkSpeedUpgrade;
+    public int healthUpgrade;
+    
     public void Clear()
     {
         items.Clear();
+
+        foreach (WeaponData weaponData in weapons)
+        {
+            weaponData.effectChanceUpgrade = 0;
+        }
+        
         weapons.Clear();
+        damageUpgrade = 0;
+        atkSpeedUpgrade = 0;
+        healthUpgrade = 0;
         coins = 0;
     }
 

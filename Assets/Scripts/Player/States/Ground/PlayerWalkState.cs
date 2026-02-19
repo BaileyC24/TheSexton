@@ -17,6 +17,7 @@ public class PlayerWalkState : PlayerMovementState
         {
             return PlayerStateMachine.PlayerStates.Sprint;
         }
+        
 
         return base.GetNextStateKey();
     }

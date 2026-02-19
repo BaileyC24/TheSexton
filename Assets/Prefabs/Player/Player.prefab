@@ -1563,10 +1563,6 @@ MonoBehaviour:
   HPOrig: 0
   health: 10
   speed: 5
-  volume: 0.588
-  aud: {fileID: 0}
-  audHit:
-  - {fileID: 8300000, guid: b7f8695cf65a4f24eb37544298821146, type: 3}
   sprintSpeed: 10
   slideTargetDistance: 5
   slideFasterDuration: 0.5
@@ -1577,6 +1573,7 @@ MonoBehaviour:
   rBody: {fileID: 3851675104023062832}
   collider: {fileID: 772442463008066308}
   animator: {fileID: 638484684100904255}
+  weapons: []
 --- !u!114 &1357382888961720616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1608,10 +1605,6 @@ MonoBehaviour:
   maxCleaveTargets: 2
   attackSpeed: 0.55
   str: 1
-  weapons:
-  - {fileID: 11400000, guid: 56493bd269f58e5409da264052542f45, type: 2}
-  - {fileID: 11400000, guid: ea84186b895b2fb4f8b1bfb4f4cc557b, type: 2}
-  - {fileID: 11400000, guid: d185607cd56caaf4481248241737a35a, type: 2}
   currentWeapon: {fileID: 0}
 --- !u!114 &4429929082094690574
 MonoBehaviour:
@@ -3719,8 +3712,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -2478439849770909088, guid: 73860ec4e8dbc2f4f930e93cc35d3fe2,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fa6dbb38c2756ac439d5e9f015eae43a,
         type: 3}
       propertyPath: m_Name
