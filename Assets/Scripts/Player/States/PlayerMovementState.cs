@@ -38,7 +38,6 @@ public class PlayerMovementState : PlayerStateBase
 
             if (context.GetInput().Player.Slide.triggered)
                 return PlayerStateMachine.PlayerStates.Slide;
-                
         }
 
         if (!context.IsGrounded())
