@@ -9,6 +9,10 @@ public class CrossFade : sceneTransitions
 
     public CanvasGroup crossFade;
 
+    public void Awake()
+    {
+        crossFade.alpha = 0f;
+    }
     public override IEnumerator AnimateTransitionIn()
     {
         var tweener = crossFade.DOFade(1, 1f);
