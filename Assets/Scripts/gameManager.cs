@@ -17,6 +17,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] private GameObject menuStore;
     [SerializeField] private GameObject menuAlert;
     [SerializeField] private GameObject menuInventory;
+    [SerializeField] private GameObject menuStageComplete;
     
     [Header("Upgrade")]
     [SerializeField] private TextMeshProUGUI weaponName;
@@ -42,7 +43,8 @@ public class gameManager : MonoBehaviour
         Lose,
         Win,
         Store,
-        Inventory
+        Inventory,
+        StageComplete
     }
     
     public PlayerStateMachine playerScript;
@@ -76,6 +78,7 @@ public class gameManager : MonoBehaviour
     private void Start()
     {
         currentPlayerData.LoadData(InventoryManager.instance);
+        
     }
 
     // Update is called once per frame
@@ -154,6 +157,10 @@ public class gameManager : MonoBehaviour
         {
             case MenuType.Lose:
                 menuActive = menuLose;
+                break;
+
+            case MenuType.StageComplete:
+                menuActive = menuStageComplete;
                 break;
 
             case MenuType.Win:
