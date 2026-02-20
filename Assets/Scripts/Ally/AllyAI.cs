@@ -43,7 +43,7 @@ public class AllyAI : MonoBehaviour, IDamage, IHealable
         shootTimer += Time.deltaTime;
         navTimer -= Time.deltaTime;
 
-        
+
         AcquireTarget();
 
         switch (currentState)
@@ -61,6 +61,17 @@ public class AllyAI : MonoBehaviour, IDamage, IHealable
                 break;
         }
     }
+
+    void OnEnable()        //whenever this component becomes enabled
+    {                       //please run this function automatically
+        if (agent == null)   //if my agent variable currently points to nothing
+        { agent = GetComponent<NavMeshAgent>(); } //look on this same game object for a NavMeshAgent component and store it in my agent variable
+
+        if (agent == null) //if there still isn't one, meaning the game object must not have one
+        { Debug.LogWarning("AllyAI requires a NavMeshAgent on this GameObject.");  }
+    }
+    
+    
 
     // ------------------ Movement ------------------
 

@@ -1570,6 +1570,7 @@ GameObject:
   - component: {fileID: 5571729481018847622}
   - component: {fileID: 2612845031164209962}
   - component: {fileID: 6384361065156809959}
+  - component: {fileID: 7960044317691122492}
   m_Layer: 6
   m_Name: Enemy1
   m_TagString: Enemy
@@ -1711,6 +1712,18 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.84, z: 0}
+--- !u!114 &7960044317691122492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9074822214476854037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6459668c36efb1445a034f3d3d7a6cdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyPolymorphable
 --- !u!1001 &1665855655520722958
 PrefabInstance:
   m_ObjectHideFlags: 0

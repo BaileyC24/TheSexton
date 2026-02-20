@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Player Spawn Pos
   - Cinemachine
+  - Ally
   layers:
   - Default
   - TransparentFX

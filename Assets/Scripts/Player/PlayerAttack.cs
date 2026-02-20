@@ -422,6 +422,31 @@ public class PlayerAttack : MonoBehaviour
                 }
                 break;
             }
+
+            case WeaponData.SpecialEffect.Burn: //
+                {
+                    var blind = target.GetComponent<IBlindable>();
+                    if (blind != null)
+                        blind.Blind(currentWeapon.specialDuration);
+                    break;
+                }
+
+            case WeaponData.SpecialEffect.Polymorph:
+                {
+                    var polymorph = target.GetComponent<IPolymorphable>(); //script currently called IPolymorph.cs
+                    if (polymorph != null)
+                        polymorph.Polymorph(currentWeapon.specialDuration);
+                    break;
+                }
+
+            case WeaponData.SpecialEffect.Alteration: //
+                {
+                    var blind = target.GetComponent<IBlindable>();
+                    if (blind != null)
+                        blind.Blind(currentWeapon.specialDuration);
+                    break;
+                }
+
             case WeaponData.SpecialEffect.None:
                 break;
         }

@@ -101,4 +101,14 @@ public class buttonFunctions : MonoBehaviour
             upgradeContent.SetActive(true);
         }
     }
-}
+
+    public void credits(CharacterData characterData)
+    {
+        SoundManager.PlaySound(SoundType.Menu); //SoundType.Menu _find where is and set to Credits
+        SceneManager.LoadScene(2); //_find where is and set to 2 for credits
+        MusicManager.instance.PlayMusic("InGame"); //_find and set to "Credits" make new music
+        //It would be fun to list the current character name and then in the credits put YOU
+        currentPlayerData.currentCharacter = characterData;
+    }
+
+    }
