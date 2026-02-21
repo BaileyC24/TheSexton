@@ -15,4 +15,4 @@ MonoBehaviour:
   items: []
   weapons: []
   coins: 0
-  currentCharacter: {fileID: 11400000, guid: c35112c123b979a48b926f3573fe778e, type: 2}
+  currentCharacter: {fileID: 11400000, guid: 0b4f5d749bdfa134d86eb22baec4b844, type: 2}

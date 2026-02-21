@@ -17,6 +17,12 @@ public class gameManager : MonoBehaviour
     [SerializeField] private GameObject menuStore;
     [SerializeField] private GameObject menuAlert;
     [SerializeField] private GameObject menuInventory;
+    [SerializeField] private GameObject menuStageComplete;
+    
+    [Header("Upgrade")]
+    [SerializeField] private TextMeshProUGUI weaponName;
+    [SerializeField] private TextMeshProUGUI weaponEffect;
+    [SerializeField] private TextMeshProUGUI weaponChance;
     
     [SerializeField] public PlayerActiveData currentPlayerData;
 
@@ -37,7 +43,8 @@ public class gameManager : MonoBehaviour
         Lose,
         Win,
         Store,
-        Inventory
+        Inventory,
+        StageComplete
     }
     
     public PlayerStateMachine playerScript;
@@ -59,9 +66,9 @@ public class gameManager : MonoBehaviour
     {
         instance = this;
         timeScaleOrig = Time.timeScale;
-
+        
         player = GameObject.FindWithTag("Player");
-
+        
         level = 1;
         playerScript = player.GetComponent<PlayerStateMachine>();
         playerStats = player.GetComponent<PlayerAttack>();
@@ -71,17 +78,14 @@ public class gameManager : MonoBehaviour
     private void Start()
     {
         currentPlayerData.LoadData(InventoryManager.instance);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        levelText.text = level.ToString("F0") + "/" + maxLevel.ToString("F0");
-        pointsText.text = points.ToString("F0");
-        strText.text = playerStats.currentWeapon.damage.ToString("F0");
-        attackSpdText.text = "N/A TODO";
-        HealthText.text = playerScript.health.ToString("F0") + "/" + playerScript.HPOrig.ToString("F0");
-        
+        UpdateText();
+
         if (Input.GetButtonDown("Cancel"))
         {
             if (menuActive != null)
@@ -105,6 +109,19 @@ public class gameManager : MonoBehaviour
             SoundManager.PlaySound(SoundType.Buy);
             SendAlert("Level Up! You are now level " + level.ToString("F0") + "!", 1.5f);
         }
+    }
+
+    private void UpdateText()
+    {
+        levelText.text = level.ToString("F0") + "/" + maxLevel.ToString("F0");
+        pointsText.text = points.ToString("F0");
+        strText.text = (playerStats.currentWeapon.damage + currentPlayerData.damageUpgrade).ToString("F0");
+        attackSpdText.text = (playerStats.currentWeapon.totalTime - currentPlayerData.atkSpeedUpgrade).ToString("F2");
+        HealthText.text = (playerScript.health) + "/" + (playerScript.HPOrig + currentPlayerData.healthUpgrade);
+        weaponName.text = playerStats.currentWeapon.weaponName;
+        weaponChance.text = (playerStats.currentWeapon.specialChance + playerStats.currentWeapon.effectChanceUpgrade).ToString("F2");
+        weaponEffect.color = WeaponData.SpecialEffectColor[playerStats.currentWeapon.specialEffect];
+        weaponEffect.text = playerStats.currentWeapon.specialEffect.ToString();
     }
 
     public void statePaused()
@@ -140,6 +157,10 @@ public class gameManager : MonoBehaviour
         {
             case MenuType.Lose:
                 menuActive = menuLose;
+                break;
+
+            case MenuType.StageComplete:
+                menuActive = menuStageComplete;
                 break;
 
             case MenuType.Win:
