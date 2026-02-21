@@ -27,10 +27,10 @@ public class EnemyPolymorphable : MonoBehaviour, IPolymorphable
                 Destroy(GetComponent<EnemyAI>());  //remove the EnemyAI script  
                 gameObject.AddComponent<AllyAI>(); //add the AllyAI script  
 
-                if (agent == null)
-                {
-                    agent = GetComponent<NavMeshAgent>();
-                }
+                //if (agent == null)       _This is now handled in AllyAI OnEnable
+                //{
+                //    agent = GetComponent<NavMeshAgent>();
+                //}
             }
         }
         //         ...could also do a vsn with disable and reenable component (coroutine)

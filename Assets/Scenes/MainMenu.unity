@@ -5786,6 +5786,7 @@ GameObject:
   - component: {fileID: 1507304418}
   - component: {fileID: 1507304417}
   - component: {fileID: 1507304419}
+  - component: {fileID: 1507304420}
   m_Layer: 5
   m_Name: ScrollPanel
   m_TagString: Untagged
@@ -5865,7 +5866,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 85432693c37ff0e46bdd9418276687d0, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.207
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5949,6 +5950,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1507304420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507304415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35749c12efe13d5439f39d1a06113c77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AutoScrollCredits
+  creditScroller: {fileID: 797821407}
+  scrollSpeed: 50
 --- !u!1 &1524108626
 GameObject:
   m_ObjectHideFlags: 0
@@ -6152,7 +6167,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1525569668}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
   m_Name: 
@@ -6826,6 +6841,7 @@ GameObject:
   - component: {fileID: 1659648733}
   - component: {fileID: 1659648735}
   - component: {fileID: 1659648734}
+  - component: {fileID: 1659648736}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -6872,9 +6888,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Credits!\n\nNames of Team Members:\r\nBailey Curtis\r\nLorenzo McGee\r\nMohammed
-    Mohammed\r\nEve Weston\n\nLightning/Mist Brushes:\t\nObsidianDawn.com from ObsidianDawn.com\n\nCredits
-    Music track: Treat by Aetheric\r\nSource: https://freetouse.com/music"
+  m_text: "Credits!\n\nNames of Team Members:\n\r\nBailey Curtis\n\r\nLorenzo McGee\n\r\nMohammed
+    Mohammed\n\r\nEve Weston\n\n\nLightning/Mist Brushes:\t\n\nObsidianDawn.com from
+    ObsidianDawn.com\n\n\nCredits Music track: Treat by Aetheric\n\r\nSource: https://freetouse.com/music"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6954,6 +6970,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1659648732}
   m_CullTransparentMesh: 1
+--- !u!114 &1659648736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659648732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7db6cafbbeba5f448b770ca85dd1a26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CreditsMoveUp
+  content: {fileID: 797821407}
+  pixelsPerSecond: 50
+  startY: -500
+  resetY: 500
 --- !u!1 &1692089473
 GameObject:
   m_ObjectHideFlags: 0
