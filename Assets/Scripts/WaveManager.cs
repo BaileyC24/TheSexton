@@ -18,10 +18,15 @@ public class WaveManager : MonoBehaviour
     private int currentWave;
 
     public int enemiesAlive;
+
+    public portalManager portalManager;
+    public int killCount;
     
     
     void Start()
     {
+
+       
         instance = this;
         spawnManagers = new List<SpawnManager>();
         foreach (GameObject spawnManager in GameObject.FindGameObjectsWithTag("Spawner")) 
@@ -53,6 +58,7 @@ public class WaveManager : MonoBehaviour
     public void EnemiesDied()
     {
         enemiesAlive--;
+        killCount++;
         gameManager.instance.updateGameGoal(-1);
         if (enemiesAlive <= 0 && waveStarted)
         {
@@ -70,7 +76,8 @@ public class WaveManager : MonoBehaviour
         }
         else
         {
-            gameManager.instance.OpenMenu(gameManager.MenuType.Win);
+            gameManager.instance.OpenMenu(gameManager.MenuType.StageComplete);
+            portalManager.ActivatePortal();
         }
     }
 

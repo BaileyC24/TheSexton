@@ -40,10 +40,9 @@ public class InventoryManager : MonoBehaviour
     private void Update()
     {
         levelText.text = gameManager.instance.level.ToString("F0") + "/" + gameManager.instance.maxLevel.ToString("F0");
-        strText.text = gameManager.instance.playerStats.currentWeapon.damage.ToString("F0");
-        atkSpeedText.text = "N/A TODO";
-        healthText.text = gameManager.instance.playerScript.health.ToString("F0") + 
-                          "/" + gameManager.instance.playerScript.HPOrig.ToString("F0");
+        strText.text = (gameManager.instance.playerStats.currentWeapon.damage + gameManager.instance.currentPlayerData.damageUpgrade).ToString("F0");
+        atkSpeedText.text = (gameManager.instance.playerStats.currentWeapon.totalTime - gameManager.instance.currentPlayerData.atkSpeedUpgrade).ToString("F2");
+        healthText.text = (gameManager.instance.playerScript.health) + "/" + (gameManager.instance.playerScript.HPOrig + gameManager.instance.currentPlayerData.healthUpgrade);
     }
 
     private void BuildSlots()

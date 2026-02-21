@@ -26,7 +26,7 @@ public class buttonFunctions : MonoBehaviour
     public void play(CharacterData characterData)
     {
         SoundManager.PlaySound(SoundType.Menu);
-        SceneManager.LoadScene(1);
+        transitionsManager.instance.LoadScene(1 , "CrossFade");
         MusicManager.instance.PlayMusic("InGame");
         currentPlayerData.currentCharacter = characterData;
     }
@@ -55,34 +55,83 @@ public class buttonFunctions : MonoBehaviour
 
     public void hpPlus()
     {
-        if(gameManager.instance.points > 0 && gameManager.instance.playerScript.health < 200)
+        if (gameManager.instance.points < 2)
         {
-            gameManager.instance.playerScript.HPOrig += 5;
-            gameManager.instance.playerScript.health = gameManager.instance.playerScript.HPOrig;
-            gameManager.instance.points--;
+            gameManager.instance.SendAlert("Not enough points");
+            return;
         }
+        
+        if (gameManager.instance.currentPlayerData.healthUpgrade >= 60)
+        {
+            gameManager.instance.SendAlert("Upgrade already at max level");
+            return;
+        }
+
+        gameManager.instance.playerScript.health += gameManager.instance.currentPlayerData.healthUpgrade;
+        gameManager.instance.points -= 2;
     }
 
     public void strPlus()
     {
-        // TODO: REDO STRENGTH UPGRADE TO WORK PROPERLY WITH THE NEW SYSTEM
-        if (gameManager.instance.points > 0 && gameManager.instance.playerStats.currentWeapon.damage < 15)
+        if (gameManager.instance.currentPlayerData.damageUpgrade >= 8)
         {
-            gameManager.instance.playerStats.currentWeapon.damage += 1;
-            gameManager.instance.points--;
+            gameManager.instance.SendAlert("Upgrade already at max level");
+            return;
         }
+        
+        if (gameManager.instance.points < 3)
+        {
+            gameManager.instance.SendAlert("Not enough points");
+            return;
+        }
+
+        gameManager.instance.currentPlayerData.damageUpgrade += 1;
+        gameManager.instance.points -= 3;
     }
 
     public void attSpdPlus()
     {
-        // TODO: REDO ATTACK SPEED UPGRADE TO WORK PROPERLY WITH THE NEW SYSTEM
-        /*if (gameManager.instance.points > 0 && gameManager.instance.playerStats.attackSpeed > 0.1f)
+                
+        if (gameManager.instance.currentPlayerData.atkSpeedUpgrade >= 0.4f)
         {
-            gameManager.instance.playerStats.attackSpeed -= 0.1f;
-            gameManager.instance.points--;
-        }*/
+            gameManager.instance.SendAlert("Upgrade already at max level");
+            return;
+        }
+        
+        if (gameManager.instance.points < 2)
+        {
+            gameManager.instance.SendAlert("Not enough points");
+            return;
+        }
+
+        gameManager.instance.currentPlayerData.atkSpeedUpgrade += 0.1f;
+        gameManager.instance.points -= 2;
     }
-    
+
+    public void ChanceUpgrade()
+    {
+        if (gameManager.instance.playerStats.currentWeapon.effectChanceUpgrade >= 0.5f)
+        {
+            gameManager.instance.SendAlert("Upgrade already at max level");
+            return;
+        }
+        
+        if (gameManager.instance.playerStats.currentWeapon.specialEffect == WeaponData.SpecialEffect.None)
+        {
+            gameManager.instance.SendAlert("Weapon has no special effect");
+            return;
+        }
+        
+        if (gameManager.instance.points < 4)
+        {
+            gameManager.instance.SendAlert("Not enough points");
+            return;
+        }
+
+        gameManager.instance.playerStats.currentWeapon.effectChanceUpgrade += 0.15f;
+        gameManager.instance.points -= 2;
+    }
+
     public void BringToFront()
     {
         if (uiElementToManage != null)
@@ -92,6 +141,7 @@ public class buttonFunctions : MonoBehaviour
             upgradeContent.SetActive(false);
         }
     }
+    
     public void SendToBack()
     {
         if (uiElementToManage != null)

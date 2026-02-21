@@ -23,6 +23,7 @@ public class WeaponData : ScriptableObject
     public bool isWeaponPrimary;
     public float zOffset;
     public float optionalScale;
+    public Material outLineMaterial;
 
     public WeaponType weaponType = WeaponType.Melee;
 
@@ -49,4 +50,7 @@ public class WeaponData : ScriptableObject
     public bool canBreakLocks;
     public bool emitsLight;
     public float lightRadius;
+
+    [Header("Upgrades")] [HideInInspector] 
+    public float effectChanceUpgrade;
 }

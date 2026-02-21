@@ -19,6 +19,7 @@ MonoBehaviour:
   isWeaponPrimary: 0
   zOffset: 0
   optionalScale: 1
+  outLineMaterial: {fileID: 2100000, guid: 8fb1617c35be6654a93a48ab6f3770d1, type: 2}
   weaponType: 0
   animatorOverride: {fileID: 0}
   damage: 5
