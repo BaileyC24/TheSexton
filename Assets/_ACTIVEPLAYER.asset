@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bcf428e76494a15b35e88a6da42c576, type: 3}
   m_Name: _ACTIVEPLAYER
   m_EditorClassIdentifier: Assembly-CSharp::PlayerActiveData
-  items:
-  - item: {fileID: 11400000, guid: bffe00ecad22bb249bfbd5dbc95618fe, type: 2}
-    amount: 1
+  items: []
+  weapons: []
   coins: 0
   currentCharacter: {fileID: 11400000, guid: c35112c123b979a48b926f3573fe778e, type: 2}
