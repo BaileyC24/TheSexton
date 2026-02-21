@@ -26,9 +26,9 @@ MonoBehaviour:
   swingArc: 90
   hitDelay: 0.15
   totalTime: 0.6
-  specialEffect: 0
-  specialChance: 0
-  specialDuration: 0
+  specialEffect: 5
+  specialChance: 1
+  specialDuration: 2
   canBreakLocks: 0
   emitsLight: 0
   lightRadius: 0
