@@ -20,6 +20,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private GameObject useMenu;
     [SerializeField] private TextMeshProUGUI useText;
     [SerializeField] private TextMeshProUGUI itemText;
+    [SerializeField] private TextMeshProUGUI coinsText;
 
     [Header("Equipped Weapons (UI optional)")]
     [SerializeField] private InventorySlotUI primaryWeaponSlotUI;
@@ -29,6 +30,7 @@ public class InventoryManager : MonoBehaviour
     public List<SlotData> slotList = new();
     private List<InventorySlotUI> slotUIs = new();
     private int selectedIndex = -1;
+    [HideInInspector] public int coinsOnHand;
     
     private void Awake()
     {
@@ -43,6 +45,7 @@ public class InventoryManager : MonoBehaviour
         strText.text = (gameManager.instance.playerStats.currentWeapon.damage + gameManager.instance.currentPlayerData.damageUpgrade).ToString("F0");
         atkSpeedText.text = (gameManager.instance.playerStats.currentWeapon.totalTime - gameManager.instance.currentPlayerData.atkSpeedUpgrade).ToString("F2");
         healthText.text = (gameManager.instance.playerScript.health) + "/" + (gameManager.instance.playerScript.HPOrig + gameManager.instance.currentPlayerData.healthUpgrade);
+        coinsText.text = coinsOnHand.ToString();
     }
 
     private void BuildSlots()
@@ -207,6 +210,23 @@ public class InventoryManager : MonoBehaviour
             {
                 gameManager.instance.playerScript.heal(currentSlot.item.healingAmount);
             }
+
+            if (currentSlot.item.isPlaceable)
+            {
+                bool grounded = Physics.Raycast(
+                    gameManager.instance.playerScript.feetPos.position + Vector3.up * 0.1f,
+                    Vector3.down,
+                    out RaycastHit hit,
+                    1.5f,
+                    ~LayerMask.GetMask("Player"),
+                    QueryTriggerInteraction.Ignore
+                );
+
+                if (!grounded) return false;
+
+                Instantiate(currentSlot.item.itemPrefab, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
+            }
+            
             RemoveFromSlot(slotIndex, 1);
             return true;
         }
@@ -321,7 +341,7 @@ public class InventoryManager : MonoBehaviour
         return i >= 0 && i < slotList.Count;
     }
     
-    public void AddStartingItems(List<StartingItem> startingItems, List<WeaponData> startingWeapons)
+    public void AddStartingItems(List<StartingItem> startingItems, List<WeaponData> startingWeapons, int coins)
     {
         foreach (StartingItem item in startingItems)
             AddItem(item.item, item.amount);
@@ -335,6 +355,8 @@ public class InventoryManager : MonoBehaviour
             else
                 AddWeapon(weapon);
         }
+
+        coinsOnHand = coins;
         
         SyncWeaponsToPlayer();
     }

@@ -13,18 +13,21 @@ MonoBehaviour:
   m_Name: Hammar
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   weaponName: Hammar
-  weaponIcon: {fileID: 21300000, guid: eab77367f5fa22f4cbdf0361514e06f2, type: 3}
+  weaponIcon: {fileID: 21300000, guid: fd21722d97cd55c40a11ebb35451ea1e, type: 3}
   weaponModel: {fileID: 2939461966237491692, guid: 6dc5bbadc807ebe4d926b32d4cee4f6f,
     type: 3}
-  isWeaponPrimary: 0
+  isWeaponPrimary: 1
   zOffset: 0
   optionalScale: 1
   outLineMaterial: {fileID: 2100000, guid: 8fb1617c35be6654a93a48ab6f3770d1, type: 2}
   weaponType: 0
+  weaponPrice: 130
   animatorOverride: {fileID: 0}
   damage: 5
   range: 1.9
   swingArc: 70
+  meleeEffect: {fileID: 2955623459812423943, guid: f5507a8c6a22c404ab324980c4e8a11b,
+    type: 3}
   hitDelay: 0.15
   totalTime: 0.6
   specialEffect: 0
@@ -33,3 +36,4 @@ MonoBehaviour:
   canBreakLocks: 1
   emitsLight: 0
   lightRadius: 0
+  effectChanceUpgrade: 0

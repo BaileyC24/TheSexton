@@ -18,7 +18,7 @@ public class buttonFunctions : MonoBehaviour
     {
         SoundManager.PlaySound(SoundType.Menu);
         gameManager.instance.currentPlayerData.Clear();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        transitionsManager.instance.LoadScene(1 , "CrossFade");
         MusicManager.instance.PlayMusic("InGame");
         gameManager.instance.stateUnpaused();
     }

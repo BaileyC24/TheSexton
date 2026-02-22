@@ -26,6 +26,7 @@ public class WeaponData : ScriptableObject
     public Material outLineMaterial;
 
     public WeaponType weaponType = WeaponType.Melee;
+    public int weaponPrice;
 
     [Header("Animation")]
     public AnimatorOverrideController animatorOverride;
@@ -36,6 +37,9 @@ public class WeaponData : ScriptableObject
     public float range = 2f;
     [Tooltip("How wide the swing is (0 = thrust / straight hit).")]
     [Range(0f, 180f)] public float swingArc = 90f;
+    
+    [Header("")]
+    public GameObject meleeEffect;
 
     [Header("Timing")]
     public float hitDelay = 0.15f;

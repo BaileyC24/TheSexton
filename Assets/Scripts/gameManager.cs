@@ -18,6 +18,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] private GameObject menuAlert;
     [SerializeField] private GameObject menuInventory;
     [SerializeField] private GameObject menuStageComplete;
+    [SerializeField] private Image currentWeaponIcon;
+    [SerializeField] private Image previousWeaponIcon;
     
     [Header("Upgrade")]
     [SerializeField] private TextMeshProUGUI weaponName;
@@ -75,12 +77,6 @@ public class gameManager : MonoBehaviour
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
     }
 
-    private void Start()
-    {
-        currentPlayerData.LoadData(InventoryManager.instance);
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -106,6 +102,8 @@ public class gameManager : MonoBehaviour
             points += 3;
             nextLevel = (nextLevel * 1.3) + 2;
             exp = 0;
+            int coinsRewarded = 30 + (level * 5);
+            InventoryManager.instance.coinsOnHand += coinsRewarded;
             SoundManager.PlaySound(SoundType.Buy);
             SendAlert("Level Up! You are now level " + level.ToString("F0") + "!", 1.5f);
         }
@@ -202,5 +200,20 @@ public class gameManager : MonoBehaviour
     {
         currentPlayerData.SaveData(InventoryManager.instance);
         SceneManager.LoadScene(levelIndex);
+    }
+
+    public void UpdateWeaponIcons(WeaponData current, WeaponData previous)
+    {
+        if (currentWeaponIcon != null)
+        {
+            currentWeaponIcon.sprite = current != null ? current.weaponIcon : null;
+            currentWeaponIcon.enabled = currentWeaponIcon.sprite != null;
+        }
+
+        if (previousWeaponIcon != null)
+        {
+            previousWeaponIcon.sprite = previous != null ? previous.weaponIcon : null;
+            previousWeaponIcon.enabled = previousWeaponIcon.sprite != null;
+        }
     }
 }
