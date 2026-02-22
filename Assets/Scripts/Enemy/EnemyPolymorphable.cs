@@ -4,11 +4,17 @@ using UnityEngine.AI;
 
 public class EnemyPolymorphable : MonoBehaviour, IPolymorphable
 {
+
+    [SerializeField] public ParticleSystem magicEffect;
     public void Polymorph(float duration)
     {
         //change this thing I hit to be this other thing (or one of these other things)
         if (gameObject.tag == "Enemy")  //we may also need to disable EnemyAI or change it's state...??
         {
+          if (magicEffect != null)
+            { 
+                    magicEffect.Play();
+            }
             gameObject.tag = "Ally";
         }
     }
@@ -23,7 +29,7 @@ public class EnemyPolymorphable : MonoBehaviour, IPolymorphable
         {
             if (allyScript == null)//check to see if already AllyAI script
             {  //only if there isn't already an AllyAI script
-
+               
                 Destroy(GetComponent<EnemyAI>());  //remove the EnemyAI script  
                 gameObject.AddComponent<AllyAI>(); //add the AllyAI script  
 

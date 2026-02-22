@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem.Controls;
 using Random = UnityEngine.Random;
 
 public class PlayerAttack : MonoBehaviour
@@ -95,6 +96,22 @@ public class PlayerAttack : MonoBehaviour
     {
         attackTimer += Time.deltaTime;
 
+        // Commenting out the original code for now
+        // mouseScroll = PSM.GetInput().Player.Scroll.ReadValue<Vector2>().y;
+
+        if (PSM == null)
+        {
+            Debug.LogWarning("Link 1 Broken: PSM container is empty!");
+        }
+        else if (PSM.GetInput() == null)
+        {
+            Debug.LogWarning("Link 2 Broken: GetInput() is returning nothing!");
+        }
+        else
+        {
+            Debug.LogWarning("Link 3 Broken: The Input Action Map 'Player' or 'Scroll' got changed!");
+        }
+
         mouseScroll = PSM.GetInput().Player.Scroll.ReadValue<Vector2>().y;
         bool attackPressed = gameManager.instance.playerScript.GetInput().Player.Attack.triggered;
 
@@ -127,10 +144,12 @@ public class PlayerAttack : MonoBehaviour
 
         if (currentWeapon.weaponType == WeaponData.WeaponType.Melee)
             DoMeleeHit();
-        else
+        if (currentWeapon.weaponType == WeaponData.WeaponType.Utility)
             DoUtility();
-        
-        yield return new WaitForSeconds(currentWeapon.totalTime);
+        if (currentWeapon.weaponType == WeaponData.WeaponType.Magic)
+            DoMagic(); 
+
+            yield return new WaitForSeconds(currentWeapon.totalTime);
 
         attacking = false;
     }
@@ -377,7 +396,25 @@ public class PlayerAttack : MonoBehaviour
             ApplySpecial(c);
         }
     }
+
+private void DoMagic()
+    {
+        if (aimCamera == null) return; //if we don't have a camera, stop. What we want to do here needs one. 
+
+        float range = Mathf.Max(0.1f, currentWeapon.range); //prevents crash from someone setting range to 0 or less
+        Vector3 origin = aimCamera.transform.position + aimCamera.transform.forward * cameraRayStartOffset;
+
+        Vector3 forward = aimCamera.transform.forward;
+
+        if (Physics.Raycast(origin, forward, out RaycastHit hit, range, enemyMask)) //if we hit something, do...
+        {
+            ApplySpecial(hit.collider); //apply the appropriate effect to the enemy of the collider we hit
+        }
+ 
+    }
     
+
+
     private void ApplyDamageAndEffects(Collider target, int damageAmount)
     {
         // TODO: Add hit effects here (particles, sounds, etc.)
@@ -435,9 +472,9 @@ public class PlayerAttack : MonoBehaviour
 
             case WeaponData.SpecialEffect.Burn: //
                 {
-                    var blind = target.GetComponent<IBlindable>();
-                    if (blind != null)
-                        blind.Blind(currentWeapon.specialDuration);
+                    var burn = target.GetComponent<IBurnable>();
+                    if (burn != null)
+                        burn.Burn(currentWeapon.specialDuration);
                     break;
                 }
 
@@ -451,9 +488,9 @@ public class PlayerAttack : MonoBehaviour
 
             case WeaponData.SpecialEffect.Alteration: //
                 {
-                    var blind = target.GetComponent<IBlindable>();
-                    if (blind != null)
-                        blind.Blind(currentWeapon.specialDuration);
+                    var alteration = target.GetComponent<IAlterable>(); //script currently called IAlter
+                    if (alteration != null)
+                        alteration.Alter(currentWeapon.specialDuration);
                     break;
                 }
 
