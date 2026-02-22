@@ -1546,6 +1546,7 @@ Transform:
   - {fileID: 3310902387073771179}
   - {fileID: 1960304225466469121}
   - {fileID: 6778669902633837958}
+  - {fileID: 749726576778552853}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4804062950398805894
@@ -1574,6 +1575,7 @@ MonoBehaviour:
   collider: {fileID: 772442463008066308}
   animator: {fileID: 638484684100904255}
   weapons: []
+  feetPos: {fileID: 749726576778552853}
 --- !u!114 &1357382888961720616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1605,6 +1607,7 @@ MonoBehaviour:
   maxCleaveTargets: 2
   attackSpeed: 0.55
   str: 1
+  hitVfxOffset: {x: 0, y: 0.9, z: 0}
   currentWeapon: {fileID: 0}
 --- !u!114 &4429929082094690574
 MonoBehaviour:
@@ -3649,6 +3652,37 @@ Transform:
   m_Children:
   - {fileID: 3870361684662933375}
   m_Father: {fileID: 8116456842556647772}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9127385531206164406
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 749726576778552853}
+  m_Layer: 3
+  m_Name: FeetPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &749726576778552853
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9127385531206164406}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5415460446128706163}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &949517752316584697
 PrefabInstance:

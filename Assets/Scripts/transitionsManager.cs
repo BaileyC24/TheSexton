@@ -16,8 +16,6 @@ public class transitionsManager : MonoBehaviour
     private sceneTransitions[] transitions;
     private void Awake()
     {
-        
-
         // If an instance of transitionsManager already exists, destroy this new one
         if (instance == null)
         {

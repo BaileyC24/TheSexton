@@ -8,7 +8,7 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
     [Header("UI")]
     [SerializeField] private Image icon;
     [SerializeField] private TextMeshProUGUI stackText;
-
+    [SerializeField] private bool isStore;
     public int SlotIndex { get; private set; }
 
     public void Init(int slotIndex)
@@ -43,7 +43,14 @@ public class InventorySlotUI : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left)
-            InventoryManager.instance.OnSlotLeftClick(SlotIndex);
+        if (eventData.button != PointerEventData.InputButton.Left) return;
+        
+        if (isStore)
+        {
+            StoreManager.instance.OnSlotLeftClick(SlotIndex);
+            return;
+        }
+            
+        InventoryManager.instance.OnSlotLeftClick(SlotIndex);
     }
 }
