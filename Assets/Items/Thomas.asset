@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d1084bc14cdda44ac21de956fa7cff, type: 3}
   m_Name: Thomas
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
-  characterName: Thomas
+  characterName: 
   bio: 
   profilePicture: {fileID: 0}
   cardPicture: {fileID: 0}
   combatStyle: 0
   role: 0
   startingItems:
-  - item: {fileID: 11400000, guid: 767ab76668d5952419b256569afb5708, type: 2}
-    amount: 3
+  - item: {fileID: 11400000, guid: b8991876f7bb077449333568e56d232e, type: 2}
+    amount: 10
   startingWeapons:
   - {fileID: 11400000, guid: 56493bd269f58e5409da264052542f45, type: 2}
-  - {fileID: 11400000, guid: e1258ebd71da02843846ba292a59b7c5, type: 2}
-  startingCoins: 20
+  - {fileID: 11400000, guid: 78065dfb2311b424c84d68a02a5f13a0, type: 2}
+  - {fileID: 11400000, guid: 8a0cedd02ddde684c80fb9b5149a177f, type: 2}
+  startingCoins: 0

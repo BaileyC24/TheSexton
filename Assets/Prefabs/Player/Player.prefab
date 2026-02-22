@@ -1522,6 +1522,8 @@ GameObject:
   - component: {fileID: 772442463008066308}
   - component: {fileID: 3851675104023062832}
   - component: {fileID: 7754621423565768333}
+  - component: {fileID: -7645259991884189397}
+  - component: {fileID: 3135674437632782663}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1826,6 +1828,36 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-7645259991884189397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3590821475202817051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9467ba8a7d0d1e341bafd18b58500b01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileLauncher
+  projectile: {fileID: 3334042957695438149, guid: 18fc4b42884d1e144b102c4fce0c450a,
+    type: 3}
+  projectileSpawnPoint: {fileID: 0}
+--- !u!114 &3135674437632782663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3590821475202817051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9467ba8a7d0d1e341bafd18b58500b01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileLauncher
+  projectile: {fileID: 3334042957695438149, guid: 18fc4b42884d1e144b102c4fce0c450a,
+    type: 3}
+  projectileSpawnPoint: {fileID: 0}
 --- !u!1 &3730447508976039497
 GameObject:
   m_ObjectHideFlags: 0
@@ -2348,7 +2380,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4266793789806358278}
   - component: {fileID: 4365617681688600083}
-  - component: {fileID: 5196117126801161957}
   - component: {fileID: 3465595164354712166}
   - component: {fileID: 7538385191399939012}
   m_Layer: 0
@@ -2424,14 +2455,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &5196117126801161957
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5499873858968904365}
-  m_Enabled: 1
 --- !u!114 &3465595164354712166
 MonoBehaviour:
   m_ObjectHideFlags: 0

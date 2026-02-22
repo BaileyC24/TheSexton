@@ -5,8 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Weapon", menuName = "The Sexton/Weapon Data")]
 public class WeaponData : ScriptableObject
 {
-    public enum WeaponType { Melee, Utility }
-    public enum SpecialEffect { None, Stun, Blind, Knockback }
+    public enum WeaponType { Melee, Utility, Magic }
+    public enum SpecialEffect { None, Stun, Blind, Knockback, Burn, Polymorph, Alteration }
     
     public static readonly Dictionary<SpecialEffect, Color> SpecialEffectColor = new()
         {
