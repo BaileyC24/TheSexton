@@ -20,7 +20,7 @@ public class WaveManager : MonoBehaviour
     public int enemiesAlive;
 
     public portalManager portalManager;
-    public int killCount;
+    int killCount;
     
     
     void Start()
@@ -74,11 +74,16 @@ public class WaveManager : MonoBehaviour
         {
             StartCoroutine(StartNextWave());
         }
+        else if (portalManager != null)
+        {   portalManager.ActivatePortal();
+            gameManager.instance.OpenMenu(gameManager.MenuType.StageComplete);
+            
+        }
         else
         {
-            gameManager.instance.OpenMenu(gameManager.MenuType.StageComplete);
-            portalManager.ActivatePortal();
+           gameManager.instance.OpenMenu(gameManager.MenuType.Win);
         }
+
     }
 
     IEnumerator StartNextWave()
