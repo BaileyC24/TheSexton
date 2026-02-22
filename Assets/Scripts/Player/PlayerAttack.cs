@@ -39,6 +39,9 @@ public class PlayerAttack : MonoBehaviour
     [Header("Fallback Stats (if weapon damage is 0)")]
     [Range(0.1f, 2f)] [SerializeField] private float attackSpeed = 0.5f;
     [Range(1, 15)] [SerializeField] private int str = 5;
+    
+    [Header("Hit VFX Placement")]
+    [SerializeField] private Vector3 hitVfxOffset = new Vector3(0f, 0.9f, 0f);
 
     private float attackTimer;
     private bool attacking;
@@ -50,6 +53,7 @@ public class PlayerAttack : MonoBehaviour
     private RuntimeAnimatorController defaultAnimatorController;
 
     [HideInInspector] public WeaponData currentWeapon;
+    [HideInInspector] public WeaponData PreviousWeapon;
 
     // Getting self colliders for easy checking to prevent hitting self with
     // attacks or interactions with the weapon raycasts
@@ -58,6 +62,7 @@ public class PlayerAttack : MonoBehaviour
     private void Start()
     {
         PSM = GetComponent<PlayerStateMachine>();
+        gameManager.instance.currentPlayerData.LoadData(InventoryManager.instance);
         if (PSM == null)
         {
             Debug.LogError("PlayerAttack requires a PlayerStateMachine component on the same GameObject.");
@@ -80,6 +85,10 @@ public class PlayerAttack : MonoBehaviour
         {
             Debug.LogWarning("No weapons assigned to PlayerAttack.");
         }
+
+        if (PSM.weapons is { Count: > 1 })
+            PreviousWeapon = PSM.weapons[1];
+        gameManager.instance.UpdateWeaponIcons(currentWeapon, PreviousWeapon);
     }
 
     private void Update()
@@ -101,12 +110,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (mouseScroll != 0 && !attacking)
             ChangeWeapons();
-
-
-        if (PSM.weapons.Count > 0)
-        {
-            SwitchWeapon(PSM.weapons[currentWeaponIndex]);
-        }
+        
     }
 
     private IEnumerator AttackRoutine()
@@ -381,6 +385,14 @@ public class PlayerAttack : MonoBehaviour
         if (dmg != null)
             dmg.takeDamage(damageAmount);
 
+        if (currentWeapon.meleeEffect != null)
+        {
+            Vector3 vfxPos = target.ClosestPoint(attackPos.position);
+            vfxPos += Vector3.up * 0.15f;
+
+            GameObject effect = Instantiate(currentWeapon.meleeEffect, vfxPos, Quaternion.identity);
+            Destroy(effect, 0.5f);
+        }
         ApplySpecial(target);
         //SoundManager.PlaySound(Choose sound from Enum for what you want);  Can add more sounds if needed.
     }
@@ -414,8 +426,9 @@ public class PlayerAttack : MonoBehaviour
                 {
                     Vector3 dir = (target.bounds.center - transform.position);
                     dir.y = 0f;
-                    if (dir.sqrMagnitude < 0.001f) dir = transform.forward;
-                    knockback.Knockback(dir.normalized, 1f);
+                    if (dir.sqrMagnitude < 0.001f) 
+                        dir = transform.forward;
+                    knockback.Knockback(dir.normalized, 5f);
                 }
                 break;
             }
@@ -447,23 +460,29 @@ public class PlayerAttack : MonoBehaviour
 
     private void ChangeWeapons()
     {
-        switch (mouseScroll)
-        {
-            case > 0 when currentWeaponIndex <PSM.weapons.Count - 1:
-                currentWeaponIndex++;
-                SwitchWeapon(PSM.weapons[currentWeaponIndex]);
-                break;
-            case < 0 when currentWeaponIndex > 0:
-                currentWeaponIndex--;
-                SwitchWeapon(PSM.weapons[currentWeaponIndex]);
-                break;
-        }
+        if (PSM.weapons == null || PSM.weapons.Count == 0) return;
+
+        int oldIndex = currentWeaponIndex;
+
+        if (mouseScroll > 0 && currentWeaponIndex < PSM.weapons.Count - 1)
+            currentWeaponIndex++;
+        else if (mouseScroll < 0 && currentWeaponIndex > 0)
+            currentWeaponIndex--;
+        
+        if (currentWeaponIndex == oldIndex) return;
+        
+        PreviousWeapon = PSM.weapons[oldIndex];
+        
+        SwitchWeapon(PSM.weapons[currentWeaponIndex]);
     }
 
     private void SwitchWeapon(WeaponData newWeapon)
     {
         currentWeapon = newWeapon;
 
+        if (currentWeapon != null && currentWeapon != newWeapon)
+            PreviousWeapon = currentWeapon;
+        
         PSM.GetAnimator().runtimeAnimatorController = newWeapon.animatorOverride != null
             ? newWeapon.animatorOverride
             : defaultAnimatorController;
@@ -479,21 +498,12 @@ public class PlayerAttack : MonoBehaviour
         curFilter.sharedMesh = newFilter.sharedMesh;
         curRenderer.sharedMaterials = newRenderer.sharedMaterials;
         weaponVisual.gameObject.transform.localPosition = new Vector3(0f, 0f, newWeapon.zOffset);
+        
+        gameManager.instance.UpdateWeaponIcons(currentWeapon, PreviousWeapon);
 
-        if (newWeapon.outLineMaterial != null)
+        if (newWeapon.outLineMaterial != null && newWeapon.specialEffect != WeaponData.SpecialEffect.None)
         {
-            var baseMaterials = newRenderer.sharedMaterials;
-
-            Material[] combinedMaterials = new Material[baseMaterials.Length + 1];
-
-            for (int i = 0; i < baseMaterials.Length; i++)
-            {
-                combinedMaterials[i] = baseMaterials[i];
-            }
-
-            combinedMaterials[combinedMaterials.Length - 1] = newWeapon.outLineMaterial;
-
-            curRenderer.sharedMaterials = combinedMaterials;
+            AddOutline(newWeapon);
         }
 
         if (newWeapon.optionalScale > 0)
@@ -525,5 +535,25 @@ public class PlayerAttack : MonoBehaviour
             spawnedPs.Clear(true);
             spawnedPs.Play(true);
         }
+    }
+
+    private void AddOutline(WeaponData newWeapon)
+    {
+        MeshRenderer curRenderer = weaponVisual.GetComponent<MeshRenderer>();
+        MeshRenderer newRenderer = newWeapon.weaponModel.GetComponent<MeshRenderer>() ??
+                                   newWeapon.weaponModel.GetComponentInChildren<MeshRenderer>();
+        
+        var baseMaterials = newRenderer.sharedMaterials;
+
+        Material[] combinedMaterials = new Material[baseMaterials.Length + 1];
+
+        for (int i = 0; i < baseMaterials.Length; i++)
+        {
+            combinedMaterials[i] = baseMaterials[i];
+        }
+
+        combinedMaterials[combinedMaterials.Length - 1] = newWeapon.outLineMaterial;
+
+        curRenderer.sharedMaterials = combinedMaterials;
     }
 }

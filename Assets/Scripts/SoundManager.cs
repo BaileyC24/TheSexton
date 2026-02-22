@@ -16,7 +16,8 @@ using UnityEngine;
       Unequip,
       Menu,
       Footsteps1,
-      Footsteps2
+      Footsteps2,
+      Denied
    }
 
 [RequireComponent(typeof(AudioSource))]

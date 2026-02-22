@@ -14,12 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Medkit
   itemIcon: {fileID: 21300000, guid: 0ab58fd699448e74b83c2904de5b9800, type: 3}
+  itemPrice: 60
   isStackable: 1
   maxStackSize: 3
   type: 0
   consumableCooldown: 0
   isHealing: 1
-  healingAmount: 2
+  healingAmount: 5
   isStrBuff: 0
   strBuffTime: 0
   strBuffAmount: 0
+  isPlaceable: 0
+  itemPrefab: {fileID: 0}

@@ -45,16 +45,17 @@ public class PlayerActiveData : ScriptableObject
             weapons.Add(inventoryManager.PrimaryWeapon);
         if (inventoryManager.SecondaryWeapon != null)
             weapons.Add(inventoryManager.SecondaryWeapon);
+        
+        if (inventoryManager.coinsOnHand > 0)
+            coins = inventoryManager.coinsOnHand;
     }
 
     public void LoadData(InventoryManager inventoryManager)
     {
-        if (items.Count > 0 || weapons.Count > 0)
-        {
-            inventoryManager.AddStartingItems(items, weapons);
-            return;
-        }
+        int startingCoins = coins > 0 ? coins : currentCharacter.startingCoins;
+        List<StartingItem> startingItems = items.Count > 0 ? items : currentCharacter.startingItems;
+        List<WeaponData> startingWeapons = weapons.Count > 0 ? weapons : currentCharacter.startingWeapons;
         
-        inventoryManager.AddStartingItems(currentCharacter.startingItems, currentCharacter.startingWeapons);
+        inventoryManager.AddStartingItems(startingItems, startingWeapons, startingCoins);
     }
 }
