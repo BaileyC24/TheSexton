@@ -11,6 +11,7 @@ public class ItemData : ScriptableObject
 {
     public string itemName;
     public Sprite itemIcon;
+    public int itemPrice;
 
     public bool isStackable = true;
     public int maxStackSize = 10;
@@ -24,4 +25,7 @@ public class ItemData : ScriptableObject
     public bool isStrBuff;
     public float strBuffTime;
     public int strBuffAmount;
+
+    public bool isPlaceable;
+    public GameObject itemPrefab;
 }

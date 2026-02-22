@@ -101,6 +101,7 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
     #endregion
     
     [HideInInspector] public List<WeaponData> weapons;
+    public Transform feetPos;
 
     public override void StartMethod()
     {

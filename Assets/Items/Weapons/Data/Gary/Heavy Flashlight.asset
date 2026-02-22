@@ -13,22 +13,27 @@ MonoBehaviour:
   m_Name: Heavy Flashlight
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   weaponName: Torch
-  weaponIcon: {fileID: 21300000, guid: 768bf563601e4ac47bb7769d0202631b, type: 3}
+  weaponIcon: {fileID: 21300000, guid: b8fdb3d452e734c4db4341d96e644e83, type: 3}
   weaponModel: {fileID: 1816966673987872, guid: e7400f9e927fd47a394fadd5d536fb00,
     type: 3}
   isWeaponPrimary: 0
   zOffset: 0.28
   optionalScale: 1
-  weaponType: 1
+  outLineMaterial: {fileID: 2100000, guid: 0cbc9e56514580c4a857785305d6a31b, type: 2}
+  weaponType: 0
+  weaponPrice: 75
   animatorOverride: {fileID: 22100000, guid: 537c502a6063d534ab35c3a1ca65860a, type: 2}
   damage: 1
   range: 1.9
   swingArc: 35
+  meleeEffect: {fileID: 2955623459812423943, guid: f5507a8c6a22c404ab324980c4e8a11b,
+    type: 3}
   hitDelay: 0.15
   totalTime: 0.6
   specialEffect: 2
-  specialChance: 1
-  specialDuration: 1.2
+  specialChance: 0.3
+  specialDuration: 2.5
   canBreakLocks: 0
   emitsLight: 1
   lightRadius: 6
+  effectChanceUpgrade: 0

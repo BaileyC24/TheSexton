@@ -13,17 +13,21 @@ MonoBehaviour:
   m_Name: Spear
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   weaponName: Hammar
-  weaponIcon: {fileID: 0}
+  weaponIcon: {fileID: 21300000, guid: e652e893e7b84e046b3a524ef902d7b2, type: 3}
   weaponModel: {fileID: 919132149155446097, guid: 210e6f4a52d6fcf4d88f364d29b1e739,
     type: 3}
   isWeaponPrimary: 0
   zOffset: 0
   optionalScale: 0
+  outLineMaterial: {fileID: 0}
   weaponType: 0
+  weaponPrice: 110
   animatorOverride: {fileID: 22100000, guid: c0a7f64f93e70874cb394470e43bf862, type: 2}
   damage: 6
   range: 2.7
   swingArc: 10
+  meleeEffect: {fileID: 2955623459812423943, guid: f5507a8c6a22c404ab324980c4e8a11b,
+    type: 3}
   hitDelay: 0.15
   totalTime: 0.6
   specialEffect: 0
@@ -32,3 +36,4 @@ MonoBehaviour:
   canBreakLocks: 1
   emitsLight: 0
   lightRadius: 0
+  effectChanceUpgrade: 0
