@@ -1724,6 +1724,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6459668c36efb1445a034f3d3d7a6cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPolymorphable
+  magicEffect: {fileID: 3925391064058705924, guid: 5267bb68dd0cb3344a05a6f9637b2818,
+    type: 3}
 --- !u!1001 &1665855655520722958
 PrefabInstance:
   m_ObjectHideFlags: 0

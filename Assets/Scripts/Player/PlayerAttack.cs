@@ -87,7 +87,7 @@ public class PlayerAttack : MonoBehaviour
     {
         attackTimer += Time.deltaTime;
 
-        // We put two slashes here to temporarily turn your original code into a comment so it doesn't run!
+        // Commenting out the original code for now
         // mouseScroll = PSM.GetInput().Player.Scroll.ReadValue<Vector2>().y;
 
         if (PSM == null)
