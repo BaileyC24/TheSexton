@@ -243,7 +243,7 @@ public class EnemyAI : MonoBehaviour, IDamage, IKnockbackable, IBlindable, IStun
             agent.enabled = false;
             enabled = false;
             animator.enabled = false;
-            Destroy(gameObject, 5f);
+            Destroy(gameObject);
         }
         else
         {

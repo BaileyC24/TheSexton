@@ -66,7 +66,12 @@ public class transitionsManager : MonoBehaviour
     }
 
     private IEnumerator LoadSceneAsync(int sceneIndex, string transitionName)
-    { 
+    {
+        // Set the transitioning flag to true to indicate that a scene transition is in progress
+        gameManager.instance.isTransitioning = true;
+
+
+        // Find the transition with the specified name from the transitions array
         sceneTransitions transition = transitions.First(t => t.name == transitionName);
         
         
@@ -103,6 +108,9 @@ public class transitionsManager : MonoBehaviour
 
         // Animate the transition out after the scene has loaded
         yield return transition.AnimateTransitionOut();
+
+        // Set the transitioning flag to false after the transition is complete
+        gameManager.instance.isTransitioning = false;
     }
 
 }
