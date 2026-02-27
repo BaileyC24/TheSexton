@@ -39,7 +39,9 @@ public class gameManager : MonoBehaviour
     public int exp;
     public int points;
     public int level;
-    
+
+    public bool isTransitioning;
+
     public enum MenuType
     {
         Lose,
@@ -123,7 +125,12 @@ public class gameManager : MonoBehaviour
     }
 
     public void statePaused()
-    {     
+    {
+
+        if (gameManager.instance.isTransitioning)
+            return; // block pausing during transitions
+
+
         SoundManager.PlaySound(SoundType.Pause);
         isPaused = true;
         Time.timeScale = 0;
