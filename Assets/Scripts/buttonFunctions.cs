@@ -18,9 +18,8 @@ public class buttonFunctions : MonoBehaviour
     {
         SoundManager.PlaySound(SoundType.Menu);
         gameManager.instance.currentPlayerData.Clear();
-        transitionsManager.instance.LoadScene(1 , "CrossFade");
-        MusicManager.instance.PlayMusic("InGame");
         gameManager.instance.stateUnpaused();
+        transitionsManager.instance.LoadScene(1 , "CrossFade");
     }
     
     public void play(CharacterData characterData)

@@ -9,6 +9,7 @@ TagManager:
   - Player Spawn Pos
   - Cinemachine
   - Ally
+  - Undefined
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Enemy Attack
   - Player Attack
   - Ally
-  - 
+  - EnemySpawn
   - 
   - 
   - 

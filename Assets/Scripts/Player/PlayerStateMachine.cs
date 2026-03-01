@@ -121,9 +121,6 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
         displayHP = Mathf.MoveTowards(displayHP, health, 5 * Time.deltaTime);
         gameManager.instance.playerHPBar.fillAmount = displayHP / HPOrig;
         
-        if (GetInput().Player.Inventory.triggered && !gameManager.instance.isPaused)
-            gameManager.instance.OpenMenu(gameManager.MenuType.Inventory);
-        
         if (!gameManager.instance.isPaused)
             playerInput.Enable();
     }

@@ -209,12 +209,17 @@ public class EnemyAI : MonoBehaviour, IDamage, IKnockbackable, IBlindable, IStun
 
         if (weaponDmg != null && weaponDmg.type == damage.damageType.ranged)
         {
-            Instantiate(weapon, attackPos.position, transform.rotation);
-        }
+            //removed Instantiate line from here, adding animation event instead
+             }
         else
         {
             StartCoroutine(MeleeHitWindow());
         }
+    }
+
+    public void SpawnProjectile()
+    {
+        Instantiate(weapon, attackPos.position, transform.rotation);
     }
 
     IEnumerator MeleeHitWindow()
@@ -245,9 +250,10 @@ public class EnemyAI : MonoBehaviour, IDamage, IKnockbackable, IBlindable, IStun
             gameManager.instance.exp++;
             HPBar.gameObject.SetActive(false);
             agent.enabled = false;
+            GetComponentInChildren<CapsuleCollider>().enabled = false;
             enabled = false;
             animator.enabled = false;
-            Destroy(gameObject);
+            Destroy(gameObject, 5f);
         }
         else
         {
