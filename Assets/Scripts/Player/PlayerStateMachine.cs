@@ -105,6 +105,8 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
 
     public override void StartMethod()
     {
+
+
         spawnPlayer();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -159,6 +161,13 @@ public class PlayerStateMachine : StateManager<PlayerStateMachine.PlayerStates>,
 
     public void takeDamage(int amount)
     {
+
+        if (gameManager.instance.isTransitioning)
+            return;
+        if (gameManager.instance.freezeGameplay)
+            return;
+
+
         health -= amount;
         StartCoroutine(flashDamage());
         SoundManager.PlaySound(SoundType.Hit);

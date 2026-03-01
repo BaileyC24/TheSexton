@@ -41,6 +41,8 @@ public class gameManager : MonoBehaviour
     public int level;
 
     public bool isTransitioning;
+    public bool isDead;
+    public bool freezeGameplay;
 
     public enum MenuType
     {
@@ -130,6 +132,9 @@ public class gameManager : MonoBehaviour
         if (gameManager.instance.isTransitioning)
             return; // block pausing during transitions
 
+        if(gameManager.instance.isDead)
+            return; // block pausing when dead
+
 
         SoundManager.PlaySound(SoundType.Pause);
         isPaused = true;
@@ -161,10 +166,13 @@ public class gameManager : MonoBehaviour
         switch (type)
         {
             case MenuType.Lose:
+                gameManager.instance.freezeGameplay = true;
+                gameManager.instance.isDead = true;
                 menuActive = menuLose;
                 break;
 
             case MenuType.StageComplete:
+                gameManager.instance.freezeGameplay = true;
                 menuActive = menuStageComplete;
                 break;
 

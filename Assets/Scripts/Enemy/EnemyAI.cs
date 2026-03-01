@@ -86,6 +86,10 @@ public class EnemyAI : MonoBehaviour, IDamage, IKnockbackable, IBlindable, IStun
 
     void Awake()
     {
+
+        if (gameManager.instance.freezeGameplay)
+            return;
+
         colorOrig = models[0].material.color;
         pointOrig = transform.position;
         origStopDist = agent.stoppingDistance;

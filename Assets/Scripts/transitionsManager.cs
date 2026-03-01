@@ -69,6 +69,7 @@ public class transitionsManager : MonoBehaviour
     {
         // Set the transitioning flag to true to indicate that a scene transition is in progress
         gameManager.instance.isTransitioning = true;
+        gameManager.instance.freezeGameplay = true; // Optional: Freeze gameplay during the transition
 
 
         // Find the transition with the specified name from the transitions array
@@ -111,6 +112,9 @@ public class transitionsManager : MonoBehaviour
 
         // Set the transitioning flag to false after the transition is complete
         gameManager.instance.isTransitioning = false;
+
+        //Unfreeze gameplay after the transition is complete
+        gameManager.instance.freezeGameplay = false;
     }
 
 }
