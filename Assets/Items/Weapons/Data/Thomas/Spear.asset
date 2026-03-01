@@ -28,8 +28,8 @@ MonoBehaviour:
   swingArc: 10
   meleeEffect: {fileID: 2955623459812423943, guid: f5507a8c6a22c404ab324980c4e8a11b,
     type: 3}
-  hitDelay: 0.15
-  totalTime: 0.6
+  hitDelay: 0.5
+  totalTime: 1.3
   specialEffect: 0
   specialChance: 0
   specialDuration: 0

@@ -2074,6 +2074,7 @@ GameObject:
   m_Component:
   - component: {fileID: 423111790}
   - component: {fileID: 423111791}
+  - component: {fileID: 423111792}
   m_Layer: 5
   m_Name: Functions
   m_TagString: Untagged
@@ -2116,6 +2117,51 @@ MonoBehaviour:
   storeContent: {fileID: 0}
   upgradeContent: {fileID: 0}
   currentPlayerData: {fileID: 11400000, guid: b8213f116173ce14682b15c207665148, type: 2}
+--- !u!114 &423111792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423111789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f492689e3171cb45a585babb28c1d64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::gameManager
+  menuActive: {fileID: 0}
+  menuPause: {fileID: 0}
+  menuWin: {fileID: 0}
+  menuLose: {fileID: 0}
+  menuStore: {fileID: 0}
+  menuAlert: {fileID: 0}
+  menuInventory: {fileID: 0}
+  menuStageComplete: {fileID: 0}
+  currentWeaponIcon: {fileID: 0}
+  previousWeaponIcon: {fileID: 0}
+  weaponName: {fileID: 0}
+  weaponEffect: {fileID: 0}
+  weaponChance: {fileID: 0}
+  currentPlayerData: {fileID: 11400000, guid: b8213f116173ce14682b15c207665148, type: 2}
+  playerSpawnPos: {fileID: 0}
+  playerHPBar: {fileID: 0}
+  isPaused: 0
+  player: {fileID: 0}
+  damageFlash: {fileID: 0}
+  playerStats: {fileID: 0}
+  maxLevel: 0
+  nextLevel: 0
+  exp: 0
+  points: 0
+  level: 0
+  isTransitioning: 0
+  playerScript: {fileID: 0}
+  gameGoalText: {fileID: 0}
+  pointsText: {fileID: 0}
+  levelText: {fileID: 0}
+  strText: {fileID: 0}
+  attackSpdText: {fileID: 0}
+  HealthText: {fileID: 0}
 --- !u!1 &477058536
 GameObject:
   m_ObjectHideFlags: 0
@@ -6733,6 +6779,74 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AutoScrollCredits
   creditScroller: {fileID: 797821407}
   scrollSpeed: 50
+--- !u!1001 &1517710108
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1313259473550498919, guid: 0ddcca413a4e1e44a946d3c5e5c414c7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -29.04927
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313259473550498919, guid: 0ddcca413a4e1e44a946d3c5e5c414c7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.7251
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313259473550498919, guid: 0ddcca413a4e1e44a946d3c5e5c414c7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 37.48735
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313259473550498919, guid: 0ddcca413a4e1e44a946d3c5e5c414c7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313259473550498919, guid: 0ddcca413a4e1e44a946d3c5e5c414c7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313259473550498919, guid: 0ddcca413a4e1e44a946d3c5e5c414c7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313259473550498919, guid: 0ddcca413a4e1e44a946d3c5e5c414c7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313259473550498919, guid: 0ddcca413a4e1e44a946d3c5e5c414c7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313259473550498919, guid: 0ddcca413a4e1e44a946d3c5e5c414c7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313259473550498919, guid: 0ddcca413a4e1e44a946d3c5e5c414c7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1736442681514590688, guid: 0ddcca413a4e1e44a946d3c5e5c414c7,
+        type: 3}
+      propertyPath: m_Name
+      value: MusicSource
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0ddcca413a4e1e44a946d3c5e5c414c7, type: 3}
 --- !u!1 &1524108626
 GameObject:
   m_ObjectHideFlags: 0
@@ -10364,3 +10478,4 @@ SceneRoots:
   - {fileID: 1053739287}
   - {fileID: 1533118701}
   - {fileID: 1304777912}
+  - {fileID: 1517710108}

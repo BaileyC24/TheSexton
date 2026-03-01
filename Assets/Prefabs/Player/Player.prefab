@@ -845,8 +845,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408602858495687344}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.78999996, z: 0}
+  m_LocalRotation: {x: 0.083341174, y: -0.46278188, z: 0.043755542, w: 0.88146055}
+  m_LocalPosition: {x: -14.170367, y: 0.78999996, z: 17.971012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1611,6 +1611,7 @@ MonoBehaviour:
   str: 1
   hitVfxOffset: {x: 0, y: 0.9, z: 0}
   currentWeapon: {fileID: 0}
+  PreviousWeapon: {fileID: 0}
 --- !u!114 &4429929082094690574
 MonoBehaviour:
   m_ObjectHideFlags: 0
