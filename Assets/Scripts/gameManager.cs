@@ -74,8 +74,12 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         
         level = 1;
-        playerScript = player.GetComponent<PlayerStateMachine>();
-        playerStats = player.GetComponent<PlayerAttack>();
+        if (player != null)
+        {
+            playerScript = player.GetComponent<PlayerStateMachine>();
+            playerStats = player.GetComponent<PlayerAttack>();
+        }
+
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
     }
 
