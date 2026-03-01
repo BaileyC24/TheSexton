@@ -241,6 +241,7 @@ public class EnemyAI : MonoBehaviour, IDamage, IKnockbackable, IBlindable, IStun
             gameManager.instance.exp++;
             HPBar.gameObject.SetActive(false);
             agent.enabled = false;
+            GetComponentInChildren<CapsuleCollider>().enabled = false;
             enabled = false;
             animator.enabled = false;
             Destroy(gameObject, 5f);

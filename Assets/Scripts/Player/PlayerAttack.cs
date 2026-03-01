@@ -107,10 +107,6 @@ public class PlayerAttack : MonoBehaviour
         {
             Debug.LogWarning("Link 2 Broken: GetInput() is returning nothing!");
         }
-        else
-        {
-            Debug.LogWarning("Link 3 Broken: The Input Action Map 'Player' or 'Scroll' got changed!");
-        }
 
         mouseScroll = PSM.GetInput().Player.Scroll.ReadValue<Vector2>().y;
         bool attackPressed = gameManager.instance.playerScript.GetInput().Player.Attack.triggered;

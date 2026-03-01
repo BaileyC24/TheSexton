@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: _ACTIVEPLAYER
   m_EditorClassIdentifier: Assembly-CSharp::PlayerActiveData
   items: []
-  weapons:
-  - {fileID: 11400000, guid: 8a0cedd02ddde684c80fb9b5149a177f, type: 2}
+  weapons: []
   coins: 0
   currentCharacter: {fileID: 11400000, guid: c35112c123b979a48b926f3573fe778e, type: 2}
   damageUpgrade: 0

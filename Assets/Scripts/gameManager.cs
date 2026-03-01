@@ -39,7 +39,9 @@ public class gameManager : MonoBehaviour
     public int exp;
     public int points;
     public int level;
-    
+
+    public bool isTransitioning;
+
     public enum MenuType
     {
         Lose,
@@ -80,6 +82,19 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isTransitioning)
+        {
+            if (!isPaused)
+            {
+                isPaused = true;
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.None;
+                playerScript.GetInput().Disable();
+            }
+
+            return;
+        }
+
         UpdateText();
 
         if (Input.GetButtonDown("Cancel"))
@@ -95,6 +110,10 @@ public class gameManager : MonoBehaviour
                 menuActive.SetActive(true);
             }
         }
+        if (playerScript.GetInput().Player.Inventory.triggered && !isPaused)
+            instance.OpenMenu(MenuType.Inventory);
+        else if (Input.GetButtonDown("E") && menuActive == menuInventory)
+            instance.stateUnpaused();
 
         if (exp >= nextLevel && level < maxLevel)
         {
@@ -123,7 +142,12 @@ public class gameManager : MonoBehaviour
     }
 
     public void statePaused()
-    {     
+    {
+
+        if (gameManager.instance.isTransitioning)
+            return; // block pausing during transitions
+
+
         SoundManager.PlaySound(SoundType.Pause);
         isPaused = true;
         Time.timeScale = 0;
